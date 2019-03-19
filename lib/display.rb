@@ -10,7 +10,7 @@ class Display
     """
   end
 
-  def prompt_make_move
+  def display_make_move
     print 'Choose a position from 1-8: '
   end
 end
