@@ -5,9 +5,7 @@ class Display
     -----------
      #{grid[3]} | #{grid[4]} | #{grid[5]}
     -----------
-     #{grid[6]} | #{grid[7]} | #{grid[8]}
-
-    """
+     #{grid[6]} | #{grid[7]} | #{grid[8]}\n"""
   end
 
   def display_make_move
