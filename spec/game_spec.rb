@@ -5,7 +5,7 @@ RSpec.describe Game do
     @game = Game.new
   end
 
-  it 'prompts user for a move and returns move as integer' do
+  it 'prompts the user for their move and returns the move as an integer' do
     allow($stdin).to receive(:gets).and_return('1')
     move = @game.prompt_make_move
     expect(move).to eq(1)

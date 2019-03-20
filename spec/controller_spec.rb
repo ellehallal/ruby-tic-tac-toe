@@ -19,7 +19,7 @@ RSpec.describe Controller do
     -----------
      4 | 5 | 6
     -----------
-     7 | 8 | 9\nChoose a position from 1-8: 
+     7 | 8 | 9\nChoose a position from 1-9: 
      x | 2 | 3
     -----------
      4 | 5 | 6

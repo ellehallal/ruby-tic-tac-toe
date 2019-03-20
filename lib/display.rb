@@ -1,14 +1,14 @@
 class Display
-  def display_grid(grid)
+  def display_board(board)
     print """
-     #{grid[0]} | #{grid[1]} | #{grid[2]}
+     #{board[0]} | #{board[1]} | #{board[2]}
     -----------
-     #{grid[3]} | #{grid[4]} | #{grid[5]}
+     #{board[3]} | #{board[4]} | #{board[5]}
     -----------
-     #{grid[6]} | #{grid[7]} | #{grid[8]}\n"""
+     #{board[6]} | #{board[7]} | #{board[8]}\n"""
   end
 
-  def display_make_move
-    print 'Choose a position from 1-8: '
+  def ask_for_move
+    print 'Choose a position from 1-9: '
   end
 end

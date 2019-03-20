@@ -1,11 +1,11 @@
 class Board
-  attr_reader :grid
+  attr_reader :board
 
-  def initialize(grid)
-    @grid = grid
+  def initialize(board)
+    @board = board
   end
 
-  def make_move(mark, position)
-    @grid[position - 1] = mark
+  def player_make_move(player_mark, position)
+    @board[position - 1] = player_mark
   end
 end
