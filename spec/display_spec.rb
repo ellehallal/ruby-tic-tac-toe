@@ -13,8 +13,8 @@ RSpec.describe Display do
     -----------
      4 | 5 | 6
     -----------
-     7 | 8 | 9\n"""
-    ).to_stdout
+     7 | 8 | 9\n""")
+    .to_stdout
     end
 
     it 'displays "Choose a position from 1-9"' do
