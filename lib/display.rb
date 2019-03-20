@@ -11,4 +11,8 @@ class Display
   def ask_for_move
     print 'Choose a position from 1-9: '
   end
+
+  def show_current_player(current_player_mark)
+    print "The current player is #{current_player_mark}"
+  end
 end

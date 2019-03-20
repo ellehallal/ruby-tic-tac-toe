@@ -22,5 +22,11 @@ RSpec.describe Display do
         display.ask_for_move
       end.to output('Choose a position from 1-9: ').to_stdout
     end
+
+    it 'displays "The current player is x"' do
+      expect do
+        display.show_current_player('x')
+      end.to output('The current player is x').to_stdout
+    end
   end
 end
