@@ -2,12 +2,13 @@ require 'controller'
 require 'board'
 require 'display'
 require 'game'
+require 'player'
 
 RSpec.describe Controller do
-  describe 'controls flow of the game' do
+  describe 'Controller: ' do
     board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new
-    game = Game.new
+    game = Game.new('x', 'o')
     controller = Controller.new(board, display, game)
 
     it 'prompts for moves and displays updated board' do
