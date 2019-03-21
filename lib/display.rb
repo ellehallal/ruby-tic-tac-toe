@@ -13,6 +13,6 @@ class Display
   end
 
   def show_current_player(current_player_mark)
-    print "The current player is #{current_player_mark}"
+    print "The current player is #{current_player_mark}\n"
   end
 end

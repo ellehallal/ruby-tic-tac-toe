@@ -49,7 +49,7 @@ RSpec.describe Game do
     -----------
      4 | 5 | 6
     -----------
-     7 | 8 | 9\nChoose a position from 1-9: 
+     7 | 8 | 9\nThe current player is x\nChoose a position from 1-9: 
      x | 2 | 3
     -----------
      4 | 5 | 6
