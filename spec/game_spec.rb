@@ -15,7 +15,7 @@ RSpec.describe Game do
 
       allow($stdin).to receive(:gets).and_return('1')
       expect do
-        game.make_move
+        game.play_move
       end
       .to output(
       """
@@ -30,29 +30,6 @@ RSpec.describe Game do
     -----------
      7 | 8 | 9\n""")
     .to_stdout
-    end
-  end
-
-  context 'Toggling the player: ' do
-    display = Display.new
-    player1 = Player.new('x')
-    player2 = Player.new('o')
-
-    it 'toggles the current player from player1(x) to player2(o)' do
-      board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
-      game = Game.new(board, display, player1, player2)
-
-      game.toggle_current_player
-      expect(game.current_player.mark).to eq('o')
-    end
-
-    it 'toggles the current player from player2(o) to player1(x)' do
-      board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
-      game = Game.new(board, display, player1, player2)
-
-      game.toggle_current_player
-      game.toggle_current_player
-      expect(game.current_player.mark).to eq('x')
     end
   end
 
