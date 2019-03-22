@@ -9,6 +9,8 @@ class Game
     @current_player = player1
   end
 
+  private
+
   def toggle_current_player
     if @current_player == @player1
       @current_player = @player2
@@ -24,6 +26,8 @@ class Game
     @board.player_make_move(@current_player.mark, move)
     @display.display_board(@board.board)
   end
+
+  public
 
   def play_move
     make_move
