@@ -31,7 +31,7 @@ RSpec.describe Display do
     it 'returns the users move' do
       allow($stdin).to receive(:gets).and_return('1')
       move = display.ask_for_move
-      expect(move).to eq(1)
+      expect(move).to eq('1')
     end
   end
 

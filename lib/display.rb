@@ -11,7 +11,6 @@ class Display
   def ask_for_move
     print 'Choose a position from 1-9: '
     move = $stdin.gets.chomp
-    move.to_i
   end
 
   def show_current_player(current_player_mark)

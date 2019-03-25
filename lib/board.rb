@@ -16,7 +16,6 @@ class Board
   end
 
   private
-   
   def update_moves_remaining
     update_moves = @board.count { |position| position.is_a? Integer }
     @moves_remaining = update_moves
