@@ -41,6 +41,4 @@ class Game
   def can_continue_playing?
     moves_remaining?
   end
-
-  
 end

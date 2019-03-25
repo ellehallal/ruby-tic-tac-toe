@@ -5,7 +5,7 @@ require 'game'
 require 'player'
 
 RSpec.describe Controller do
-  describe 'Controller: alternates current player after each move ' do
+  describe 'Controls the game flow' do
     board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new
     player1 = Player.new('x')
