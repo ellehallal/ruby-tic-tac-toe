@@ -15,5 +15,16 @@ RSpec.describe Board do
       board.player_make_move('x', 4)
       expect(board.moves_remaining).to eq(8)
     end
+
+    it 'returns true if position is available' do
+      board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      expect(board.position_available?(4)).to eq(true)
+    end
+
+    it 'returns false if position is taken' do
+      board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
+      board.player_make_move('o', 4)
+      expect(board.position_available?(4)).to eq(false)
+    end
   end
 end

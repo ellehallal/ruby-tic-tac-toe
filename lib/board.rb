@@ -10,4 +10,8 @@ class Board
     @board[position - 1] = player_mark
     @moves_remaining -= 1
   end
+
+  def position_available?(position)
+    @board[position - 1].is_a? Integer
+  end
 end
