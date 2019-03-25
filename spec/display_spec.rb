@@ -37,11 +37,21 @@ RSpec.describe Display do
 
   context 'Displaying the current player:' do
     display = Display.new
-    
+
     it 'displays "The current player is x"' do
       expect do
         display.show_current_player('x')
       end.to output("The current player is x\n").to_stdout
+    end
+  end
+
+  context 'Displays message when user enters incorrect move' do
+    display = Display.new
+
+    it 'displays "22 is an invalid move."' do
+      expect do
+        display.invalid_move_message('22')
+      end.to output("22 is an invalid move.\n").to_stdout
     end
   end
 end

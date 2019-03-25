@@ -87,4 +87,16 @@ RSpec.describe Game do
       expect(game.can_continue_playing?).to eq(false)
     end
   end
+
+  context 'Validates a user\s move' do
+    display = Display.new
+    player1 = Player.new('x')
+    player2 = Player.new('o')
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    game = Game.new(board, display, player1, player2)
+
+    it 'if user enters move that is not a single integer, user is prompted again to enter move' do
+      
+    end
+  end
 end

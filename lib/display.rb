@@ -17,4 +17,8 @@ class Display
   def show_current_player(current_player_mark)
     print "The current player is #{current_player_mark}\n"
   end
+
+  def invalid_move_message(move)
+    print "#{move} is an invalid move.\n"
+  end
 end
