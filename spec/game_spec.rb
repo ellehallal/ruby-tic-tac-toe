@@ -9,7 +9,7 @@ RSpec.describe Game do
     player1 = Player.new('x')
     player2 = Player.new('o')
 
-    it 'prompts user for a move and displays the updated board' do
+    it 'displays the board and prompts user for a move' do
       board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
       game = Game.new(board, display, player1, player2)
 
@@ -23,12 +23,7 @@ RSpec.describe Game do
     -----------
      4 | 5 | 6
     -----------
-     7 | 8 | 9\nThe current player is x\nChoose a position from 1-9: 
-     x | 2 | 3
-    -----------
-     4 | 5 | 6
-    -----------
-     7 | 8 | 9\n""")
+     7 | 8 | 9\nThe current player is x\nChoose a position from 1-9: """)
     .to_stdout
     end
   end

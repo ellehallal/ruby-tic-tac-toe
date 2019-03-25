@@ -28,7 +28,6 @@ class Game
       move = @display.ask_for_move
     end
     @board.player_make_move(@current_player.mark, move.to_i)
-    @display.display_board(@board.board)
   end
 
   public
