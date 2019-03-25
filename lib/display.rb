@@ -20,4 +20,8 @@ class Display
   def invalid_move_message(move)
     print "#{move} is an invalid move.\n"
   end
+
+  def winner_message(player_mark)
+    print "#{player_mark} is the winner!\n"
+  end
 end

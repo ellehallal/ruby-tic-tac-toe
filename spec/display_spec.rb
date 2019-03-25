@@ -54,4 +54,14 @@ RSpec.describe Display do
       end.to output("22 is an invalid move.\n").to_stdout
     end
   end
+
+  context 'Displays message when game is over' do
+    display = Display.new
+
+    it 'displays "x is the winner!"' do
+      expect do
+        display.winner_message('x')
+      end.to output("x is the winner!\n").to_stdout
+    end
+  end
 end
