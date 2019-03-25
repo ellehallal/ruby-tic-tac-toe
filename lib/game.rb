@@ -47,6 +47,6 @@ class Game
 
   def move_valid?(move)
     move = move.to_i
-    (move.is_a? Integer) && move.between?(1, 9) && @board.position_available?(move)
+    move.between?(1, 9) && @board.position_available?(move)
   end
 end
