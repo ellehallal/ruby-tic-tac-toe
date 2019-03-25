@@ -31,7 +31,12 @@ RSpec.describe Board do
   describe 'checking for winning combinations on the board' do
     it 'returns true if a mark is in a winning combination position' do
       board = Board.new(['x', 'x', 'x', 4, 5, 6, 'o', 8, 'o'])
-      expect(board.has_winning_combo('x')).to eq(true)
+      expect(board.has_winning_combination?('x')).to eq(true)
+    end
+
+    it 'returns false if a mark is not in a winning combination position' do
+      board = Board.new(['x', 'o', 'x', 4, 5, 6, 'o', 'x', 'o'])
+      expect(board.has_winning_combination?('x')).to eq(false)
     end
   end
 end
