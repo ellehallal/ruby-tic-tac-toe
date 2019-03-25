@@ -24,4 +24,8 @@ class Display
   def winner_message(player_mark)
     print "#{player_mark} is the winner!\n"
   end
+
+  def tie_message
+    print "The game is a tie!\n"
+  end
 end

@@ -63,5 +63,11 @@ RSpec.describe Display do
         display.winner_message('x')
       end.to output("x is the winner!\n").to_stdout
     end
+
+    it 'displays "The game is a tie!\n"' do
+      expect do
+        display.tie_message
+      end.to output("The game is a tie!\n").to_stdout
+    end
   end
 end
