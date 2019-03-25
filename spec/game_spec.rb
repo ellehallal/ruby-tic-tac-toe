@@ -59,14 +59,18 @@ RSpec.describe Game do
     player2 = Player.new('o')
 
     it 'when less than 9 moves have been played, can_continue_playing returns true' do
+      allow($stdin).to receive(:gets).and_return('9')
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
+      game.play_move
       expect(game.can_continue_playing?).to eq(true)
     end
 
     it 'when 9 moves have been played, can_continue_playing returns false' do
-      board = Board.new(['o', 'x', 'x', 'o', 'x', 'o', 'x', 'o', 'x'])
+      allow($stdin).to receive(:gets).and_return('9')
+      board = Board.new(['o', 'x', 'x', 'o', 'x', 'o', 'x', 'o', 9])
       game = Game.new(board, display, player1, player2)
+      game.play_move
       expect(game.can_continue_playing?).to eq(false)
     end
   end
