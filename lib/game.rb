@@ -41,4 +41,8 @@ class Game
   def can_continue_playing?
     moves_remaining?
   end
+
+  def move_valid?(move)
+    move.between?(1, 9) && @board.position_available?(move)
+  end
 end

@@ -92,11 +92,23 @@ RSpec.describe Game do
     display = Display.new
     player1 = Player.new('x')
     player2 = Player.new('o')
-    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
     game = Game.new(board, display, player1, player2)
 
-    it 'if user enters move that is not a single integer, user is prompted again to enter move' do
-      
+    it 'returns false if user enters move that is not a single integer' do
+      expect(game.move_valid?(22)).to eq(false)
+    end
+
+    it 'returns false if user enters move that is not between 1 - 9' do
+      expect(game.move_valid?(10)).to eq(false)
+    end
+
+    it 'returns false if user enters move that is already taken' do
+      expect(game.move_valid?(4)).to eq(false)
+    end
+
+    it 'returns true if user enters move that is a single integer and available' do
+      expect(game.move_valid?(2)).to eq(true)
     end
   end
 end

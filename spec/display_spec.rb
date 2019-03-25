@@ -28,7 +28,7 @@ RSpec.describe Display do
       end.to output('Choose a position from 1-9: ').to_stdout
     end
 
-    it 'returns the users move as an integer' do
+    it 'returns the users move' do
       allow($stdin).to receive(:gets).and_return('1')
       move = display.ask_for_move
       expect(move).to eq(1)
