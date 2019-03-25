@@ -52,4 +52,39 @@ RSpec.describe Game do
       expect(game.current_player.mark).to eq('x')
     end
   end
+
+  context 'Checks if user can continue playing' do
+    display = Display.new
+    player1 = Player.new('x')
+    player2 = Player.new('o')
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    game = Game.new(board, display, player1, player2)
+
+    it 'when less than 9 moves have been played, returns can_continue_playing returns true' do
+      allow($stdin).to receive(:gets).and_return('1', '2', '3', '4', '5', '6', '7', '8')
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      expect(game.can_continue_playing?).to eq(true)
+    end
+
+    it 'when 9 moves have been played, returns can_continue_playing returns false' do
+      allow($stdin).to receive(:gets).and_return('1', '2', '3', '4', '5', '6', '7', '8')
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      game.play_move
+      expect(game.can_continue_playing?).to eq(false)
+    end
+  end
 end

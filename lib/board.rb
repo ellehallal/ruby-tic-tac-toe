@@ -1,5 +1,5 @@
 class Board
-  attr_reader :board, :attr_reader
+  attr_reader :board, :moves_remaining
 
   def initialize(board)
     @board = board

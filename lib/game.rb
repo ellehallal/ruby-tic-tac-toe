@@ -27,10 +27,20 @@ class Game
     @display.display_board(@board.board)
   end
 
+  def moves_remaining?
+    @board.moves_remaining > 0
+  end
+
   public
 
   def play_move
     make_move
     toggle_current_player
   end
+
+  def can_continue_playing?
+    moves_remaining?
+  end
+
+  
 end
