@@ -65,4 +65,24 @@ RSpec.describe Display do
         .to output("The game is a tie!\n").to_stdout
     end
   end
+
+  context 'Displays messages after game has ended ' do
+    display = Display.new
+
+    it 'displays "Play again?"' do
+      allow($stdin).to receive(:gets).and_return('Y')
+      expect { display.ask_play_again }
+        .to output("Play again?:\n").to_stdout
+    end
+
+    it "returns 'Y'" do
+      allow($stdin).to receive(:gets).and_return('Y')
+      expect(display.ask_play_again).to eq('Y')
+    end
+
+    it 'displays "Thanks for playing Tic Tac Toe!"' do
+      expect { display.show_exit_message }
+        .to output("Thanks for playing Tic Tac Toe!\n").to_stdout
+    end
+  end
 end
