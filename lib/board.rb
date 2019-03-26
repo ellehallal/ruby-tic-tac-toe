@@ -31,6 +31,7 @@ class Board
   end
 
   def moves_remaining?
-    @squares.count { |square| square.is_a? Integer }
+    available_squares = @squares.count { |square| square.is_a? Integer }
+    available_squares > 0
   end
 end

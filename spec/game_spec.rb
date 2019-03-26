@@ -93,34 +93,6 @@ RSpec.describe Game do
     end
   end
 
-  # context "Validates a user's move:" do
-  #   display = Display.new
-  #   player1 = Player.new('x')
-  #   player2 = Player.new('o')
-  #   board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
-  #   game = Game.new(board, display, player1, player2)
-
-  #   it 'returns false if a user enters a move that is not a single integer' do
-  #     expect(game.move_valid?(22)).to eq(false)
-  #   end
-
-  #   it 'returns false if a user enters a move not between 1-9' do
-  #     expect(game.move_valid?(10)).to eq(false)
-  #   end
-
-  #   it 'returns false if a user enters a move that is already taken' do
-  #     expect(game.move_valid?(4)).to eq(false)
-  #   end
-
-  #   it 'returns false a if user enters a move that is not an integer' do
-  #     expect(game.move_valid?('k')).to eq(false)
-  #   end
-
-  #   it 'returns true if a user enters move that is a single integer and is not taken' do
-  #     expect(game.move_valid?(2)).to eq(true)
-  #   end
-  # end
-
   context "Manages the outcome of the game:" do
     display = Display.new
     player1 = Player.new('x')

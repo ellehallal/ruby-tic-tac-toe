@@ -53,4 +53,16 @@ RSpec.describe Board do
       expect(board.has_winning_combination?('x')).to eq(false)
     end
   end
+
+  describe 'Checking for available spaces: ' do
+    it 'returns true if there are available spaces on the board' do
+      board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
+      expect(board.moves_remaining?).to eq(true)
+    end
+
+    it 'returns false if there are no available spaces on the board' do
+      board = Board.new(['x', 'x', 'o', 'x', 'o', 'o', 'o', 'x', 'x'])
+      expect(board.moves_remaining?).to eq(false)
+    end
+  end
 end
