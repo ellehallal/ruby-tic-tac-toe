@@ -30,6 +30,10 @@ class Game
     @board.player_make_move(@current_player.mark, move.to_i)
   end
 
+  def winning_player_exists?
+    @board.has_winning_combination?(@player1.mark) || @board.has_winning_combination?(@player2.mark)
+  end
+
   public
 
   def moves_remaining?
@@ -42,7 +46,7 @@ class Game
   end
 
   def can_continue_playing?
-    moves_remaining?
+    moves_remaining? && !winning_player_exists?
   end
 
   def move_valid?(move)
