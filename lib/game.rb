@@ -23,14 +23,30 @@ class Game
     @display.display_board(@board.board)
     @display.show_current_player(@current_player.mark)
     move = @display.ask_for_move
-    @board.player_make_move(@current_player.mark, move)
-    @display.display_board(@board.board)
+    until move_valid?(move)
+      @display.invalid_move_message(move)
+      move = @display.ask_for_move
+    end
+    @board.player_make_move(@current_player.mark, move.to_i)
   end
 
   public
 
+  def moves_remaining?
+    @board.moves_remaining > 0
+  end
+
   def play_move
     make_move
     toggle_current_player
+  end
+
+  def can_continue_playing?
+    moves_remaining?
+  end
+
+  def move_valid?(move)
+    move = move.to_i
+    move.between?(1, 9) && @board.position_available?(move)
   end
 end
