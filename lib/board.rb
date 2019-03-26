@@ -19,8 +19,9 @@ class Board
     @squares[position - 1] = player_mark
   end
 
-  def position_available?(position)
-    @squares[position - 1].is_a? Integer
+  def move_valid?(move)
+    move = move.to_i
+    (@squares[move - 1].is_a? Integer) && move.between?(1, 9)
   end
 
   def has_winning_combination?(player_mark)

@@ -23,7 +23,7 @@ class Game
     @display.display_board(@board.squares)
     @display.show_current_player(@current_player.mark)
     move = @display.ask_for_move
-    until move_valid?(move)
+    until @board.move_valid?(move)
       @display.show_invalid_move_message(move)
       move = @display.ask_for_move
     end
@@ -51,11 +51,6 @@ class Game
 
   def is_over?
     !@board.moves_remaining? || winning_player_exists?
-  end
-
-  def move_valid?(move)
-    move = move.to_i
-    move.between?(1, 9) && @board.position_available?(move)
   end
 
   def tie_or_won

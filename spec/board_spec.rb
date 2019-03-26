@@ -12,20 +12,31 @@ RSpec.describe Board do
     end
   end
 
-  describe 'Making a move: ' do
+  describe 'Validating a move: ' do
+    board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
 
     it 'returns true if position is available' do
-      board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
-
-      expect(board.position_available?(4)).to eq(true)
+      expect(board.move_valid?(3)).to eq(true)
     end
 
     it 'returns false if position is taken' do
-      board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
+      expect(board.move_valid?(4)).to eq(false)
+    end
 
-      board.player_make_move('o', 4)
+    it 'returns false if a user enters a move that is not a single integer' do
+      expect(board.move_valid?(22)).to eq(false)
+    end
 
-      expect(board.position_available?(4)).to eq(false)
+    it 'returns false if a user enters a move not between 1-9' do
+      expect(board.move_valid?(10)).to eq(false)
+    end
+
+    it 'returns false a if user enters a move that is not an integer' do
+      expect(board.move_valid?('k')).to eq(false)
+    end
+
+    it 'returns true if a user enters move that is a single integer and is not taken' do
+      expect(board.move_valid?(2)).to eq(true)
     end
   end
 
