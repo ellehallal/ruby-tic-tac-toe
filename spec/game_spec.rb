@@ -52,44 +52,44 @@ RSpec.describe Game do
     player1 = Player.new('x')
     player2 = Player.new('o')
 
-    it 'returns true when less than 9 moves have been played' do
+    it 'returns false when less than 9 moves have been played' do
       allow($stdin).to receive(:gets).and_return('9')
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
 
       game.play_move
 
-      expect(game.can_continue_playing?).to eq(true)
+      expect(game.is_over?).to eq(false)
     end
 
-    it 'returns false when 9 moves have been played' do
+    it 'returns true when 9 moves have been played' do
       allow($stdin).to receive(:gets).and_return('9')
       board = Board.new(['o', 'x', 'x', 'o', 'x', 'o', 'x', 'o', 9])
       game = Game.new(board, display, player1, player2)
 
       game.play_move
 
-      expect(game.can_continue_playing?).to eq(false)
+      expect(game.is_over?).to eq(true)
     end
 
-    it 'returns true when both players do not have a winning combination' do
+    it 'returns false when both players do not have a winning combination' do
       allow($stdin).to receive(:gets).and_return('9')
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
 
       game.play_move
 
-      expect(game.can_continue_playing?).to eq(true)
+      expect(game.is_over?).to eq(false)
     end
 
-    it 'returns false when one player has a winning combination' do
+    it 'returns true when one player has a winning combination' do
       allow($stdin).to receive(:gets).and_return('9')
       board = Board.new(['x', 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
 
       game.play_move
 
-      expect(game.can_continue_playing?).to eq(false)
+      expect(game.is_over?).to eq(true)
     end
   end
 

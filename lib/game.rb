@@ -49,8 +49,8 @@ class Game
     toggle_current_player
   end
 
-  def can_continue_playing?
-    @board.moves_remaining? && !winning_player_exists?
+  def is_over?
+    !@board.moves_remaining? || winning_player_exists?
   end
 
   def move_valid?(move)
