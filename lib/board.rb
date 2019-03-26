@@ -1,9 +1,8 @@
 class Board
-  attr_reader :board, :moves_remaining
+  attr_reader :board
 
   def initialize(board)
     @board = board
-    @moves_remaining = 9
     @winning_combinations = [
       [0, 1, 2],
       [3, 4, 5],
@@ -18,7 +17,6 @@ class Board
 
   def player_make_move(player_mark, position)
     @board[position - 1] = player_mark
-    update_moves_remaining
   end
 
   def position_available?(position)
@@ -31,9 +29,7 @@ class Board
     end
   end
 
-  private
-  def update_moves_remaining
-    update_moves = @board.count { |position| position.is_a? Integer }
-    @moves_remaining = update_moves
+  def moves_remaining?
+    @board.count { |position| position.is_a? Integer }
   end
 end

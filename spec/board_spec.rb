@@ -2,6 +2,7 @@ require 'board'
 
 RSpec.describe Board do
   describe 'creating a board' do
+    
     it 'can accept a position and change the value to the specified mark' do
       board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
@@ -12,13 +13,6 @@ RSpec.describe Board do
   end
 
   describe 'Making a move: ' do
-    it 'decreases the remaining moves by 1 when a move is made' do
-      board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
-
-      board.player_make_move('x', 4)
-
-      expect(board.moves_remaining).to eq(8)
-    end
 
     it 'returns true if position is available' do
       board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])

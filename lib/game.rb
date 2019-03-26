@@ -44,17 +44,13 @@ class Game
 
   public
 
-  def moves_remaining?
-    @board.moves_remaining > 0
-  end
-
   def play_move
     make_move
     toggle_current_player
   end
 
   def can_continue_playing?
-    moves_remaining? && !winning_player_exists?
+    @board.moves_remaining? && !winning_player_exists?
   end
 
   def move_valid?(move)

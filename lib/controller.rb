@@ -5,6 +5,6 @@ class Controller
 
   def play
     while @game.can_continue_playing? do @game.play_move end
-    @game.is_tie_or_won
+    @game.tie_or_won
   end
 end
