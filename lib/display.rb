@@ -31,7 +31,7 @@ class Display
 
   def ask_play_again
     print "Play again? (Y/N):\n"
-    $stdin.gets.chomp
+    $stdin.gets.chomp.upcase
   end
 
   def show_exit_message

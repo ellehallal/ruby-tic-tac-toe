@@ -75,8 +75,8 @@ RSpec.describe Display do
         .to output("Play again? (Y/N):\n").to_stdout
     end
 
-    it "returns 'Y'" do
-      allow($stdin).to receive(:gets).and_return('Y')
+    it "returns user's input as uppercase" do
+      allow($stdin).to receive(:gets).and_return('y')
       expect(display.ask_play_again).to eq('Y')
     end
 

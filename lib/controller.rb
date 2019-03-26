@@ -15,7 +15,6 @@ class Controller
 
   def play_again?
     choice = @game.display.ask_play_again
-    choice.upcase!
     if choice == 'Y'
       @game.board.clear_squares
       true
