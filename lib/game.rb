@@ -20,7 +20,7 @@ class Game
   end
 
   def make_move
-    @display.display_board(@board.board)
+    @display.display_board(@board.squares)
     @display.show_current_player(@current_player.mark)
     move = @display.ask_for_move
     until move_valid?(move)
@@ -59,7 +59,7 @@ class Game
   end
 
   def tie_or_won
-    @display.display_board(@board.board)
+    @display.display_board(@board.squares)
     if winning_player_exists?
       @display.show_winner_message(winning_player)
     else

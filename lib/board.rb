@@ -1,8 +1,8 @@
 class Board
-  attr_reader :board
+  attr_reader :squares
 
-  def initialize(board)
-    @board = board
+  def initialize(squares)
+    @squares = squares
     @winning_combinations = [
       [0, 1, 2],
       [3, 4, 5],
@@ -16,20 +16,20 @@ class Board
   end
 
   def player_make_move(player_mark, position)
-    @board[position - 1] = player_mark
+    @squares[position - 1] = player_mark
   end
 
   def position_available?(position)
-    @board[position - 1].is_a? Integer
+    @squares[position - 1].is_a? Integer
   end
 
   def has_winning_combination?(player_mark)
     @winning_combinations.any? do |combination|
-      combination.all? { |position| @board[position] == player_mark }
+      combination.all? { |position| @squares[position] == player_mark }
     end
   end
 
   def moves_remaining?
-    @board.count { |position| position.is_a? Integer }
+    @squares.count { |square| square.is_a? Integer }
   end
 end
