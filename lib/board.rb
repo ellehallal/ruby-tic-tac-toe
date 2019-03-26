@@ -3,6 +3,7 @@ class Board
 
   def initialize(squares)
     @squares = squares
+    @initial_squares = squares
     @winning_combinations = [
       [0, 1, 2],
       [3, 4, 5],
@@ -33,5 +34,9 @@ class Board
   def moves_remaining?
     available_squares = @squares.count { |square| square.is_a? Integer }
     available_squares > 0
+  end
+
+  def clear_squares
+    @squares.each_index { |index| @squares[index] = index + 1 }
   end
 end
