@@ -17,15 +17,15 @@ class Display
     print "The current player is #{current_player_mark}\n"
   end
 
-  def invalid_move_message(move)
+  def show_invalid_move_message(move)
     print "#{move} is an invalid move.\n"
   end
 
-  def winner_message(player_mark)
+  def show_winner_message(player_mark)
     print "#{player_mark} is the winner!\n"
   end
 
-  def tie_message
+  def show_tie_message
     print "The game is a tie!\n"
   end
 end

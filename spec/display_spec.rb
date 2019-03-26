@@ -50,7 +50,7 @@ RSpec.describe Display do
 
     it 'displays "22 is an invalid move."' do
       expect do
-        display.invalid_move_message('22')
+        display.show_invalid_move_message('22')
       end.to output("22 is an invalid move.\n").to_stdout
     end
   end
@@ -60,13 +60,13 @@ RSpec.describe Display do
 
     it 'displays "x is the winner!"' do
       expect do
-        display.winner_message('x')
+        display.show_winner_message('x')
       end.to output("x is the winner!\n").to_stdout
     end
 
     it 'displays "The game is a tie!\n"' do
       expect do
-        display.tie_message
+        display.show_tie_message
       end.to output("The game is a tie!\n").to_stdout
     end
   end
