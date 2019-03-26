@@ -30,7 +30,7 @@ class Display
   end
 
   def ask_play_again
-    print "Play again?:\n"
+    print "Play again? (Y/N):\n"
     $stdin.gets.chomp
   end
 

@@ -69,10 +69,10 @@ RSpec.describe Display do
   context 'Displays messages after game has ended ' do
     display = Display.new
 
-    it 'displays "Play again?"' do
+    it 'displays "Play again? (Y/N):"' do
       allow($stdin).to receive(:gets).and_return('Y')
       expect { display.ask_play_again }
-        .to output("Play again?:\n").to_stdout
+        .to output("Play again? (Y/N):\n").to_stdout
     end
 
     it "returns 'Y'" do
