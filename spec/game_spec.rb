@@ -34,6 +34,7 @@ RSpec.describe Game do
 
     it 'plays move of x and updates the current player to o' do
       allow($stdin).to receive(:gets).and_return('1')
+
       game.play_move
 
       expect(game.current_player.mark).to eq('o')
@@ -41,6 +42,7 @@ RSpec.describe Game do
 
     it 'plays move of o and updates the current player to x' do
       allow($stdin).to receive(:gets).and_return('9')
+  
       game.play_move
 
       expect(game.current_player.mark).to eq('x')
@@ -53,41 +55,29 @@ RSpec.describe Game do
     player2 = Player.new('o')
 
     it 'returns false when less than 9 moves have been played' do
-      allow($stdin).to receive(:gets).and_return('9')
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
-
-      game.play_move
 
       expect(game.is_over?).to eq(false)
     end
 
     it 'returns true when 9 moves have been played' do
-      allow($stdin).to receive(:gets).and_return('9')
-      board = Board.new(['o', 'x', 'x', 'o', 'x', 'o', 'x', 'o', 9])
+      board = Board.new(['o', 'x', 'x', 'o', 'x', 'o', 'x', 'o', 'x'])
       game = Game.new(board, display, player1, player2)
-
-      game.play_move
 
       expect(game.is_over?).to eq(true)
     end
 
     it 'returns false when both players do not have a winning combination' do
-      allow($stdin).to receive(:gets).and_return('9')
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
-
-      game.play_move
 
       expect(game.is_over?).to eq(false)
     end
 
     it 'returns true when one player has a winning combination' do
-      allow($stdin).to receive(:gets).and_return('9')
       board = Board.new(['x', 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
-
-      game.play_move
 
       expect(game.is_over?).to eq(true)
     end
@@ -102,8 +92,7 @@ RSpec.describe Game do
       board = Board.new(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
       game = Game.new(board, display, player1, player2)
 
-      expect { game.tie_or_won }
-        .to output("""
+      expect { game.tie_or_won }.to output("""
      x | x | 3
     -----------
      o | o | 6
@@ -115,8 +104,7 @@ RSpec.describe Game do
       board = Board.new(['x', 'x', 'x', 'o', 'o', 6, 7, 8, 9])
       game = Game.new(board, display, player1, player2)
 
-      expect { game.tie_or_won }
-        .to output("""
+      expect { game.tie_or_won }.to output("""
      x | x | x
     -----------
      o | o | 6
@@ -128,8 +116,7 @@ RSpec.describe Game do
       board = Board.new(['x', 2, 'x', 'o', 'o', 'o', 7, 'x', 9])
       game = Game.new(board, display, player1, player2)
 
-      expect { game.tie_or_won }
-      .to output("""
+      expect { game.tie_or_won }.to output("""
      x | 2 | x
     -----------
      o | o | o
