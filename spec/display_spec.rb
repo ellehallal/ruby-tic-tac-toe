@@ -4,17 +4,14 @@ RSpec.describe Display do
   context 'Displaying a grid:' do
     display = Display.new
 
-    it 'display_grid accepts a grid as an argument and displays it' do
-      expect do
-        display.display_board([1, 2, 3, 4, 5, 6, 7, 8, 9])
-      end.to output(
-    """
+    it 'accepts a grid as an argument and displays it' do
+      expect { display.display_board([1, 2, 3, 4, 5, 6, 7, 8, 9]) }
+      .to output("""
      1 | 2 | 3
     -----------
      4 | 5 | 6
     -----------
-     7 | 8 | 9\n""")
-    .to_stdout
+     7 | 8 | 9\n""").to_stdout
     end
   end
 
@@ -23,14 +20,16 @@ RSpec.describe Display do
 
     it 'displays "Choose a position from 1-9"' do
       allow($stdin).to receive(:gets).and_return('1')
-      expect do
-        display.ask_for_move
-      end.to output('Choose a position from 1-9: ').to_stdout
+
+      expect { display.ask_for_move }
+        .to output('Choose a position from 1-9: ').to_stdout
     end
 
-    it 'returns the users move' do
+    it "returns the user's move" do
       allow($stdin).to receive(:gets).and_return('1')
+
       move = display.ask_for_move
+
       expect(move).to eq('1')
     end
   end
@@ -39,35 +38,31 @@ RSpec.describe Display do
     display = Display.new
 
     it 'displays "The current player is x"' do
-      expect do
-        display.show_current_player('x')
-      end.to output("The current player is x\n").to_stdout
+      expect { display.show_current_player('x') }
+        .to output("The current player is x\n").to_stdout
     end
   end
 
-  context 'Displays message when user enters incorrect move' do
+  context 'Displays a message when a user enters an incorrect move:' do
     display = Display.new
 
     it 'displays "22 is an invalid move."' do
-      expect do
-        display.show_invalid_move_message('22')
-      end.to output("22 is an invalid move.\n").to_stdout
+      expect { display.show_invalid_move_message('22') }
+        .to output("22 is an invalid move.\n").to_stdout
     end
   end
 
-  context 'Displays message when game is over' do
+  context 'Displays a message when the game is over: ' do
     display = Display.new
 
     it 'displays "x is the winner!"' do
-      expect do
-        display.show_winner_message('x')
-      end.to output("x is the winner!\n").to_stdout
+      expect { display.show_winner_message('x') }
+        .to output("x is the winner!\n").to_stdout
     end
 
-    it 'displays "The game is a tie!\n"' do
-      expect do
-        display.show_tie_message
-      end.to output("The game is a tie!\n").to_stdout
+    it 'displays "The game is a tie! "' do
+      expect { display.show_tie_message }
+        .to output("The game is a tie!\n").to_stdout
     end
   end
 end
