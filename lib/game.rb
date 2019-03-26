@@ -34,6 +34,14 @@ class Game
     @board.has_winning_combination?(@player1.mark) || @board.has_winning_combination?(@player2.mark)
   end
 
+  def winning_player
+    if @board.has_winning_combination?(@player1.mark)
+      @player1.mark
+    else
+      @player2.mark
+    end
+  end
+
   public
 
   def moves_remaining?
@@ -52,5 +60,14 @@ class Game
   def move_valid?(move)
     move = move.to_i
     move.between?(1, 9) && @board.position_available?(move)
+  end
+
+  def tie_or_won
+    @display.display_board(@board.board)
+    if winning_player_exists?
+      @display.winner_message(winning_player)
+    else
+      @display.tie_message
+    end
   end
 end

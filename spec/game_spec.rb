@@ -121,4 +121,40 @@ RSpec.describe Game do
       expect(game.move_valid?(2)).to eq(true)
     end
   end
+
+  context "Manages the outcome of the game" do
+    display = Display.new
+    player1 = Player.new('x')
+    player2 = Player.new('o')
+
+    it 'displays "The game is a tie!" if there are no winning players' do
+      board = Board.new(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
+      game = Game.new(board, display, player1, player2)
+
+      expect do
+        game.tie_or_won
+      end.to output("\n     x | x | 3\n    -----------\n     o | o | 6\n    -----------\n     7 | 8 | 9\nThe game is a tie!\n")
+      .to_stdout
+    end
+
+    it 'displays "x is the winner" when x has a winning combination' do
+      board = Board.new(['x', 'x', 'x', 'o', 'o', 6, 7, 8, 9])
+      game = Game.new(board, display, player1, player2)
+
+      expect do
+        game.tie_or_won
+      end.to output("\n     x | x | x\n    -----------\n     o | o | 6\n    -----------\n     7 | 8 | 9\nx is the winner!\n")
+      .to_stdout
+    end
+
+    it 'displays "o is the winner" when o has a winning combination' do
+      board = Board.new(['x', 2, 'x', 'o', 'o', 'o', 7, 'x', 9])
+      game = Game.new(board, display, player1, player2)
+
+      expect do
+        game.tie_or_won
+      end.to output("\n     x | 2 | x\n    -----------\n     o | o | o\n    -----------\n     7 | x | 9\no is the winner!\n")
+      .to_stdout
+    end
+  end
 end
