@@ -19,17 +19,6 @@ class Game
     end
   end
 
-  def make_move
-    @display.display_board(@board.squares)
-    @display.show_current_player(@current_player.mark)
-    move = @display.ask_for_move
-    until @board.move_valid?(move)
-      @display.show_invalid_move_message(move)
-      move = @display.ask_for_move
-    end
-    @board.player_make_move(@current_player.mark, move.to_i)
-  end
-
   def winning_player
     if @board.winning_line?(@player1.mark)
       @player1.mark
@@ -40,8 +29,8 @@ class Game
 
   public
 
-  def play_move
-    make_move
+  def play_move(move)
+    @board.player_make_move(@current_player.mark, move.to_i)
     toggle_current_player
   end
 
