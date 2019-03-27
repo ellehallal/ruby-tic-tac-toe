@@ -6,7 +6,7 @@ class Controller
   def play
     play_game = true
     while play_game
-      @game.play_move until @game.is_over?
+      @game.play_move until @game.over?
       @game.tie_or_won
       play_game = play_again?
     end

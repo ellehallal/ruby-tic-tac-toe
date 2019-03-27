@@ -22,7 +22,7 @@ class Board
 
   def move_valid?(move)
     move = move.to_i
-    (@squares[move - 1].is_a? Integer) && move.between?(1, 9)
+    move.between?(1, 9) && (@squares[move - 1].is_a? Integer)
   end
 
   def winning_line?(player_mark)

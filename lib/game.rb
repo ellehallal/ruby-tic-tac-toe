@@ -49,7 +49,7 @@ class Game
     toggle_current_player
   end
 
-  def is_over?
+  def over?
     !@board.moves_remaining? || winning_player_exists?
   end
 
