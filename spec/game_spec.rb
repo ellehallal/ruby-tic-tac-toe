@@ -58,28 +58,28 @@ RSpec.describe Game do
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
 
-      expect(game.is_over?).to eq(false)
+      expect(game.over?).to be false
     end
 
     it 'returns true when 9 moves have been played' do
       board = Board.new(['o', 'x', 'x', 'o', 'x', 'o', 'x', 'o', 'x'])
       game = Game.new(board, display, player1, player2)
 
-      expect(game.is_over?).to eq(true)
+      expect(game.over?).to be true
     end
 
     it 'returns false when both players do not have a winning combination' do
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
 
-      expect(game.is_over?).to eq(false)
+      expect(game.over?).to be false
     end
 
     it 'returns true when one player has a winning combination' do
       board = Board.new(['x', 'x', 'x', 'o', 5, 6, 'o', 8, 9])
       game = Game.new(board, display, player1, player2)
 
-      expect(game.is_over?).to eq(true)
+      expect(game.over?).to be true
     end
   end
 

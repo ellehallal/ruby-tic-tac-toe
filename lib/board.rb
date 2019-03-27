@@ -1,18 +1,19 @@
 class Board
   attr_reader :squares
 
+  @@winning_lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [2, 4, 6],
+    [0, 4, 8]
+  ]
+
   def initialize(squares)
     @squares = squares
-    @winning_combinations = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [2, 4, 6],
-      [0, 4, 8]
-    ]
   end
 
   def player_make_move(player_mark, position)
@@ -21,21 +22,25 @@ class Board
 
   def move_valid?(move)
     move = move.to_i
-    (@squares[move - 1].is_a? Integer) && move.between?(1, 9)
+    move.between?(1, 9) && (@squares[move - 1].is_a? Integer)
   end
 
-  def has_winning_combination?(player_mark)
-    @winning_combinations.any? do |combination|
+  def winning_line?(player_mark)
+    @@winning_lines.any? do |combination|
       combination.all? { |position| @squares[position] == player_mark }
     end
   end
 
-  def moves_remaining?
+  def winning_player_exists?(player1_mark, player2_mark)
+    winning_line?(player1_mark) || winning_line?(player2_mark)
+  end
+
+  def complete?
     available_squares = @squares.count { |square| square.is_a? Integer }
-    available_squares > 0
+    available_squares == 0
   end
 
   def clear_squares
-    @squares.each_index { |index| @squares[index] = index + 1 }
+    @squares = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
 end
