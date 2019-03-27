@@ -27,7 +27,7 @@ class Display
   end
 
   def show_invalid_move_message(move)
-    print "#{move} is an invalid move.\n"
+    print "#{move} is an invalid move. Please try again:\n"
   end
 
   def show_winner_message(player_mark)
@@ -39,10 +39,10 @@ class Display
   end
 
   def show_game_outcome(outcome, player_mark)
-    if outcome == 'win'
-      show_winner_message(player_mark)
-    else
+    if outcome == 'tie'
       show_tie_message
+    else
+      show_winner_message(player_mark)
     end
   end
 

@@ -1,9 +1,8 @@
 class Game
   attr_reader :current_player, :display, :board
 
-  def initialize(board, display, player1, player2)
+  def initialize(board, player1, player2)
     @board = board
-    @display = display
     @player1 = player1
     @player2 = player2
     @current_player = player1
@@ -39,11 +38,10 @@ class Game
   end
 
   def tie_or_won
-    @display.display_board(@board.squares)
     if @board.winning_player_exists?(@player1.mark, @player2.mark)
-      @display.show_winner_message(winning_player)
+      winning_player
     else
-      @display.show_tie_message
+      'tie'
     end
   end
 end

@@ -8,7 +8,7 @@ RSpec.describe Game do
     player1 = Player.new('x')
     player2 = Player.new('o')
     board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    game = Game.new(board, display, player1, player2)
+    game = Game.new(board, player1, player2)
 
     it 'plays move of x and updates the current player to o' do
       game.play_move('1')
@@ -29,71 +29,49 @@ RSpec.describe Game do
 
     it 'returns false when less than 9 moves have been played' do
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
-      game = Game.new(board, display, player1, player2)
+      game = Game.new(board, player1, player2)
 
       expect(game.over?).to be false
     end
 
     it 'returns true when 9 moves have been played' do
       board = Board.new(['o', 'x', 'x', 'o', 'x', 'o', 'x', 'o', 'x'])
-      game = Game.new(board, display, player1, player2)
+      game = Game.new(board, player1, player2)
 
       expect(game.over?).to be true
     end
 
     it 'returns false when both players do not have a winning combination' do
       board = Board.new([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
-      game = Game.new(board, display, player1, player2)
+      game = Game.new(board, player1, player2)
 
       expect(game.over?).to be false
     end
 
     it 'returns true when one player has a winning combination' do
       board = Board.new(['x', 'x', 'x', 'o', 5, 6, 'o', 8, 9])
-      game = Game.new(board, display, player1, player2)
+      game = Game.new(board, player1, player2)
 
       expect(game.over?).to be true
     end
   end
 
-  # context "Manages the outcome of the game:" do
-  #   player1 = Player.new('x')
-  #   player2 = Player.new('o')
+  context "Manages game outcome:" do
+    player1 = Player.new('x')
+    player2 = Player.new('o')
 
-  #   it 'displays "The game is a tie!" when there are no winning players' do
-  #     board = Board.new(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
-  #     game = Game.new(board, display, player1, player2)
+    it 'returns "tie" when there are no winning players' do
+      board = Board.new(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
+      game = Game.new(board, player1, player2)
 
-  #     expect { game.tie_or_won }.to output("""
-  #    x | x | 3
-  #   -----------
-  #    o | o | 6
-  #   -----------
-  #    7 | 8 | 9\nThe game is a tie!\n").to_stdout
-  #   end
+      expect(game.tie_or_won).to eq('tie')
+    end
 
-  #   it 'displays "x is the winner" when x has a winning combination' do
-  #     board = Board.new(['x', 'x', 'x', 'o', 'o', 6, 7, 8, 9])
-  #     game = Game.new(board, display, player1, player2)
+    it "returns winning player's mark (x) when there is a winning player" do
+      board = Board.new(['x', 'x', 'x', 'o', 'o', 6, 7, 8, 9])
+      game = Game.new(board, player1, player2)
 
-  #     expect { game.tie_or_won }.to output("""
-  #    x | x | x
-  #   -----------
-  #    o | o | 6
-  #   -----------
-  #    7 | 8 | 9\nx is the winner!\n").to_stdout
-  #   end
-
-  #   it 'displays "o is the winner" when o has a winning combination' do
-  #     board = Board.new(['x', 2, 'x', 'o', 'o', 'o', 7, 'x', 9])
-  #     game = Game.new(board, display, player1, player2)
-
-  #     expect { game.tie_or_won }.to output("""
-  #    x | 2 | x
-  #   -----------
-  #    o | o | o
-  #   -----------
-  #    7 | x | 9\no is the winner!\n").to_stdout
-  #   end
-  # end
+      expect(game.tie_or_won).to eq('x')
+    end
+  end
 end

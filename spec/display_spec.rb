@@ -53,7 +53,7 @@ RSpec.describe Display do
 
     it 'displays "22 is an invalid move."' do
       expect { display.show_invalid_move_message('22') }
-        .to output("22 is an invalid move.\n").to_stdout
+        .to output("22 is an invalid move. Please try again:\n").to_stdout
     end
   end
 
