@@ -41,6 +41,6 @@ class Board
   end
 
   def clear_squares
-    @squares.each_index { |index| @squares[index] = index + 1 }
+    @squares = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
 end
