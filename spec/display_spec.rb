@@ -1,11 +1,13 @@
 require 'display'
+require 'board'
 
 RSpec.describe Display do
   context 'Displaying a grid:' do
-    display = Display.new
+    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    display = Display.new(board)
 
     it 'accepts a grid as an argument and displays it' do
-      expect { display.display_board([1, 2, 3, 4, 5, 6, 7, 8, 9]) }
+      expect { display.display_board }
       .to output("""
      1 | 2 | 3
     -----------
@@ -16,7 +18,8 @@ RSpec.describe Display do
   end
 
   context 'Asking the user for a move:' do
-    display = Display.new
+    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    display = Display.new(board)
 
     it 'displays "Choose a position from 1-9"' do
       allow($stdin).to receive(:gets).and_return('1')
@@ -35,7 +38,8 @@ RSpec.describe Display do
   end
 
   context 'Displaying the current player:' do
-    display = Display.new
+    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    display = Display.new(board)
 
     it 'displays "The current player is x"' do
       expect { display.show_current_player('x') }
@@ -44,7 +48,8 @@ RSpec.describe Display do
   end
 
   context 'Displays a message when a user enters an incorrect move:' do
-    display = Display.new
+    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    display = Display.new(board)
 
     it 'displays "22 is an invalid move."' do
       expect { display.show_invalid_move_message('22') }
@@ -53,7 +58,8 @@ RSpec.describe Display do
   end
 
   context 'Displays a message when the game is over: ' do
-    display = Display.new
+    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    display = Display.new(board)
 
     it 'displays "x is the winner!"' do
       expect { display.show_winner_message('x') }
@@ -67,7 +73,8 @@ RSpec.describe Display do
   end
 
   context 'Displays message, depending on game outcome' do
-    display = Display.new
+    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    display = Display.new(board)
 
     it "displays 'x is the winner!' when the outcome is win" do
       outcome = 'win'
@@ -87,7 +94,8 @@ RSpec.describe Display do
   end
 
   context 'Displays messages after game has ended ' do
-    display = Display.new
+    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    display = Display.new(board)
 
     it 'displays "Play again? (Y/N):"' do
       allow($stdin).to receive(:gets).and_return('Y')
