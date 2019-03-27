@@ -76,19 +76,17 @@ RSpec.describe Display do
     board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
     display = Display.new(board)
 
-    it "displays 'x is the winner!' when the outcome is win" do
-      outcome = 'win'
-      player_mark = 'x'
+    it "displays 'x is the winner!' when the outcome is x" do
+      outcome = 'x'
 
-      expect { display.show_game_outcome(outcome, player_mark) }
+      expect { display.show_game_outcome(outcome) }
         .to output("x is the winner!\n").to_stdout
     end
 
-    it "displays 'x is the winner!' when the outcome is win" do
+    it "displays 'The game is a tie!\n' when the outcome is a tie" do
       outcome = 'tie'
-      player_mark = 'x'
 
-      expect { display.show_game_outcome(outcome, player_mark) }
+      expect { display.show_game_outcome(outcome) }
         .to output("The game is a tie!\n").to_stdout
     end
   end

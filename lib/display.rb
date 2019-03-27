@@ -38,11 +38,11 @@ class Display
     print "The game is a tie!\n"
   end
 
-  def show_game_outcome(outcome, player_mark)
+  def show_game_outcome(outcome)
     if outcome == 'tie'
       show_tie_message
     else
-      show_winner_message(player_mark)
+      show_winner_message(outcome)
     end
   end
 
