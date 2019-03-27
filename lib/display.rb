@@ -29,6 +29,14 @@ class Display
     print "The game is a tie!\n"
   end
 
+  def show_game_outcome(outcome, player_mark)
+    if outcome == 'win'
+      show_winner_message(player_mark)
+    else
+      show_tie_message
+    end
+  end
+
   def ask_play_again
     print "Play again? (Y/N):\n"
     $stdin.gets.chomp.upcase

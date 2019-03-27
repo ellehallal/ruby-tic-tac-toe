@@ -66,12 +66,32 @@ RSpec.describe Display do
     end
   end
 
+  context 'Displays message, depending on game outcome' do
+    display = Display.new
+
+    it "displays 'x is the winner!' when the outcome is win" do
+      outcome = 'win'
+      player_mark = 'x'
+
+      expect { display.show_game_outcome(outcome, player_mark) }
+        .to output("x is the winner!\n").to_stdout
+    end
+
+    it "displays 'x is the winner!' when the outcome is win" do
+      outcome = 'tie'
+      player_mark = 'x'
+
+      expect { display.show_game_outcome(outcome, player_mark) }
+        .to output("The game is a tie!\n").to_stdout
+    end
+  end
+
   context 'Displays messages after game has ended ' do
     display = Display.new
 
     it 'displays "Play again? (Y/N):"' do
       allow($stdin).to receive(:gets).and_return('Y')
-      
+
       expect { display.ask_play_again }
         .to output("Play again? (Y/N):\n").to_stdout
     end
