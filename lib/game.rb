@@ -50,7 +50,7 @@ class Game
   end
 
   def over?
-    !@board.moves_remaining? || winning_player_exists?
+    @board.complete? || winning_player_exists?
   end
 
   def tie_or_won

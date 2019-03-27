@@ -55,16 +55,16 @@ RSpec.describe Board do
   end
 
   describe 'Checking for available spaces: ' do
-    it 'returns true if there are available spaces on the board' do
+    it 'returns false if there are available spaces on the board' do
       board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
-      
-      expect(board.moves_remaining?).to eq(true)
+
+      expect(board.complete?).to eq(false)
     end
 
-    it 'returns false if there are no available spaces on the board' do
+    it 'returns true if there are no available spaces on the board' do
       board = Board.new(['x', 'x', 'o', 'x', 'o', 'o', 'o', 'x', 'x'])
 
-      expect(board.moves_remaining?).to eq(false)
+      expect(board.complete?).to eq(true)
     end
   end
 

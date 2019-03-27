@@ -31,9 +31,9 @@ class Board
     end
   end
 
-  def moves_remaining?
+  def complete?
     available_squares = @squares.count { |square| square.is_a? Integer }
-    available_squares > 0
+    available_squares == 0
   end
 
   def clear_squares
