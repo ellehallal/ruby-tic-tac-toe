@@ -1,6 +1,4 @@
 class Board
-  attr_reader :squares
-
   @@winning_lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -11,6 +9,8 @@ class Board
     [2, 4, 6],
     [0, 4, 8]
   ]
+
+  attr_reader :squares
 
   def initialize(squares)
     @squares = squares
@@ -37,7 +37,7 @@ class Board
 
   def complete?
     available_squares = @squares.count { |square| square.is_a? Integer }
-    available_squares == 0
+    available_squares.zero?
   end
 
   def clear_squares

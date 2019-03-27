@@ -15,7 +15,6 @@ def game_setup(squares, mark1, mark2)
 end
 
 RSpec.describe Controller do
-
   describe 'Play again: ' do
     controller = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9], 'x', 'o')
 
@@ -37,7 +36,6 @@ RSpec.describe Controller do
   end
 
   describe 'Displays outcome of game ' do
-
     it 'displays the board and x is the winner' do
       controller = game_setup(['x', 'x', 'o', 'o', 'x', 'x', 'o', 'o', 'x'], 'x', 'o')
 

@@ -3,12 +3,12 @@ require 'board'
 
 RSpec.describe Display do
   context 'Displaying a grid:' do
-    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new(board)
 
     it 'accepts a grid as an argument and displays it' do
       expect { display.display_board }
-      .to output("""
+        .to output("""
      1 | 2 | 3
     -----------
      4 | 5 | 6
@@ -18,7 +18,7 @@ RSpec.describe Display do
   end
 
   context 'Asking the user for a move:' do
-    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new(board)
 
     it 'displays "Choose a position from 1-9"' do
@@ -38,7 +38,7 @@ RSpec.describe Display do
   end
 
   context 'Displaying the current player:' do
-    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new(board)
 
     it 'displays "The current player is x"' do
@@ -48,7 +48,7 @@ RSpec.describe Display do
   end
 
   context 'Displays a message when a user enters an incorrect move:' do
-    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new(board)
 
     it 'displays "22 is an invalid move."' do
@@ -58,7 +58,7 @@ RSpec.describe Display do
   end
 
   context 'Displays a message when the game is over: ' do
-    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new(board)
 
     it 'displays "x is the winner!"' do
@@ -73,7 +73,7 @@ RSpec.describe Display do
   end
 
   context 'Displays message, depending on game outcome' do
-    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new(board)
 
     it "displays 'x is the winner!' when the outcome is x" do
@@ -92,7 +92,7 @@ RSpec.describe Display do
   end
 
   context 'Displays messages after game has ended ' do
-    board = Board.new(([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
     display = Display.new(board)
 
     it 'displays "Play again? (Y/N):"' do
