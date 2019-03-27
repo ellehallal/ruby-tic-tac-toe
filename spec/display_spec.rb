@@ -71,12 +71,14 @@ RSpec.describe Display do
 
     it 'displays "Play again? (Y/N):"' do
       allow($stdin).to receive(:gets).and_return('Y')
+      
       expect { display.ask_play_again }
         .to output("Play again? (Y/N):\n").to_stdout
     end
 
     it "returns user's input as uppercase" do
       allow($stdin).to receive(:gets).and_return('y')
+
       expect(display.ask_play_again).to eq('Y')
     end
 

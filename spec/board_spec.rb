@@ -57,11 +57,13 @@ RSpec.describe Board do
   describe 'Checking for available spaces: ' do
     it 'returns true if there are available spaces on the board' do
       board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
+      
       expect(board.moves_remaining?).to eq(true)
     end
 
     it 'returns false if there are no available spaces on the board' do
       board = Board.new(['x', 'x', 'o', 'x', 'o', 'o', 'o', 'x', 'x'])
+
       expect(board.moves_remaining?).to eq(false)
     end
   end
@@ -69,7 +71,9 @@ RSpec.describe Board do
   describe 'Clear the squares: ' do
     it 'clears the squares' do
       board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+
       board.clear_squares
+
       expect(board.squares).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
     end
   end

@@ -3,7 +3,6 @@ class Board
 
   def initialize(squares)
     @squares = squares
-    @initial_squares = squares
     @winning_combinations = [
       [0, 1, 2],
       [3, 4, 5],
