@@ -31,11 +31,11 @@ class Game
   end
 
   def winning_player_exists?
-    @board.has_winning_combination?(@player1.mark) || @board.has_winning_combination?(@player2.mark)
+    @board.winning_line?(@player1.mark) || @board.winning_line?(@player2.mark)
   end
 
   def winning_player
-    if @board.has_winning_combination?(@player1.mark)
+    if @board.winning_line?(@player1.mark)
       @player1.mark
     else
       @player2.mark
