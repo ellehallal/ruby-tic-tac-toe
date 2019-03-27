@@ -52,6 +52,18 @@ RSpec.describe Board do
 
       expect(board.winning_line?('x')).to be false
     end
+
+    it "returns true when either player's mark is in a winning line position" do
+      board = Board.new(['x', 'x', 'x', 4, 5, 6, 'o', 8, 'o'])
+
+      expect(board.winning_player_exists?('x', 'o')).to be true
+    end
+
+    it "returns false when either player's mark is not in a winning line position" do
+      board = Board.new(['x', 'o', 'x', 4, 5, 6, 'o', 'x', 'o'])
+
+      expect(board.winning_player_exists?('x', 'o')).to be false
+    end
   end
 
   describe 'Checking for available spaces: ' do

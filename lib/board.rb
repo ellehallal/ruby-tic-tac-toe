@@ -31,6 +31,10 @@ class Board
     end
   end
 
+  def winning_player_exists?(player1_mark, player2_mark)
+    winning_line?(player1_mark) || winning_line?(player2_mark)
+  end
+
   def complete?
     available_squares = @squares.count { |square| square.is_a? Integer }
     available_squares == 0

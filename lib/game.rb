@@ -30,10 +30,6 @@ class Game
     @board.player_make_move(@current_player.mark, move.to_i)
   end
 
-  def winning_player_exists?
-    @board.winning_line?(@player1.mark) || @board.winning_line?(@player2.mark)
-  end
-
   def winning_player
     if @board.winning_line?(@player1.mark)
       @player1.mark
@@ -50,12 +46,12 @@ class Game
   end
 
   def over?
-    @board.complete? || winning_player_exists?
+    @board.complete? || @board.winning_player_exists?(@player1.mark, @player2.mark)
   end
 
   def tie_or_won
     @display.display_board(@board.squares)
-    if winning_player_exists?
+    if @board.winning_player_exists?(@player1.mark, @player2.mark)
       @display.show_winner_message(winning_player)
     else
       @display.show_tie_message
