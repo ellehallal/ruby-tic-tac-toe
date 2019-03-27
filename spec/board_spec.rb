@@ -16,27 +16,27 @@ RSpec.describe Board do
     board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
 
     it 'returns true if position is available' do
-      expect(board.move_valid?(3)).to eq(true)
+      expect(board.move_valid?(3)).to be true
     end
 
     it 'returns false if position is taken' do
-      expect(board.move_valid?(4)).to eq(false)
+      expect(board.move_valid?(4)).to be false
     end
 
     it 'returns false if a user enters a move that is not a single integer' do
-      expect(board.move_valid?(22)).to eq(false)
+      expect(board.move_valid?(22)).to be false
     end
 
     it 'returns false if a user enters a move not between 1-9' do
-      expect(board.move_valid?(10)).to eq(false)
+      expect(board.move_valid?(10)).to be false
     end
 
     it 'returns false a if user enters a move that is not an integer' do
-      expect(board.move_valid?('k')).to eq(false)
+      expect(board.move_valid?('k')).to be false
     end
 
     it 'returns true if a user enters move that is a single integer and is not taken' do
-      expect(board.move_valid?(2)).to eq(true)
+      expect(board.move_valid?(2)).to be true
     end
   end
 
@@ -44,13 +44,13 @@ RSpec.describe Board do
     it 'returns true if a mark is in a winning line position' do
       board = Board.new(['x', 'x', 'x', 4, 5, 6, 'o', 8, 'o'])
 
-      expect(board.winning_line?('x')).to eq(true)
+      expect(board.winning_line?('x')).to be true
     end
 
     it 'returns false if a mark is not in a winning line position' do
       board = Board.new(['x', 'o', 'x', 4, 5, 6, 'o', 'x', 'o'])
 
-      expect(board.winning_line?('x')).to eq(false)
+      expect(board.winning_line?('x')).to be false
     end
   end
 
@@ -58,13 +58,13 @@ RSpec.describe Board do
     it 'returns false if there are available spaces on the board' do
       board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
 
-      expect(board.complete?).to eq(false)
+      expect(board.complete?).to be false
     end
 
     it 'returns true if there are no available spaces on the board' do
       board = Board.new(['x', 'x', 'o', 'x', 'o', 'o', 'o', 'x', 'x'])
 
-      expect(board.complete?).to eq(true)
+      expect(board.complete?).to be true
     end
   end
 
