@@ -28,4 +28,13 @@ class Display
   def show_tie_message
     print "The game is a tie!\n"
   end
+
+  def ask_play_again
+    print "Play again? (Y/N):\n"
+    $stdin.gets.chomp.upcase
+  end
+
+  def show_exit_message
+    print "Thanks for playing Tic Tac Toe!\n"
+  end
 end

@@ -34,4 +34,8 @@ class Board
     available_squares = @squares.count { |square| square.is_a? Integer }
     available_squares > 0
   end
+
+  def clear_squares
+    @squares.each_index { |index| @squares[index] = index + 1 }
+  end
 end
