@@ -1,30 +1,68 @@
 require 'board'
 
 RSpec.describe Board do
-  describe 'creating a board' do
+  describe 'Making a move: ' do
+    
     it 'can accept a position and change the value to the specified mark' do
       board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
       board.player_make_move('x', 4)
-      expect(board.board).to eq([1, 2, 3, 'x', 5, 6, 7, 8, 9])
+
+      expect(board.squares).to eq([1, 2, 3, 'x', 5, 6, 7, 8, 9])
     end
   end
 
-  describe 'tracking remaining moves' do
-    it 'when a move is made, the number of moves remaining decrements by 1' do
-      board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
-      board.player_make_move('x', 4)
-      expect(board.moves_remaining).to eq(8)
-    end
+  describe 'Validating a move: ' do
+    board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
 
     it 'returns true if position is available' do
-      board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
-      expect(board.position_available?(4)).to eq(true)
+      expect(board.move_valid?(3)).to eq(true)
     end
 
     it 'returns false if position is taken' do
+      expect(board.move_valid?(4)).to eq(false)
+    end
+
+    it 'returns false if a user enters a move that is not a single integer' do
+      expect(board.move_valid?(22)).to eq(false)
+    end
+
+    it 'returns false if a user enters a move not between 1-9' do
+      expect(board.move_valid?(10)).to eq(false)
+    end
+
+    it 'returns false a if user enters a move that is not an integer' do
+      expect(board.move_valid?('k')).to eq(false)
+    end
+
+    it 'returns true if a user enters move that is a single integer and is not taken' do
+      expect(board.move_valid?(2)).to eq(true)
+    end
+  end
+
+  describe 'Checking for winning combinations on the board: ' do
+    it 'returns true if a mark is in a winning combination position' do
+      board = Board.new(['x', 'x', 'x', 4, 5, 6, 'o', 8, 'o'])
+
+      expect(board.has_winning_combination?('x')).to eq(true)
+    end
+
+    it 'returns false if a mark is not in a winning combination position' do
+      board = Board.new(['x', 'o', 'x', 4, 5, 6, 'o', 'x', 'o'])
+
+      expect(board.has_winning_combination?('x')).to eq(false)
+    end
+  end
+
+  describe 'Checking for available spaces: ' do
+    it 'returns true if there are available spaces on the board' do
       board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
-      board.player_make_move('o', 4)
-      expect(board.position_available?(4)).to eq(false)
+      expect(board.moves_remaining?).to eq(true)
+    end
+
+    it 'returns false if there are no available spaces on the board' do
+      board = Board.new(['x', 'x', 'o', 'x', 'o', 'o', 'o', 'x', 'x'])
+      expect(board.moves_remaining?).to eq(false)
     end
   end
 end

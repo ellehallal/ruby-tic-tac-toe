@@ -4,6 +4,7 @@ class Controller
   end
 
   def play
-    while @game.can_continue_playing? do @game.play_move end
+    @game.play_move until @game.is_over?
+    @game.tie_or_won
   end
 end
