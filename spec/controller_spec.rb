@@ -56,4 +56,30 @@ RSpec.describe Controller do
      x | x | o\nThe game is a tie!\n""").to_stdout
     end
   end
+
+  describe 'Playing a new game: ' do
+    controller = controller_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+    it 'calls main_game' do
+      expect(controller).to receive(:main_game)
+      controller.new_game
+    end
+
+    it 'calls end_of_game when a player has won' do
+      allow($stdin).to receive(:gets).and_return('1', '4', '2', '5', '3')
+
+      expect(controller).to receive(:end_of_game)
+      controller.new_game
+    end
+
+    it 'calls end_of_game when the game is a tie' do
+      allow($stdin).to receive(:gets).and_return('1', '2', '3', '4', '6', '5', '7', '9', '8')
+
+      expect(controller).to receive(:end_of_game)
+      controller.new_game
+    end
+
+    
+  end
+
 end
