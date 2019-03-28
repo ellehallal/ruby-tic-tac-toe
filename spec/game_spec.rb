@@ -74,4 +74,29 @@ RSpec.describe Game do
       expect(game.tie_or_won).to eq('x')
     end
   end
+
+  context "Resets the board and current player :" do
+    player1 = Player.new('x')
+    player2 = Player.new('o')
+    board = Board.new(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
+    game = Game.new(board, player1, player2)
+
+    it 'clears the board' do
+      board = Board.new(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
+      game = Game.new(board, player1, player2)
+
+      game.reset_game
+
+      expect(game.board.squares).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    end
+
+    it "makes player1 the current player" do
+      board = Board.new(['x', 'x', 'x', 'o', 'o', 6, 7, 8, 9])
+      game = Game.new(board, player1, player2)
+
+      game.reset_game
+
+      expect(game.current_player.mark).to eq('x')
+    end
+  end
 end

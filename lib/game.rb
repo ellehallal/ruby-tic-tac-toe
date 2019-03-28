@@ -44,4 +44,9 @@ class Game
       'tie'
     end
   end
+
+  def reset_game
+    @board.clear_squares
+    @current_player = @player1
+  end
 end
