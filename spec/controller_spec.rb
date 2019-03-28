@@ -10,7 +10,7 @@ def game_setup(squares, mark1, mark2)
   player1 = Player.new(mark1)
   player2 = Player.new(mark2)
   game = Game.new(board, player1, player2)
-  controller = Controller.new(game, board, display)
+  controller = Controller.new(game, display)
   controller
 end
 

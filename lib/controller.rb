@@ -1,12 +1,11 @@
 class Controller
-  def initialize(game, board, display)
+  def initialize(game, display)
     @game = game
-    @board = board
     @display = display
   end
 
   def new_game
-    @board.clear_squares
+    @game.reset_game
     until @game.over?
       @display.display_board
       @display.show_current_player(@game.current_player.mark)
