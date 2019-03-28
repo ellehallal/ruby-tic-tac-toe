@@ -5,7 +5,6 @@ class Controller
   end
 
   def new_game
-    @game.reset_game
     until @game.over?
       @display.display_board
       @display.show_current_player(@game.current_player.mark)
@@ -31,6 +30,7 @@ class Controller
     while play_game
       new_game
       play_game = play_again?
+      @game.reset_game
     end
     @display.show_exit_message
   end
