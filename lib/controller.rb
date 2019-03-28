@@ -10,12 +10,18 @@ class Controller
   end
 
   def main_game
-    until @game.over?
-      @display.display_board
-      @display.show_current_player(@game.current_player.mark)
-      move = @display.ask_for_move
-      @game.play_move(move)
+    loop do
+      break if @game.over?
+
+      play_move
     end
+  end
+
+  def play_move
+    @display.display_board
+    @display.show_current_player(@game.current_player.mark)
+    move = @display.ask_for_move
+    @game.play_move(move)
   end
 
   def end_of_game
