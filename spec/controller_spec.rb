@@ -15,27 +15,7 @@ def controller_setup(squares, mark1, mark2)
 end
 
 RSpec.describe Controller do
-  describe 'Play again: ' do
-    controller = controller_setup([1, 2, 3, 4, 5, 6, 7, 8, 9], 'x', 'o')
-
-    it 'returns true if the user inputs "Y"' do
-      allow($stdin).to receive(:gets).and_return('Y')
-      
-      play_again = controller.play_again?
-
-      expect(play_again).to eq(true)
-    end
-
-    it 'returns true if the user does not input "Y"' do
-      allow($stdin).to receive(:gets).and_return('12')
-
-      play_again = controller.play_again?
-
-      expect(play_again).to eq(false)
-    end
-  end
-
-  describe 'Displays outcome of game ' do
+  describe 'Displays outcome of game:' do
     it 'displays the board and x is the winner' do
       controller = controller_setup(['x', 'x', 'o', 'o', 'x', 'x', 'o', 'o', 'x'], 'x', 'o')
 
