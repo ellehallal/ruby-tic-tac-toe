@@ -68,18 +68,32 @@ RSpec.describe Controller do
     it 'calls end_of_game when a player has won' do
       allow($stdin).to receive(:gets).and_return('1', '4', '2', '5', '3')
 
-      expect(controller).to receive(:end_of_game)
+      expect(controller).to receive(:end_of_game).once
       controller.new_game
     end
 
     it 'calls end_of_game when the game is a tie' do
       allow($stdin).to receive(:gets).and_return('1', '2', '3', '4', '6', '5', '7', '9', '8')
 
-      expect(controller).to receive(:end_of_game)
+      expect(controller).to receive(:end_of_game).once
       controller.new_game
     end
-
-    
   end
 
+  describe 'Looping within the game: ' do
+
+    it 'breaks the loop when the game is a tie' do
+      controller = controller_setup(['x', 'o', 'x', 'o', 'o', 'x', 'x', 'x', 'o'])
+
+      expect(controller).not_to receive(:play_move)
+      controller.main_game
+    end
+
+    it 'breaks the loop when a player wins' do
+      controller = controller_setup(['x', 'x', 'x', 4, 'o', 'o', 7, 8, 9])
+
+      expect(controller).not_to receive(:play_move)
+      controller.main_game
+    end
+  end
 end
