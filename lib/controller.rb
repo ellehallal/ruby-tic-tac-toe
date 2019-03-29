@@ -4,8 +4,15 @@ class Controller
     @display = display
   end
 
+  def main_game
+    play_move until @game.over?
+    end_of_game
+  end
+
+  private
+
   def play_move
-    @display.display_board
+    @display.display_board(@game.board.squares)
     @display.show_current_player(@game.current_player.mark)
     move = @display.ask_for_move
     @game.play_move(move)
@@ -13,20 +20,7 @@ class Controller
 
   def end_of_game
     outcome = @game.tie_or_won
-    @display.display_board
+    @display.display_board(@game.board.squares)
     @display.show_game_outcome(outcome)
-  end
-
-  def main_game
-    loop do
-      break if @game.over?
-
-      play_move
-    end
-  end
-
-  def new_game
-    main_game
-    end_of_game
   end
 end

@@ -7,7 +7,7 @@ require 'game_manager'
 
 def manager_setup(squares, mark1, mark2)
   board = Board.new(squares)
-  display = Display.new(board)
+  display = Display.new
   player1 = Player.new(mark1)
   player2 = Player.new(mark2)
   game = Game.new(board, player1, player2)
@@ -34,6 +34,16 @@ RSpec.describe GameManager do
       play_again = game_manager.play_again?
 
       expect(play_again).to eq(false)
+    end
+  end
+
+  describe 'Playing a game: ' do
+    game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9], 'x', 'o')
+
+    it 'calls game_loop"' do
+      expect(game_manager).to receive(:game_loop).once
+
+      game_manager.play
     end
   end
 end

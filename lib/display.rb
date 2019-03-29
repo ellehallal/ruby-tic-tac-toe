@@ -1,21 +1,18 @@
 class Display
-  def initialize(board)
-    @board = board
-  end
 
-  def display_board
+  def display_board(board)
     print """
-     #{@board.squares[0]} | #{@board.squares[1]} | #{@board.squares[2]}
+     #{board[0]} | #{board[1]} | #{board[2]}
     -----------
-     #{@board.squares[3]} | #{@board.squares[4]} | #{@board.squares[5]}
+     #{board[3]} | #{board[4]} | #{board[5]}
     -----------
-     #{@board.squares[6]} | #{@board.squares[7]} | #{@board.squares[8]}\n"""
+     #{board[6]} | #{board[7]} | #{board[8]}\n"""
   end
 
-  def ask_for_move
+  def ask_for_move(board)
     print 'Choose a position from 1-9: '
     move = $stdin.gets.chomp
-    until @board.move_valid?(move)
+    until board.move_valid?(move)
       show_invalid_move_message(move)
       move = $stdin.gets.chomp
     end
