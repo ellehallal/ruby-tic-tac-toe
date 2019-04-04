@@ -19,22 +19,24 @@ RSpec.describe Controller do
 
     it 'breaks the loop when the game is a tie' do
       controller = controller_setup(['x', 'o', 'x', 'o', 'o', 'x', 'x', 'x', 'o'])
+      allow(controller).to receive(:end_of_game)
+      allow(controller).to receive(:play_move)
+
+      controller.main_game
 
       expect(controller).not_to receive(:play_move)
-      expect(controller).to receive(:end_of_game).once
-      controller.main_game
+      expect(controller).to have_received(:end_of_game).once
     end
 
-    it 'should have a better name' do
-      game = object_double(Game.new(nil, nil, nil), :over? => true, :tie_or_won => 'x' )
-      display = object_double(Display.new, :display_board => "hi", :show_game_outcome => 'tie', :show_current_player => 'x')
-      controller = Controller.new(game, display)
+    it 'breaks the loop when there is a winning player' do
+      controller = controller_setup(['x', 'x', 'x', 'o', 'o', 'x', 'x', 'o', 'o'])
+      allow(controller).to receive(:end_of_game)
+      allow(controller).to receive(:play_move)
 
       controller.main_game
 
-      expect(display).to have_received(:show_game_outcome)
-      expect(display).not_to have_received(:show_current_player)
-      expect(game).to have_received(:tie_or_won)
+      expect(controller).not_to receive(:play_move)
+      expect(controller).to have_received(:end_of_game).once
     end
   end
 end

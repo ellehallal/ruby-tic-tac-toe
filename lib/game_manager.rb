@@ -5,6 +5,11 @@ class GameManager
     @display = display
   end
 
+  def play
+    game_loop
+    @display.show_exit_message
+  end
+
   def play_again?
     choice = @display.ask_play_again
     choice == 'Y'
@@ -17,10 +22,5 @@ class GameManager
       play_game = play_again?
       @game.reset_game
     end
-  end
-
-  def play
-    game_loop
-    @display.show_exit_message
   end
 end

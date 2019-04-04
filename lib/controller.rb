@@ -5,7 +5,9 @@ class Controller
   end
 
   def main_game
+    p @game.over?
     play_move until @game.over?
+
     end_of_game
   end
 
