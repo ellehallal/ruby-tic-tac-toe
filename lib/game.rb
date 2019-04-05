@@ -1,5 +1,5 @@
 class Game
-  attr_reader :current_player, :board
+  attr_reader :board
 
   def initialize(board, player1, player2)
     @board = board
@@ -48,5 +48,9 @@ class Game
   def reset_game
     @board.clear_squares
     @current_player = @player1
+  end
+
+  def current_player_mark
+    @current_player.mark
   end
 end

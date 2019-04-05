@@ -18,7 +18,7 @@ class GameManager
   def game_loop
     play_game = true
     while play_game
-      @controller.new_game
+      @controller.main_game
       play_game = play_again?
       @game.reset_game
     end

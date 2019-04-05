@@ -18,13 +18,13 @@ RSpec.describe Game do
     it 'plays move of x and updates the current player to o' do
       game.play_move('1')
 
-      expect(game.current_player.mark).to eq('o')
+      expect(game.current_player_mark).to eq('o')
     end
 
     it 'plays move of o and updates the current player to x' do
       game.play_move('2')
 
-      expect(game.current_player.mark).to eq('x')
+      expect(game.current_player_mark).to eq('x')
     end
   end
 
@@ -85,7 +85,7 @@ RSpec.describe Game do
 
       game.reset_game
 
-      expect(game.current_player.mark).to eq('x')
+      expect(game.current_player_mark).to eq('x')
     end
   end
 end
