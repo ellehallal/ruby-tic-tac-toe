@@ -36,14 +36,22 @@ class Board
   end
 
   def complete?
-    available_squares.zero?
+    available_squares_quantity.zero?
   end
 
   def clear_squares
     @squares = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
 
-  def available_squares
+  def available_squares_quantity
     @squares.count { |square| square.is_a? Integer }
+  end
+
+  def available_squares
+    available = []
+    @squares.each do |square|
+      available << square if square.is_a? Integer
+    end
+    available
   end
 end
