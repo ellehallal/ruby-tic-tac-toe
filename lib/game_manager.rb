@@ -24,4 +24,13 @@ class GameManager
     end
   end
 
+  def game_selection
+    selection = 0
+    until selection.between?(1, 4)
+      @display.show_game_options
+      p selection
+      selection = $stdin.gets.to_i
+    end
+    selection
+  end
 end

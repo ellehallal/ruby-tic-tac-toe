@@ -46,4 +46,25 @@ RSpec.describe GameManager do
       game_manager.play
     end
   end
+
+  describe 'Game selection: ' do
+    game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9], 'x', 'o')
+
+    it 'prompts the user to select a game option and returns it if between 1 - 4' do
+      allow($stdin).to receive(:gets).and_return('1')
+
+      selection = game_manager.game_selection
+
+      expect(selection).to eq(1)
+    end
+
+    it "only returns user's selection selection if between 1-4" do
+      allow($stdin).to receive(:gets).and_return('a')
+      allow($stdin).to receive(:gets).and_return('2')
+
+      selection = game_manager.game_selection
+
+      expect(selection).to eq(2)
+    end
+  end
 end

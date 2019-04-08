@@ -127,8 +127,6 @@ RSpec.describe Display do
     2. Human vs Computer
     3. Computer vs Human
     4. Computer vs Computer\n""").to_stdout
-
-
     end
   end
 end
