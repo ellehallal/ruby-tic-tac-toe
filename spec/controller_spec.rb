@@ -16,27 +16,25 @@ end
 
 RSpec.describe Controller do
   describe 'Playing the game: ' do
-
-    it 'breaks the loop when the game is a tie' do
-      controller = controller_setup(['x', 'o', 'x', 'o', 'o', 'x', 'x', 'x', 'o'])
-      allow(controller).to receive(:end_of_game)
-      allow(controller).to receive(:play_move)
+    it 'plays a game that ends with a tie' do
+      controller = controller_setup(%w[x o x o o x x x o])
+      $stdout = StringIO.new
 
       controller.main_game
+      outputs = $stdout.string.split("\n")
 
-      expect(controller).not_to receive(:play_move)
-      expect(controller).to have_received(:end_of_game).once
+      expect(outputs.last).to eq('The game is a tie!')
     end
 
-    it 'breaks the loop when there is a winning player' do
-      controller = controller_setup(['x', 'x', 'x', 'o', 'o', 'x', 'x', 'o', 'o'])
-      allow(controller).to receive(:end_of_game)
-      allow(controller).to receive(:play_move)
+    it 'plays a game that ends with a winning player' do
+      controller = controller_setup([1, 'x', 'x', 4, 'o', 'x', 'x', 8, 'o'])
+      allow($stdin).to receive(:gets).and_return('8', '4', '1')
+      $stdout = StringIO.new
 
       controller.main_game
+      outputs = $stdout.string.split("\n")
 
-      expect(controller).not_to receive(:play_move)
-      expect(controller).to have_received(:end_of_game).once
+      expect(outputs.last).to eq('x is the winner!')
     end
   end
 end
