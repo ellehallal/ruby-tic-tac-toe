@@ -4,29 +4,39 @@ require 'display'
 require 'game'
 require 'player'
 
-RSpec.describe Controller do
-  board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
+def controller_setup(squares)
+  board = Board.new(squares)
   display = Display.new
   player1 = Player.new('x')
   player2 = Player.new('o')
-  game = Game.new(board, display, player1, player2)
-  controller = Controller.new(game)
+  game = Game.new(board, player1, player2)
+  controller = Controller.new(game, display)
+  controller
+end
 
-  describe 'Play again: ' do
-    it 'returns true if the user inputs "Y"' do
-      allow($stdin).to receive(:gets).and_return('Y')
+RSpec.describe Controller do
+  describe 'Playing the game: ' do
 
-      play_again = controller.play_again?
+    it 'breaks the loop when the game is a tie' do
+      controller = controller_setup(['x', 'o', 'x', 'o', 'o', 'x', 'x', 'x', 'o'])
+      allow(controller).to receive(:end_of_game)
+      allow(controller).to receive(:play_move)
 
-      expect(play_again).to eq(true)
+      controller.main_game
+
+      expect(controller).not_to receive(:play_move)
+      expect(controller).to have_received(:end_of_game).once
     end
 
-    it 'returns true if the user does not input "Y"' do
-      allow($stdin).to receive(:gets).and_return('12')
+    it 'breaks the loop when there is a winning player' do
+      controller = controller_setup(['x', 'x', 'x', 'o', 'o', 'x', 'x', 'o', 'o'])
+      allow(controller).to receive(:end_of_game)
+      allow(controller).to receive(:play_move)
 
-      play_again = controller.play_again?
+      controller.main_game
 
-      expect(play_again).to eq(false)
+      expect(controller).not_to receive(:play_move)
+      expect(controller).to have_received(:end_of_game).once
     end
   end
 end

@@ -1,9 +1,8 @@
 class Game
-  attr_reader :current_player, :display, :board
+  attr_reader :board
 
-  def initialize(board, display, player1, player2)
+  def initialize(board, player1, player2)
     @board = board
-    @display = display
     @player1 = player1
     @player2 = player2
     @current_player = player1
@@ -19,17 +18,6 @@ class Game
     end
   end
 
-  def make_move
-    @display.display_board(@board.squares)
-    @display.show_current_player(@current_player.mark)
-    move = @display.ask_for_move
-    until @board.move_valid?(move)
-      @display.show_invalid_move_message(move)
-      move = @display.ask_for_move
-    end
-    @board.player_make_move(@current_player.mark, move.to_i)
-  end
-
   def winning_player
     if @board.winning_line?(@player1.mark)
       @player1.mark
@@ -40,8 +28,8 @@ class Game
 
   public
 
-  def play_move
-    make_move
+  def play_move(move)
+    @board.player_make_move(@current_player.mark, move.to_i)
     toggle_current_player
   end
 
@@ -50,11 +38,19 @@ class Game
   end
 
   def tie_or_won
-    @display.display_board(@board.squares)
     if @board.winning_player_exists?(@player1.mark, @player2.mark)
-      @display.show_winner_message(winning_player)
+      winning_player
     else
-      @display.show_tie_message
+      'tie'
     end
+  end
+
+  def reset_game
+    @board.clear_squares
+    @current_player = @player1
+  end
+
+  def current_player_mark
+    @current_player.mark
   end
 end

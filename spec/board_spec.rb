@@ -89,4 +89,12 @@ RSpec.describe Board do
       expect(board.squares).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
     end
   end
+
+  describe 'Available squares: ' do
+    it 'returns the amount of available squares' do
+      board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+
+      expect(board.available_squares).to eq(7)
+    end
+  end
 end

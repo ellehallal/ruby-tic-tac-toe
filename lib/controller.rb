@@ -1,25 +1,28 @@
 class Controller
-  def initialize(game)
+  def initialize(game, display)
     @game = game
+    @display = display
   end
 
-  def play
-    play_game = true
-    while play_game
-      @game.play_move until @game.over?
-      @game.tie_or_won
-      play_game = play_again?
-    end
-    @game.display.show_exit_message
+  def main_game
+    p @game.over?
+    play_move until @game.over?
+
+    end_of_game
   end
 
-  def play_again?
-    choice = @game.display.ask_play_again
-    if choice == 'Y'
-      @game.board.clear_squares
-      true
-    else
-      false
-    end
+  private
+
+  def play_move
+    @display.display_board(@game.board.squares)
+    @display.show_current_player(@game.current_player_mark)
+    move = @display.ask_for_move(@game.board)
+    @game.play_move(move)
+  end
+
+  def end_of_game
+    outcome = @game.tie_or_won
+    @display.display_board(@game.board.squares)
+    @display.show_game_outcome(outcome)
   end
 end

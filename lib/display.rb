@@ -1,4 +1,5 @@
 class Display
+
   def display_board(board)
     print """
      #{board[0]} | #{board[1]} | #{board[2]}
@@ -8,9 +9,14 @@ class Display
      #{board[6]} | #{board[7]} | #{board[8]}\n"""
   end
 
-  def ask_for_move
+  def ask_for_move(board)
     print 'Choose a position from 1-9: '
-    $stdin.gets.chomp
+    move = $stdin.gets.chomp
+    until board.move_valid?(move)
+      show_invalid_move_message(move)
+      move = $stdin.gets.chomp
+    end
+    move
   end
 
   def show_current_player(current_player_mark)
@@ -18,7 +24,7 @@ class Display
   end
 
   def show_invalid_move_message(move)
-    print "#{move} is an invalid move.\n"
+    print "#{move} is an invalid move. Please try again:\n"
   end
 
   def show_winner_message(player_mark)
@@ -29,11 +35,11 @@ class Display
     print "The game is a tie!\n"
   end
 
-  def show_game_outcome(outcome, player_mark)
-    if outcome == 'win'
-      show_winner_message(player_mark)
-    else
+  def show_game_outcome(outcome)
+    if outcome == 'tie'
       show_tie_message
+    else
+      show_winner_message(outcome)
     end
   end
 
