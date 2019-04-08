@@ -112,4 +112,23 @@ RSpec.describe Display do
         .to output("Thanks for playing Tic Tac Toe!\n").to_stdout
     end
   end
+
+  context 'Game options ' do
+    display = display_setup
+
+    it 'displays the available game options a user can select' do
+      display = display_setup
+
+      expect { display.show_game_options }
+        .to output("""
+    Let's play Tic Tac Toe!
+    Please select a game type:
+    1. Human vs Human
+    2. Human vs Computer
+    3. Computer vs Human
+    4. Computer vs Computer\n""").to_stdout
+
+
+    end
+  end
 end

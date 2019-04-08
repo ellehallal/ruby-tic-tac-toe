@@ -1,7 +1,7 @@
 class GameManager
-  def initialize(game, controller, display)
-    @game = game
+  def initialize(controller, display)
     @controller = controller
+    @game = @controller.game
     @display = display
   end
 
@@ -23,4 +23,5 @@ class GameManager
       @game.reset_game
     end
   end
+
 end

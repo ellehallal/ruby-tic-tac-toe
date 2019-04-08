@@ -1,4 +1,5 @@
 class Controller
+  attr_reader :game
   def initialize(game, display)
     @game = game
     @display = display

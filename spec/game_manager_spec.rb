@@ -12,7 +12,7 @@ def manager_setup(squares, mark1, mark2)
   player2 = Player.new(mark2)
   game = Game.new(board, player1, player2)
   controller = Controller.new(game, display)
-  game_manager = GameManager.new(game, controller, display)
+  game_manager = GameManager.new(controller, display)
   game_manager
 end
 
