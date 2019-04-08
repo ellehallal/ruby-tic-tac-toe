@@ -13,7 +13,7 @@ RSpec.describe ComputerPlayer do
     it 'returns an available move' do
       computer_player = ComputerPlayer.new('x')
       allow(computer_player).to receive(:sleep)
-      allow(computer_player).to receive(:print)
+      allow(computer_player).to receive(:puts)
 
       choose_move = computer_player.choose_move([1, 2, 3])
 
