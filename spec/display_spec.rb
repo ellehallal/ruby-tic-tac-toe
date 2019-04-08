@@ -128,5 +128,11 @@ RSpec.describe Display do
     3. Computer vs Human
     4. Computer vs Computer\n""").to_stdout
     end
+
+    it 'displays "Invalid game option selected. Please try again:"' do
+
+      expect { display.show_invalid_option_message }
+        .to output("Invalid game option selected. Please try again:\n").to_stdout
+    end
   end
 end

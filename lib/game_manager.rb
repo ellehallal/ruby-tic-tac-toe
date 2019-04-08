@@ -17,6 +17,7 @@ class GameManager
 
   def game_loop
     play_game = true
+    game_selection
     while play_game
       @controller.main_game
       play_game = play_again?
@@ -28,7 +29,6 @@ class GameManager
     selection = 0
     until selection.between?(1, 4)
       @display.show_game_options
-      p selection
       selection = $stdin.gets.to_i
     end
     selection

@@ -37,16 +37,6 @@ RSpec.describe GameManager do
     end
   end
 
-  describe 'Playing a game: ' do
-    game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9], 'x', 'o')
-
-    it 'calls game_loop"' do
-      expect(game_manager).to receive(:game_loop).once
-
-      game_manager.play
-    end
-  end
-
   describe 'Game selection: ' do
     game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9], 'x', 'o')
 

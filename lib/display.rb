@@ -61,4 +61,8 @@ class Display
     3. Computer vs Human
     4. Computer vs Computer\n"""
   end
+
+  def show_invalid_option_message
+    print "Invalid game option selected. Please try again:\n"
+  end
 end
