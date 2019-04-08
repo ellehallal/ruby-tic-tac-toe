@@ -27,17 +27,9 @@ RSpec.describe Display do
 
     it 'displays "Choose a position from 1-9"' do
       allow($stdin).to receive(:gets).and_return('1')
-      
-      expect { display.ask_for_move(board) }
+
+      expect { display.ask_for_move }
         .to output('Choose a position from 1-9: ').to_stdout
-    end
-
-    it "returns the user's move" do
-      allow($stdin).to receive(:gets).and_return('1')
-
-      move = display.ask_for_move(board)
-
-      expect(move).to eq('1')
     end
   end
 
@@ -53,9 +45,9 @@ RSpec.describe Display do
   context 'Displays a message when a user enters an incorrect move:' do
     display = display_setup
 
-    it 'displays "22 is an invalid move."' do
-      expect { display.show_invalid_move_message('22') }
-        .to output("22 is an invalid move. Please try again:\n").to_stdout
+    it 'returns "You have entered an invalid move. Please try again:"' do
+      expect(display.invalid_move_message)
+        .to eq("You have entered an invalid move. Please try again:\n")
     end
   end
 

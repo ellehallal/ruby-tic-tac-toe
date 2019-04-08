@@ -9,22 +9,16 @@ class Display
      #{board[6]} | #{board[7]} | #{board[8]}\n"""
   end
 
-  def ask_for_move(board)
+  def ask_for_move
     print 'Choose a position from 1-9: '
-    move = $stdin.gets.chomp
-    until board.move_valid?(move)
-      show_invalid_move_message(move)
-      move = $stdin.gets.chomp
-    end
-    move
   end
 
   def show_current_player(current_player_mark)
     print "The current player is #{current_player_mark}\n"
   end
 
-  def show_invalid_move_message(move)
-    print "#{move} is an invalid move. Please try again:\n"
+  def invalid_move_message
+    "You have entered an invalid move. Please try again:\n"
   end
 
   def show_winner_message(player_mark)

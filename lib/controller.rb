@@ -16,8 +16,9 @@ class Controller
   def play_move
     @display.display_board(@game.board.squares)
     @display.show_current_player(@game.current_player_mark)
-    move = @display.ask_for_move(@game.board)
-    @game.play_move(move)
+    @display.ask_for_move
+    @game.play_move(@display.invalid_move_message)
+    @game.toggle_current_player
   end
 
   def end_of_game

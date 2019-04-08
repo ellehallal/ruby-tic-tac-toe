@@ -1,5 +1,5 @@
 class Game
-  attr_reader :board
+  attr_reader :board, :current_player
 
   def initialize(board, player1, player2)
     @board = board
@@ -9,14 +9,6 @@ class Game
   end
 
   private
-
-  def toggle_current_player
-    if @current_player == @player1
-      @current_player = @player2
-    else
-      @current_player = @player1
-    end
-  end
 
   def winning_player
     if @board.winning_line?(@player1.mark)
@@ -28,9 +20,21 @@ class Game
 
   public
 
-  def play_move(move)
-    @board.player_make_move(@current_player.mark, move.to_i)
-    toggle_current_player
+  def play_move(invalid_message)
+    player_move = @current_player.choose_move
+    until @board.move_valid?(player_move)
+      print invalid_message
+      player_move = @current_player.choose_move
+    end
+    @board.player_make_move(@current_player.mark, player_move)
+  end
+
+  def toggle_current_player
+    if @current_player == @player1
+      @current_player = @player2
+    else
+      @current_player = @player1
+    end
   end
 
   def over?

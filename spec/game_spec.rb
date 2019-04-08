@@ -11,23 +11,6 @@ def game_setup(new_board)
 end
 
 RSpec.describe Game do
-
-  context 'Playing a move when x is the current player:' do
-    game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
-
-    it 'plays move of x and updates the current player to o' do
-      game.play_move('1')
-
-      expect(game.current_player_mark).to eq('o')
-    end
-
-    it 'plays move of o and updates the current player to x' do
-      game.play_move('2')
-
-      expect(game.current_player_mark).to eq('x')
-    end
-  end
-
   context 'Checks if a user can continue playing:' do
 
     it 'returns false when less than 9 moves have been played' do
@@ -84,6 +67,22 @@ RSpec.describe Game do
       game = game_setup(['x', 'x', 'x', 'o', 'o', 6, 7, 8, 9])
 
       game.reset_game
+
+      expect(game.current_player_mark).to eq('x')
+    end
+  end
+
+  context 'Toggles the current player' do
+    game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+    it 'updates current player from x to o' do
+      game.toggle_current_player
+
+      expect(game.current_player_mark).to eq('o')
+    end
+
+    it 'updates current player from to x' do
+      game.toggle_current_player
 
       expect(game.current_player_mark).to eq('x')
     end
