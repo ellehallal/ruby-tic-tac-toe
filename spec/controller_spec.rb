@@ -2,13 +2,13 @@ require 'controller'
 require 'board'
 require 'display'
 require 'game'
-require 'player'
+require 'human_player'
 
 def controller_setup(squares)
   board = Board.new(squares)
   display = Display.new
-  player1 = Player.new('x')
-  player2 = Player.new('o')
+  player1 = HumanPlayer.new('x')
+  player2 = HumanPlayer.new('o')
   game = Game.new(board, player1, player2)
   controller = Controller.new(game, display)
   controller
