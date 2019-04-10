@@ -52,22 +52,23 @@ RSpec.describe Controller do
 
   describe 'Playing the game: ' do
     it 'plays a game that ends with a tie' do
-      allow($stdin).to receive(:gets).and_return('h', 'c')
       $stdout = StringIO.new
       controller = controller_setup
+      controller.create_game('h', 'c', %w[x o x o o x x x o])
 
-      controller.main_game(%w[x o x o o x x x o])
+      controller.play_game
       output = $stdout.string.split("\n")
 
       expect(output.last).to eq('The game is a tie!')
     end
 
     it 'plays a game that ends with a winning player' do
-      allow($stdin).to receive(:gets).and_return('h', 'h', '8', '4', '1')
+      allow($stdin).to receive(:gets).and_return('8', '4', '1')
       $stdout = StringIO.new
       controller = controller_setup
+      controller.create_game('h', 'h', [1, 'x', 'x', 4, 'o', 'x', 'x', 8, 'o'])
 
-      controller.main_game([1, 'x', 'x', 4, 'o', 'x', 'x', 8, 'o'])
+      controller.play_game
       output = $stdout.string.split("\n")
 
       expect(output.last).to eq('x is the winner!')

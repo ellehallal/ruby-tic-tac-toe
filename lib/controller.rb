@@ -3,7 +3,7 @@ require_relative './game_factory.rb'
 class Controller
   attr_reader :game
   def initialize(display)
-    @game = game
+    @game = nil
     @display = display
     @default_squares = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
@@ -16,10 +16,13 @@ class Controller
     @display.show_welcome_message
     players = player_selection
     create_game(players[0], players[1], squares)
+    @game.reset_game
+    play_game
+  end
 
+  def play_game
     play_move until @game.over?
     end_of_game
-    @game.reset_game
   end
 
   def player_selection
