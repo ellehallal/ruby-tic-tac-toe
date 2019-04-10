@@ -63,10 +63,7 @@ class Controller
   end
 
   def play_move
-    @display.display_board(@game.board.squares)
-    @display.show_current_player(@game.player_info[:mark], @game.player_info[:name])
-    @display.ask_for_move
-    @game.play_move(@display.invalid_move_message)
+    @game.play_move
     @game.toggle_current_player
   end
 

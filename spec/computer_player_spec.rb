@@ -1,21 +1,22 @@
 require 'computer_player'
+require 'display'
+require 'board'
+
+def computer_player_setup
+  display = Display.new
+  computer_player = ComputerPlayer.new('x', display)
+  computer_player
+end
 
 RSpec.describe ComputerPlayer do
-  describe 'Create computer player' do
-    it 'creates a new player with a mark' do
-      computer_player = ComputerPlayer.new('x')
-
-      expect(computer_player.mark).to eq('x')
-    end
-  end
-
   describe 'Selecting a move' do
     it 'returns an available move' do
-      computer_player = ComputerPlayer.new('x')
+      computer_player = computer_player_setup
+      board = Board.new([1, 2, 3])
       allow(computer_player).to receive(:sleep)
       allow(computer_player).to receive(:puts)
 
-      choose_move = computer_player.choose_move([1, 2, 3])
+      choose_move = computer_player.choose_move(board)
 
       expect(choose_move).to be_between(1, 3)
     end

@@ -20,12 +20,8 @@ class Game
 
   public
 
-  def play_move(invalid_message)
-    player_move = @current_player.choose_move(@board.available_squares)
-    until @board.move_valid?(player_move)
-      print invalid_message
-      player_move = @current_player.choose_move(@board.available_squares)
-    end
+  def play_move(board)
+    player_move = @current_player.choose_move(board)
     @board.player_make_move(@current_player.mark, player_move)
   end
 

@@ -3,7 +3,6 @@ require 'board'
 
 def display_setup
   display = Display.new
-  display
 end
 
 RSpec.describe Display do
@@ -29,7 +28,7 @@ RSpec.describe Display do
       allow($stdin).to receive(:gets).and_return('1')
 
       expect { display.ask_for_move }
-        .to output('Choose a position from 1-9: ').to_stdout
+        .to output("Choose a position from 1-9: \n").to_stdout
     end
   end
 
@@ -46,8 +45,8 @@ RSpec.describe Display do
     display = display_setup
 
     it 'returns "You have entered an invalid move. Please try again:"' do
-      expect(display.invalid_move_message)
-        .to eq("You have entered an invalid move. Please try again:\n")
+      expect { display.invalid_move_message }
+        .to output("You have entered an invalid move. Please try again:\n").to_stdout
     end
   end
 
@@ -128,6 +127,22 @@ RSpec.describe Display do
     it "displays 'Please select player 2 (h = human, c = computer):'" do
       expect { display.ask_for_player2 }
         .to output("Please select player 2 (h = human, c = computer):\n").to_stdout
+    end
+  end
+
+  context 'Computer move ' do
+    display = display_setup
+
+    it "displays 'Computer is thinking. Please wait...'" do
+      display = display_setup
+
+      expect { display.show_computer_thinking }
+        .to output("\n\nComputer is thinking. Please wait...\n\n").to_stdout
+    end
+
+    it 'displays "Computer has selected position 3"' do
+      expect { display.show_computer_move(3) }
+        .to output("Computer has selected position 3\n").to_stdout
     end
   end
 end

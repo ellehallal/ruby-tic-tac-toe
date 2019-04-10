@@ -9,7 +9,7 @@ class Display
   end
 
   def ask_for_move
-    print 'Choose a position from 1-9: '
+    print "Choose a position from 1-9: \n"
   end
 
   def show_current_player(mark, name)
@@ -17,7 +17,7 @@ class Display
   end
 
   def invalid_move_message
-    "You have entered an invalid move. Please try again:\n"
+    print "You have entered an invalid move. Please try again:\n"
   end
 
   def show_winner_message(player_mark)
@@ -58,5 +58,13 @@ class Display
 
   def ask_for_player2
     print "Please select player 2 (h = human, c = computer):\n"
- end
+  end
+
+  def show_computer_thinking
+    print "\n\nComputer is thinking. Please wait...\n\n"
+  end
+
+  def show_computer_move(move)
+    print "Computer has selected position #{move}\n"
+  end
 end

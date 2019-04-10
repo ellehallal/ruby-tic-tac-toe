@@ -1,11 +1,13 @@
 require 'game'
 require 'player'
 require 'board'
+require 'display'
+require 'human_player'
 
-def game_setup(new_board)
-  player1 = HumanPlayer.new('x')
-  player2 = HumanPlayer.new('o')
-  board = Board.new(new_board)
+def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
+  board = Board.new(squares)
+  player1 = HumanPlayer.new('x', board, display)
+  player2 = HumanPlayer.new('o', board, display)
   game = Game.new(board, player1, player2)
   game
 end
@@ -48,24 +50,6 @@ RSpec.describe Game do
       game = game_setup(['x', 'x', 'x', 'o', 'o', 6, 7, 8, 9])
 
       expect(game.tie_or_won).to eq('x')
-    end
-  end
-
-  context 'Resets the board and current player:' do
-    it 'clears the board' do
-      game = game_setup(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
-
-      game.reset_game
-
-      expect(game.board.squares).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    end
-
-    it 'makes player1 the current player' do
-      game = game_setup(['x', 'x', 'x', 'o', 'o', 6, 7, 8, 9])
-
-      game.reset_game
-
-      expect(game.player_info[:mark]).to eq('x')
     end
   end
 
