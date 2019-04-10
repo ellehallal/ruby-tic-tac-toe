@@ -3,8 +3,8 @@ require 'player'
 require 'board'
 
 def game_setup(new_board)
-  player1 = Player.new('x')
-  player2 = Player.new('o')
+  player1 = HumanPlayer.new('x')
+  player2 = HumanPlayer.new('o')
   board = Board.new(new_board)
   game = Game.new(board, player1, player2)
   game
@@ -12,7 +12,6 @@ end
 
 RSpec.describe Game do
   context 'Checks if a user can continue playing:' do
-
     it 'returns false when less than 9 moves have been played' do
       game = game_setup([1, 'x', 'x', 'o', 5, 6, 'o', 8, 9])
 
@@ -20,7 +19,7 @@ RSpec.describe Game do
     end
 
     it 'returns true when 9 moves have been played' do
-      game = game_setup(['o', 'x', 'x', 'o', 'x', 'o', 'x', 'o', 'x'])
+      game = game_setup(%w[o x x o x o x o x])
 
       expect(game.over?).to be true
     end
@@ -39,7 +38,6 @@ RSpec.describe Game do
   end
 
   context "Manages the game's outcome:" do
-
     it 'returns "tie" when there are no winning players' do
       game = game_setup(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
 
@@ -53,8 +51,7 @@ RSpec.describe Game do
     end
   end
 
-  context "Resets the board and current player:" do
-
+  context 'Resets the board and current player:' do
     it 'clears the board' do
       game = game_setup(['x', 'x', 3, 'o', 'o', 6, 7, 8, 9])
 
@@ -68,7 +65,7 @@ RSpec.describe Game do
 
       game.reset_game
 
-      expect(game.current_player_mark).to eq('x')
+      expect(game.player_info[:mark]).to eq('x')
     end
   end
 
@@ -78,13 +75,15 @@ RSpec.describe Game do
     it 'updates current player from x to o' do
       game.toggle_current_player
 
-      expect(game.current_player_mark).to eq('o')
+      expect(game.player_info[:mark]).to eq('o')
+      expect(game.player_info[:name]).to eq('Human')
     end
 
-    it 'updates current player from to x' do
+    it 'updates current player from o to x' do
       game.toggle_current_player
 
-      expect(game.current_player_mark).to eq('x')
+      expect(game.player_info[:mark]).to eq('x')
+      expect(game.player_info[:name]).to eq('Human')
     end
   end
 end

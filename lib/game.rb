@@ -30,11 +30,11 @@ class Game
   end
 
   def toggle_current_player
-    if @current_player == @player1
-      @current_player = @player2
-    else
-      @current_player = @player1
-    end
+    @current_player = if @current_player == @player1
+                        @player2
+                      else
+                        @player1
+                      end
   end
 
   def over?
@@ -54,7 +54,10 @@ class Game
     @current_player = @player1
   end
 
-  def current_player_mark
-    @current_player.mark
+  def player_info
+    {
+      mark: @current_player.mark,
+      name: @current_player.name
+    }
   end
 end
