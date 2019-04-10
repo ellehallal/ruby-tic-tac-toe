@@ -1,20 +1,19 @@
 class Display
-
   def display_board(board)
-    print """
+    print ''"
      #{board[0]} | #{board[1]} | #{board[2]}
     -----------
      #{board[3]} | #{board[4]} | #{board[5]}
     -----------
-     #{board[6]} | #{board[7]} | #{board[8]}\n"""
+     #{board[6]} | #{board[7]} | #{board[8]}\n"''
   end
 
   def ask_for_move
     print 'Choose a position from 1-9: '
   end
 
-  def show_current_player(current_player_mark)
-    print "The current player is #{current_player_mark}\n"
+  def show_current_player(mark, name)
+    print "#{mark} (#{name}), play a move:\n"
   end
 
   def invalid_move_message
@@ -47,16 +46,18 @@ class Display
   end
 
   def show_game_options
-    print """
-    Let's play Tic Tac Toe!
-    Please select a game type:
-    1. Human vs Human
-    2. Human vs Computer
-    3. Computer vs Human
-    4. Computer vs Computer\n"""
+    print "Let's play Tic Tac Toe!\n"
   end
 
   def show_invalid_option_message
-    print "Invalid game option selected. Please try again:\n"
+    print "Invalid option selected. Please try again:\n"
   end
+
+  def ask_for_player1
+    print "Please select player 1 (h = human, c = computer):\n"
+  end
+
+  def ask_for_player2
+    print "Please select player 2 (h = human, c = computer):\n"
+ end
 end

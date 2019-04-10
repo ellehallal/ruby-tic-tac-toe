@@ -12,12 +12,12 @@ RSpec.describe Display do
 
     it 'accepts a grid as an argument and displays it' do
       expect { display.display_board([1, 2, 3, 4, 5, 6, 7, 8, 9]) }
-        .to output("""
+        .to output(''"
      1 | 2 | 3
     -----------
      4 | 5 | 6
     -----------
-     7 | 8 | 9\n""").to_stdout
+     7 | 8 | 9\n"'').to_stdout
     end
   end
 
@@ -37,8 +37,8 @@ RSpec.describe Display do
     display = display_setup
 
     it 'displays "The current player is x"' do
-      expect { display.show_current_player('x') }
-        .to output("The current player is x\n").to_stdout
+      expect { display.show_current_player('x', 'Computer') }
+        .to output("x (Computer), play a move:\n").to_stdout
     end
   end
 
@@ -112,19 +112,28 @@ RSpec.describe Display do
       display = display_setup
 
       expect { display.show_game_options }
-        .to output("""
-    Let's play Tic Tac Toe!
-    Please select a game type:
-    1. Human vs Human
-    2. Human vs Computer
-    3. Computer vs Human
-    4. Computer vs Computer\n""").to_stdout
+        .to output("Let's play Tic Tac Toe!\n").to_stdout
     end
 
     it 'displays "Invalid game option selected. Please try again:"' do
-
       expect { display.show_invalid_option_message }
-        .to output("Invalid game option selected. Please try again:\n").to_stdout
+        .to output("Invalid option selected. Please try again:\n").to_stdout
+    end
+  end
+
+  context 'Player types ' do
+    display = display_setup
+
+    it "displays 'Please select player 1 (h = human, c = computer):'" do
+      display = display_setup
+
+      expect { display.ask_for_player1 }
+        .to output("Please select player 1 (h = human, c = computer):\n").to_stdout
+    end
+
+    it "displays 'Please select player 2 (h = human, c = computer):'" do
+      expect { display.ask_for_player2 }
+        .to output("Please select player 2 (h = human, c = computer):\n").to_stdout
     end
   end
 end
