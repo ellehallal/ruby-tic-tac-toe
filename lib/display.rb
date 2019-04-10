@@ -38,14 +38,13 @@ class Display
 
   def ask_play_again
     print "Play again? (Y/N):\n"
-    $stdin.gets.chomp.upcase
   end
 
   def show_exit_message
     print "Thanks for playing Tic Tac Toe!\n"
   end
 
-  def show_game_options
+  def show_welcome_message
     print "Let's play Tic Tac Toe!\n"
   end
 

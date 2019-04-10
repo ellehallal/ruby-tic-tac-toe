@@ -93,12 +93,6 @@ RSpec.describe Display do
         .to output("Play again? (Y/N):\n").to_stdout
     end
 
-    it "returns user's input as uppercase" do
-      allow($stdin).to receive(:gets).and_return('y')
-
-      expect(display.ask_play_again).to eq('Y')
-    end
-
     it 'displays "Thanks for playing Tic Tac Toe!"' do
       expect { display.show_exit_message }
         .to output("Thanks for playing Tic Tac Toe!\n").to_stdout
@@ -111,7 +105,7 @@ RSpec.describe Display do
     it 'displays the available game options a user can select' do
       display = display_setup
 
-      expect { display.show_game_options }
+      expect { display.show_welcome_message }
         .to output("Let's play Tic Tac Toe!\n").to_stdout
     end
 
