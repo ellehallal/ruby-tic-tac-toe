@@ -1,13 +1,13 @@
 class Controller
+  attr_reader :game
   def initialize(game, display)
     @game = game
     @display = display
   end
 
   def main_game
-    p @game.over?
+    @game.over?
     play_move until @game.over?
-
     end_of_game
   end
 

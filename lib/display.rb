@@ -51,4 +51,18 @@ class Display
   def show_exit_message
     print "Thanks for playing Tic Tac Toe!\n"
   end
+
+  def show_game_options
+    print """
+    Let's play Tic Tac Toe!
+    Please select a game type:
+    1. Human vs Human
+    2. Human vs Computer
+    3. Computer vs Human
+    4. Computer vs Computer\n"""
+  end
+
+  def show_invalid_option_message
+    print "Invalid game option selected. Please try again:\n"
+  end
 end
