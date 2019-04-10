@@ -13,6 +13,7 @@ class Controller
   end
 
   def main_game(squares = @default_squares)
+    @display.show_welcome_message
     players = player_selection
     create_game(players[0], players[1], squares)
 
@@ -25,12 +26,12 @@ class Controller
     players = []
 
     selection1 = prompt_player1_selection
-    validate_player_selection(selection1, 'player1')
+    validated_selection1 = validate_player_selection(selection1, 'player1')
 
     selection2 = prompt_player2_selection
-    validate_player_selection(selection2, 'player2')
+    validated_selection2 = validate_player_selection(selection2, 'player2')
 
-    players.push(selection1, selection2)
+    players.push(validated_selection1, validated_selection2)
   end
 
   private
@@ -55,6 +56,7 @@ class Controller
         selection = prompt_player2_selection
       end
     end
+    selection
   end
 
   def play_move

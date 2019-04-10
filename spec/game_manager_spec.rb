@@ -5,22 +5,18 @@ require 'game'
 require 'player'
 require 'game_manager'
 
-def manager_setup(squares, mark1, mark2)
-  board = Board.new(squares)
+def manager_setup(squares)
   display = Display.new
-  player1 = Player.new(mark1)
-  player2 = Player.new(mark2)
-  game = Game.new(board, player1, player2)
-  controller = Controller.new(game, display)
+  controller = Controller.new(display)
+  controller.create_game('h', 'h', squares)
   game_manager = GameManager.new(controller, display)
   game_manager
 end
 
 RSpec.describe GameManager do
   describe 'Play again: ' do
-    game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9], 'x', 'o')
-
     it 'returns true if the user inputs "Y"' do
+      game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
       allow($stdin).to receive(:gets).and_return('Y')
 
       play_again = game_manager.play_again?
@@ -28,33 +24,29 @@ RSpec.describe GameManager do
       expect(play_again).to eq(true)
     end
 
-    it 'returns true if the user does not input "Y"' do
+    it 'returns false if the user does not input "Y"' do
+      game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
       allow($stdin).to receive(:gets).and_return('12')
 
       play_again = game_manager.play_again?
 
       expect(play_again).to eq(false)
     end
-  end
 
-  describe 'Game selection: ' do
-    game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9], 'x', 'o')
+    it 'displays the exit message when the user inputs N' do
+      game_manager = manager_setup(%w[x o x x o o x x o])
 
-    it 'prompts the user to select a game option and returns it if between 1 - 4' do
-      allow($stdin).to receive(:gets).and_return('1')
+      display = Display.new
+      controller = Controller.new(display)
+      game_manager = GameManager.new(controller, display)
 
-      selection = game_manager.game_selection
+      allow(game_manager).to receive(:gets).and_return('c', 'c', 'n')
+      $stdout = StringIO.new
 
-      expect(selection).to eq(1)
-    end
+      game_manager.play
+      output = $stdout.string.split("\n")
 
-    it "only returns user's selection selection if between 1-4" do
-      allow($stdin).to receive(:gets).and_return('a')
-      allow($stdin).to receive(:gets).and_return('2')
-
-      selection = game_manager.game_selection
-
-      expect(selection).to eq(2)
+      expect(output.last).to eq('Thanks for playing Tic Tac Toe!')
     end
   end
 end
