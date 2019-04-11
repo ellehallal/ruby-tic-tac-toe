@@ -4,19 +4,21 @@ require 'display'
 require 'game'
 require 'player'
 require 'game_manager'
+require 'player_maker'
 
-def manager_setup(squares)
+def manager_setup
+  player_maker = PlayerMaker
   display = Display.new
-  controller = Controller.new(display)
-  controller.create_game('h', 'h', squares)
-  game_manager = GameManager.new(controller, display)
-  game_manager
+  player_selector = PlayerSelector.new(display, player_maker)
+  game_factory = GameFactory.new(player_selector)
+  controller = Controller.new(display, game_factory)
+  GameManager.new(controller, display)
 end
 
 RSpec.describe GameManager do
   describe 'Play again: ' do
     it 'returns true if the user inputs "Y"' do
-      game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      game_manager = manager_setup
       allow($stdin).to receive(:gets).and_return('Y')
 
       play_again = game_manager.play_again?
@@ -25,7 +27,7 @@ RSpec.describe GameManager do
     end
 
     it 'returns false if the user does not input "Y"' do
-      game_manager = manager_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      game_manager = manager_setup
       allow($stdin).to receive(:gets).and_return('12')
 
       play_again = game_manager.play_again?
@@ -34,13 +36,9 @@ RSpec.describe GameManager do
     end
 
     it 'displays the exit message when the user inputs N' do
-      game_manager = manager_setup(%w[x o x x o o x x o])
+      allow($stdin).to receive(:gets).and_return('h', 'h', 'n', '1', '2', '3', '5', '4', '6', '7', '9', '8')
+      game_manager = manager_setup
 
-      display = Display.new
-      controller = Controller.new(display)
-      game_manager = GameManager.new(controller, display)
-
-      allow(game_manager).to receive(:gets).and_return('c', 'c', 'n')
       $stdout = StringIO.new
 
       game_manager.play

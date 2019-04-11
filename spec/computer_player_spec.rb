@@ -4,7 +4,7 @@ require 'board'
 
 def computer_player_setup
   display = Display.new
-  computer_player = ComputerPlayer.new('x', display)
+  computer_player = ComputerPlayer.new('x', 'Computer', display)
   computer_player
 end
 

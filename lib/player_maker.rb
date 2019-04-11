@@ -3,11 +3,14 @@ require_relative './computer_player.rb'
 
 class PlayerMaker
   PLAYER_TYPES = {
-    'h' => HumanPlayer,
-    'c' => ComputerPlayer
+    'h' => [HumanPlayer, 'Human'],
+    'c' => [ComputerPlayer, 'Computer']
   }.freeze
 
   def self.create(player_type, mark, display)
-    (PLAYER_TYPES[player_type]).new(mark, display)
+    player_class = PLAYER_TYPES[player_type][0]
+    player_name = PLAYER_TYPES[player_type][1]
+
+    player_class.new(mark, player_name, display)
   end
 end

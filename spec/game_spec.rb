@@ -6,8 +6,8 @@ require 'human_player'
 
 def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
   board = Board.new(squares)
-  player1 = HumanPlayer.new('x', display)
-  player2 = HumanPlayer.new('o', display)
+  player1 = HumanPlayer.new('x', 'Human', display)
+  player2 = HumanPlayer.new('o', 'Human', display)
   game = Game.new(board, player1, player2)
   game
 end

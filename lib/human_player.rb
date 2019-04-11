@@ -1,13 +1,6 @@
 require_relative './player.rb'
 
 class HumanPlayer < Player
-  attr_reader :name
-
-  def initialize(mark, display)
-    super(mark, display)
-    @name = 'Human'
-  end
-
   def choose_move(board)
     @display.display_board(board.squares)
     @display.show_current_player(@mark, @name)

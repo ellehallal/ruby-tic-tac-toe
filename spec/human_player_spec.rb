@@ -4,7 +4,7 @@ require 'board'
 
 def human_player_setup
   display = Display.new
-  HumanPlayer.new('x', display)
+  HumanPlayer.new('x', 'Human', display)
 end
 
 RSpec.describe HumanPlayer do
