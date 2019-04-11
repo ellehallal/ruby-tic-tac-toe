@@ -1,5 +1,5 @@
-require 'human_player'
-require 'computer_player'
+require_relative './human_player.rb'
+require_relative './computer_player.rb'
 
 class PlayerMaker
   PLAYER_TYPES = {
