@@ -6,8 +6,8 @@ require 'human_player'
 
 def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
   board = Board.new(squares)
-  player1 = HumanPlayer.new('x', board, display)
-  player2 = HumanPlayer.new('o', board, display)
+  player1 = HumanPlayer.new('x', display)
+  player2 = HumanPlayer.new('o', display)
   game = Game.new(board, player1, player2)
   game
 end
@@ -59,15 +59,15 @@ RSpec.describe Game do
     it 'updates current player from x to o' do
       game.toggle_current_player
 
-      expect(game.player_info[:mark]).to eq('o')
-      expect(game.player_info[:name]).to eq('Human')
+      expect(game.current_player.mark).to eq('o')
+      expect(game.current_player.name).to eq('Human')
     end
 
     it 'updates current player from o to x' do
       game.toggle_current_player
 
-      expect(game.player_info[:mark]).to eq('x')
-      expect(game.player_info[:name]).to eq('Human')
+      expect(game.current_player.mark).to eq('x')
+      expect(game.current_player.name).to eq('Human')
     end
   end
 end

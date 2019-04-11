@@ -20,8 +20,8 @@ class Game
 
   public
 
-  def play_move(board)
-    player_move = @current_player.choose_move(board)
+  def play_move
+    player_move = @current_player.choose_move(@board)
     @board.player_make_move(@current_player.mark, player_move)
   end
 
@@ -43,17 +43,5 @@ class Game
     else
       'tie'
     end
-  end
-
-  def reset_game
-    @board.clear_squares
-    @current_player = @player1
-  end
-
-  def player_info
-    {
-      mark: @current_player.mark,
-      name: @current_player.name
-    }
   end
 end
