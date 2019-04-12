@@ -1,7 +1,7 @@
-require_relative './human_player.rb'
-require_relative './computer_player.rb'
+require_relative 'human_player.rb'
+require_relative 'computer_player.rb'
 
-class PlayerMaker
+class PlayerFactory
   PLAYER_TYPES = {
     'h' => [HumanPlayer, 'Human'],
     'c' => [ComputerPlayer, 'Computer']
