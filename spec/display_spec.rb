@@ -1,8 +1,7 @@
 require 'display'
-require 'board'
 
 def display_setup
-  display = Display.new
+  Display.new
 end
 
 RSpec.describe Display do
@@ -47,20 +46,6 @@ RSpec.describe Display do
     it 'returns "You have entered an invalid move. Please try again:"' do
       expect { display.invalid_move_message }
         .to output("You have entered an invalid move. Please try again:\n").to_stdout
-    end
-  end
-
-  context 'Displays a message when the game is over: ' do
-    display = display_setup
-
-    it 'displays "x is the winner!"' do
-      expect { display.show_winner_message('x') }
-        .to output("x is the winner!\n").to_stdout
-    end
-
-    it 'displays "The game is a tie! "' do
-      expect { display.show_tie_message }
-        .to output("The game is a tie!\n").to_stdout
     end
   end
 
@@ -120,8 +105,8 @@ RSpec.describe Display do
     it "displays 'Please select player 1 (h = human, c = computer):'" do
       display = display_setup
 
-      expect { display.ask_for_player1 }
-        .to output("Please select player 1 (h = human, c = computer):\n").to_stdout
+      expect { display.ask_for_player_selection(2) }
+        .to output("Please select player 2 (h = human, c = computer):\n").to_stdout
     end
 
     it "displays 'Please select player 2 (h = human, c = computer):'" do

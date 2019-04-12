@@ -34,7 +34,7 @@ RSpec.describe Board do
       expect(board.move_valid?('k')).to be false
     end
 
-    it 'returns true if a user enters move that is a single integer and available' do
+    it 'returns true if a user enters move that is valid' do
       expect(board.move_valid?(2)).to be true
     end
   end
@@ -79,23 +79,7 @@ RSpec.describe Board do
     end
   end
 
-  describe 'Clear the squares: ' do
-    it 'clears the squares' do
-      board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
-
-      board.clear_squares
-
-      expect(board.squares).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    end
-  end
-
   describe 'Available squares: ' do
-    it 'returns the quantity of available squares' do
-      board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
-
-      expect(board.available_squares_quantity).to eq(7)
-    end
-
     it 'returns the available squares as an array' do
       board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
 

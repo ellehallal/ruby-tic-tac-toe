@@ -20,14 +20,6 @@ class Display
     print "You have entered an invalid move. Please try again:\n"
   end
 
-  def show_winner_message(player_mark)
-    print "#{player_mark} is the winner!\n"
-  end
-
-  def show_tie_message
-    print "The game is a tie!\n"
-  end
-
   def show_game_outcome(outcome)
     if outcome == 'tie'
       show_tie_message
@@ -52,8 +44,8 @@ class Display
     print "Invalid option selected. Please try again:\n"
   end
 
-  def ask_for_player1
-    print "Please select player 1 (h = human, c = computer):\n"
+  def ask_for_player_selection(player_number)
+    print "Please select player #{player_number} (h = human, c = computer):\n"
   end
 
   def ask_for_player2
@@ -66,5 +58,15 @@ class Display
 
   def show_computer_move(move)
     print "Computer has selected position #{move}\n"
+  end
+
+  private
+
+  def show_winner_message(player_mark)
+    print "#{player_mark} is the winner!\n"
+  end
+
+  def show_tie_message
+    print "The game is a tie!\n"
   end
 end
