@@ -48,6 +48,12 @@ RSpec.describe Game do
 
       expect(game.tie_or_won).to eq('x')
     end
+
+    it "returns winning player's mark (o) when there is a winning player" do
+      game = game_setup(['x', 'x', 3, 'o', 'o', 'o', 'x', 8, 9])
+
+      expect(game.tie_or_won).to eq('o')
+    end
   end
 
   context 'Toggles the current player' do
