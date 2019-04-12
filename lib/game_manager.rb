@@ -5,6 +5,7 @@ class GameManager
   end
 
   def play
+    @display.show_welcome_message
     game_loop
     @display.show_exit_message
   end

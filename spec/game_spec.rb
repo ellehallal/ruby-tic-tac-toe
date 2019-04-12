@@ -1,7 +1,4 @@
 require 'game'
-require 'player'
-require 'board'
-require 'display'
 require 'human_player'
 
 def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
