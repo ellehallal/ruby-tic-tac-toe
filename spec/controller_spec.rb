@@ -1,15 +1,10 @@
 require 'controller'
-require 'board'
-require 'display'
-require 'game'
-require 'player_selector'
-require 'player_maker'
 
 def controller_setup
-  player_maker = PlayerMaker
+  player_factory = PlayerFactory
   display = Display.new
-  player_selector = PlayerSelector.new(display, player_maker)
-  game_factory = GameFactory.new(player_selector)
+  player_validator = PlayerValidator.new(display, player_factory)
+  game_factory = GameFactory.new(player_validator)
   controller = Controller.new(display, game_factory)
   controller
 end

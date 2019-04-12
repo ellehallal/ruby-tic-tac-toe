@@ -1,8 +1,6 @@
 require_relative 'game_factory.rb'
 
 class Controller
-  attr_reader :new_game
-
   def initialize(display, game_factory)
     @display = display
     @game_factory = game_factory

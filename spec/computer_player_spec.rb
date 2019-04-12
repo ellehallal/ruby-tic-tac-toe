@@ -12,9 +12,9 @@ RSpec.describe ComputerPlayer do
   describe 'Selecting a move' do
     it 'returns an available move' do
       computer_player = computer_player_setup
-      board = Board.new([1, 2, 3])
       allow(computer_player).to receive(:sleep)
-      allow(computer_player).to receive(:puts)
+
+      board = Board.new([1, 2, 3])
 
       choose_move = computer_player.choose_move(board)
 
