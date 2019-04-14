@@ -2,7 +2,6 @@ require 'board'
 
 RSpec.describe Board do
   describe 'Making a move: ' do
-
     it 'can accept a position and change the value to the specified mark' do
       board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
@@ -35,7 +34,7 @@ RSpec.describe Board do
       expect(board.move_valid?('k')).to be false
     end
 
-    it 'returns true if a user enters move that is a single integer and is not taken' do
+    it 'returns true if a user enters move that is valid' do
       expect(board.move_valid?(2)).to be true
     end
   end
@@ -59,7 +58,7 @@ RSpec.describe Board do
       expect(board.winning_player_exists?('x', 'o')).to be true
     end
 
-    it "returns false when either player's mark is not in a winning line position" do
+    it 'returns false when a mark is not in a winning line position' do
       board = Board.new(['x', 'o', 'x', 4, 5, 6, 'o', 'x', 'o'])
 
       expect(board.winning_player_exists?('x', 'o')).to be false
@@ -74,27 +73,17 @@ RSpec.describe Board do
     end
 
     it 'returns true if there are no available spaces on the board' do
-      board = Board.new(['x', 'x', 'o', 'x', 'o', 'o', 'o', 'x', 'x'])
+      board = Board.new(%w[x x o x o o o x x])
 
       expect(board.complete?).to be true
     end
   end
 
-  describe 'Clear the squares: ' do
-    it 'clears the squares' do
-      board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
-
-      board.clear_squares
-
-      expect(board.squares).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    end
-  end
-
   describe 'Available squares: ' do
-    it 'returns the amount of available squares' do
+    it 'returns the available squares as an array' do
       board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
 
-      expect(board.available_squares).to eq(7)
+      expect(board.available_squares).to eq([2, 4, 5, 6, 7, 8, 9])
     end
   end
 end

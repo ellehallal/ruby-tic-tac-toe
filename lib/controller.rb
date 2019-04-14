@@ -1,23 +1,26 @@
+require_relative 'game_factory.rb'
+
 class Controller
-  attr_reader :game
-  def initialize(game, display)
-    @game = game
+  def initialize(display, game_factory)
     @display = display
+    @game_factory = game_factory
   end
 
-  def main_game
-    @game.over?
+  def main_game(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    game_setup(squares)
     play_move until @game.over?
     end_of_game
   end
 
   private
 
+  def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    @game = @game_factory.create_game(squares)
+  end
+
   def play_move
-    @display.display_board(@game.board.squares)
-    @display.show_current_player(@game.current_player_mark)
-    move = @display.ask_for_move(@game.board)
-    @game.play_move(move)
+    @game.play_move
+    @game.toggle_current_player
   end
 
   def end_of_game
