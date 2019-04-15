@@ -1,4 +1,9 @@
 require 'game_manager'
+require 'player_factory'
+require 'display'
+require 'player_validator'
+require 'game_factory'
+require 'controller'
 
 def manager_setup
   player_factory = PlayerFactory
@@ -11,24 +16,6 @@ end
 
 RSpec.describe GameManager do
   describe 'Play again: ' do
-    it 'returns true if the user inputs "Y"' do
-      game_manager = manager_setup
-      allow($stdin).to receive(:gets).and_return('Y')
-
-      play_again = game_manager.play_again?
-
-      expect(play_again).to eq(true)
-    end
-
-    it 'returns false if the user does not input "Y"' do
-      game_manager = manager_setup
-      allow($stdin).to receive(:gets).and_return('12')
-
-      play_again = game_manager.play_again?
-
-      expect(play_again).to eq(false)
-    end
-
     it 'displays the exit message when the user inputs n' do
       allow($stdin).to receive(:gets)
         .and_return('h', 'h', '1', '2', '3', '5', '4', '6', '7', '9', '8', 'n')

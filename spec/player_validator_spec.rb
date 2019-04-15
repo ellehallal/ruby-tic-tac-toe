@@ -1,4 +1,6 @@
 require 'player_validator'
+require 'player_factory'
+require 'display'
 
 RSpec.describe PlayerValidator do
   def player_selector_setup

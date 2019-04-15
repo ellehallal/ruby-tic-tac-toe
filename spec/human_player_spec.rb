@@ -1,4 +1,6 @@
 require 'human_player'
+require 'display'
+require 'board'
 
 def human_player_setup
   display = Display.new
