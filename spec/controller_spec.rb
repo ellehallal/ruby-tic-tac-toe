@@ -2,41 +2,40 @@ require 'controller'
 require 'board'
 require 'display'
 require 'game'
-require 'player'
+require 'player_selector'
+require 'player_maker'
 
-def controller_setup(squares)
-  board = Board.new(squares)
+def controller_setup
+  player_maker = PlayerMaker
   display = Display.new
-  player1 = Player.new('x')
-  player2 = Player.new('o')
-  game = Game.new(board, player1, player2)
-  controller = Controller.new(game, display)
+  player_selector = PlayerSelector.new(display, player_maker)
+  game_factory = GameFactory.new(player_selector)
+  controller = Controller.new(display, game_factory)
   controller
 end
 
 RSpec.describe Controller do
   describe 'Playing the game: ' do
+    it 'plays a game that ends with a tie' do
+      allow($stdin).to receive(:gets).and_return('h', 'h')
+      $stdout = StringIO.new
+      controller = controller_setup
 
-    it 'breaks the loop when the game is a tie' do
-      controller = controller_setup(['x', 'o', 'x', 'o', 'o', 'x', 'x', 'x', 'o'])
-      allow(controller).to receive(:end_of_game)
-      allow(controller).to receive(:play_move)
+      controller.main_game(%w[x o x o o x x x o])
+      output = $stdout.string.split("\n")
 
-      controller.main_game
-
-      expect(controller).not_to receive(:play_move)
-      expect(controller).to have_received(:end_of_game).once
+      expect(output.last).to eq('The game is a tie!')
     end
 
-    it 'breaks the loop when there is a winning player' do
-      controller = controller_setup(['x', 'x', 'x', 'o', 'o', 'x', 'x', 'o', 'o'])
-      allow(controller).to receive(:end_of_game)
-      allow(controller).to receive(:play_move)
+    it 'plays a game that ends with a winning player' do
+      allow($stdin).to receive(:gets).and_return('h', 'h', '8', '4', '1')
+      $stdout = StringIO.new
+      controller = controller_setup
 
-      controller.main_game
+      controller.main_game([1, 'x', 'x', 4, 'o', 'x', 'x', 8, 'o'])
+      output = $stdout.string.split("\n")
 
-      expect(controller).not_to receive(:play_move)
-      expect(controller).to have_received(:end_of_game).once
+      expect(output.last).to eq('x is the winner!')
     end
   end
 end
