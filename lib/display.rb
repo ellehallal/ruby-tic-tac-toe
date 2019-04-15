@@ -1,5 +1,6 @@
 class Display
   def display_board(board)
+    clear_screen
     print ''"
      #{board[0]} | #{board[1]} | #{board[2]}
     -----------
@@ -68,5 +69,11 @@ class Display
 
   def show_tie_message
     print "The game is a tie!\n"
+  end
+
+  private
+
+  def clear_screen
+    system('clear')
   end
 end

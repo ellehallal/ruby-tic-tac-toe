@@ -9,6 +9,7 @@ class ComputerPlayer < Player
     sleep(1.5)
     computer_move = board.available_squares.sample
     @display.show_computer_move(computer_move)
+    sleep(1.5)
     computer_move
   end
 end
