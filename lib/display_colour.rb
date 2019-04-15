@@ -1,6 +1,10 @@
 require 'paint'
 
 class DisplayColour
+  def greet_colour(output)
+    Paint[output, :bold, '#FF8C00']
+  end
+
   def input_prompt_colour(output)
     Paint[output, :bright, '#40F99B']
   end

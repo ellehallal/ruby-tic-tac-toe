@@ -6,7 +6,9 @@ class Display
   end
 
   def show_welcome_message
-    print "Let's play Tic Tac Toe!\n"
+    clear_screen
+    output = "Let's play Tic Tac Toe!\n"
+    print @display_colour.greet_colour(output)
   end
 
   def display_board(board)
@@ -73,7 +75,8 @@ class Display
   end
 
   def show_exit_message
-    print "Thanks for playing Tic Tac Toe!\n"
+    output = "Thanks for playing Tic Tac Toe!\n"
+    print @display_colour.greet_colour(output)
   end
 
   private

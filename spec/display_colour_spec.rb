@@ -3,8 +3,16 @@ require 'display_colour'
 RSpec.describe DisplayColour do
   display_colour = DisplayColour.new
 
+  describe 'Greet colour:' do
+    it 'displays greeting in ansi colour \e[1;38;2;255;140;0m' do
+      output = display_colour.greet_colour('Hello! Goodbye')
+
+      expect(output).to include("\e[1;38;2;255;140;0m")
+    end
+  end
+
   describe 'Input prompt colour:' do
-    it 'displays output in ansi colour \e[1;38;2;64;249;155m' do
+    it 'displays input prompt in ansi colour \e[1;38;2;64;249;155m' do
       output = display_colour.input_prompt_colour('Prompt')
 
       expect(output).to include("\e[1;38;2;64;249;155m")
