@@ -53,7 +53,7 @@ class Display
   end
 
   def show_computer_thinking
-    print "\n\nComputer is thinking. Please wait...\n\n"
+    print "\nComputer is thinking. Please wait...\n"
   end
 
   def show_computer_move(move)

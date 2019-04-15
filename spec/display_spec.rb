@@ -1,4 +1,5 @@
 require 'display'
+require 'board'
 
 def display_setup
   Display.new
@@ -122,7 +123,7 @@ RSpec.describe Display do
       display = display_setup
 
       expect { display.show_computer_thinking }
-        .to output("\n\nComputer is thinking. Please wait...\n\n").to_stdout
+        .to output("\nComputer is thinking. Please wait...\n").to_stdout
     end
 
     it 'displays "Computer has selected position 3"' do
