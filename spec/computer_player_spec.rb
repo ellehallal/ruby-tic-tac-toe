@@ -1,9 +1,11 @@
 require 'computer_player'
 require 'display'
+require 'display_colour'
 require 'board'
 
 def computer_player_setup
-  display = Display.new
+  display_colour = DisplayColour.new
+  display = Display.new(display_colour)
   computer_player = ComputerPlayer.new('x', 'Computer', display)
   computer_player
 end

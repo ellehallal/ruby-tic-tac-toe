@@ -1,13 +1,15 @@
 require 'game_manager'
 require 'player_factory'
 require 'display'
+require 'display_colour'
 require 'player_validator'
 require 'game_factory'
 require 'controller'
 
 def manager_setup
   player_factory = PlayerFactory
-  display = Display.new
+  display_colour = DisplayColour.new
+  display = Display.new(display_colour)
   player_validator = PlayerValidator.new(display, player_factory)
   game_factory = GameFactory.new(player_validator)
   controller = Controller.new(display, game_factory)
@@ -24,9 +26,9 @@ RSpec.describe GameManager do
       $stdout = StringIO.new
 
       game_manager.play
-      output = $stdout.string.split("\n")
+      output = $stdout.string
 
-      expect(output.last).to eq('Thanks for playing Tic Tac Toe!')
+      expect(output).to include('Thanks for playing Tic Tac Toe!')
     end
   end
 end

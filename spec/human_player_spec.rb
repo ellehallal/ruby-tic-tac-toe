@@ -1,9 +1,11 @@
 require 'human_player'
 require 'display'
+require 'display_colour'
 require 'board'
 
 def human_player_setup
-  display = Display.new
+  display_colour = DisplayColour.new
+  display = Display.new(display_colour)
   HumanPlayer.new('x', 'Human', display)
 end
 
@@ -27,9 +29,10 @@ RSpec.describe HumanPlayer do
 
       human_player.choose_move(board)
       print $stdout
-      output = $stdout.string.split("\n")
+      output = $stdout.string
 
-      expect(output[8]).to eq('You have entered an invalid move. Please try again:')
+      expect(output)
+        .to include('You have entered an invalid move. Please try again:')
     end
   end
 end

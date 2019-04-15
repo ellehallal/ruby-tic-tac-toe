@@ -1,14 +1,16 @@
 require 'player_validator'
 require 'player_factory'
 require 'display'
+require 'display_colour'
+
+def player_selector_setup
+  display_colour = DisplayColour.new
+  display = Display.new(display_colour)
+  player_factory = PlayerFactory
+  PlayerValidator.new(display, player_factory)
+end
 
 RSpec.describe PlayerValidator do
-  def player_selector_setup
-    display = Display.new
-    player_factory = PlayerFactory
-    PlayerValidator.new(display, player_factory)
-  end
-
   describe 'Player validation: ' do
     it 'returns a human player with mark x' do
       allow($stdin).to receive(:gets).and_return('H')
@@ -37,10 +39,9 @@ RSpec.describe PlayerValidator do
 
       player_validator.create_player(2, 'o')
       output = $stdout.string.split("\n")
-      puts output
 
       expect(output[1])
-        .to eq('Invalid option selected. Please try again:')
+        .to include('Invalid option selected. Please try again:')
     end
   end
 end
