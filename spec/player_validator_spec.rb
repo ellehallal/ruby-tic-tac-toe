@@ -1,22 +1,20 @@
-require 'player_selector'
+require 'player_validator'
+require 'player_factory'
 require 'display'
-require 'player_maker'
-require 'human_player'
-require 'computer_player'
 
-RSpec.describe PlayerSelector do
+RSpec.describe PlayerValidator do
   def player_selector_setup
     display = Display.new
-    player_maker = PlayerMaker
-    PlayerSelector.new(display, player_maker)
+    player_factory = PlayerFactory
+    PlayerValidator.new(display, player_factory)
   end
 
-  describe 'Player selection: ' do
+  describe 'Player validation: ' do
     it 'returns a human player with mark x' do
       allow($stdin).to receive(:gets).and_return('H')
-      player_selection = player_selector_setup
+      player_validator = player_selector_setup
 
-      player = player_selection.player1_type
+      player = player_validator.create_player(1, 'x')
 
       expect(player).to be_an_instance_of(HumanPlayer)
       expect(player.mark).to eq('x')
@@ -24,9 +22,9 @@ RSpec.describe PlayerSelector do
 
     it 'returns a computer player with mark o' do
       allow($stdin).to receive(:gets).and_return('C')
-      player_selection = player_selector_setup
+      player_validator = player_selector_setup
 
-      player = player_selection.player2_type
+      player = player_validator.create_player(2, 'o')
 
       expect(player).to be_an_instance_of(ComputerPlayer)
       expect(player.mark).to eq('o')
@@ -35,9 +33,9 @@ RSpec.describe PlayerSelector do
     it 'prompts user for input again if input is not h or c' do
       allow($stdin).to receive(:gets).and_return('X', 'H')
       $stdout = StringIO.new
-      player_selection = player_selector_setup
+      player_validator = player_selector_setup
 
-      player_selection.player1_type
+      player_validator.create_player(2, 'o')
       output = $stdout.string.split("\n")
       puts output
 

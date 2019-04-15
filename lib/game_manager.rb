@@ -5,17 +5,18 @@ class GameManager
   end
 
   def play
+    @display.show_welcome_message
     game_loop
     @display.show_exit_message
   end
+
+  private
 
   def play_again?
     @display.ask_play_again
     choice = $stdin.gets.chomp.upcase
     choice == 'Y'
   end
-
-  private
 
   def game_loop
     play_game = true

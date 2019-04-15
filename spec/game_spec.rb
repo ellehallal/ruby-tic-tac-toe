@@ -1,10 +1,10 @@
 require 'game'
-require 'player'
 require 'board'
 require 'display'
 require 'human_player'
 
 def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
+  display = Display.new
   board = Board.new(squares)
   player1 = HumanPlayer.new('x', 'Human', display)
   player2 = HumanPlayer.new('o', 'Human', display)
@@ -51,20 +51,30 @@ RSpec.describe Game do
 
       expect(game.tie_or_won).to eq('x')
     end
+
+    it "returns winning player's mark (o) when there is a winning player" do
+      game = game_setup(['x', 'x', 3, 'o', 'o', 'o', 'x', 8, 9])
+
+      expect(game.tie_or_won).to eq('o')
+    end
   end
 
   context 'Toggles the current player' do
     game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     it 'updates current player from x to o' do
-      game.toggle_current_player
+      allow($stdin).to receive(:gets).and_return('1')
+
+      game.play_move
 
       expect(game.current_player.mark).to eq('o')
       expect(game.current_player.name).to eq('Human')
     end
 
     it 'updates current player from o to x' do
-      game.toggle_current_player
+      allow($stdin).to receive(:gets).and_return('3')
+
+      game.play_move
 
       expect(game.current_player.mark).to eq('x')
       expect(game.current_player.name).to eq('Human')

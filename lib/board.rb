@@ -1,5 +1,5 @@
 class Board
-  @@winning_lines = [
+  WINNING_LINES = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -8,7 +8,7 @@ class Board
     [2, 5, 8],
     [2, 4, 6],
     [0, 4, 8]
-  ]
+  ].freeze
 
   attr_reader :squares
 
@@ -26,7 +26,7 @@ class Board
   end
 
   def winning_line?(player_mark)
-    @@winning_lines.any? do |combination|
+    WINNING_LINES.any? do |combination|
       combination.all? { |position| @squares[position] == player_mark }
     end
   end
@@ -36,22 +36,16 @@ class Board
   end
 
   def complete?
-    available_squares_quantity.zero?
-  end
-
-  def clear_squares
-    @squares = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  end
-
-  def available_squares_quantity
-    @squares.count { |square| square.is_a? Integer }
+    total_available_squares.zero?
   end
 
   def available_squares
-    available = []
-    @squares.each do |square|
-      available << square if square.is_a? Integer
-    end
-    available
+    squares.select { |square| square.is_a? Integer }
+  end
+
+  private
+
+  def total_available_squares
+    available_squares.size
   end
 end
