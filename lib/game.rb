@@ -37,10 +37,10 @@ class Game
   end
 
   def toggle_current_player
-    @current_player = if @current_player == @player1
-                        @player2
-                      else
-                        @player1
-                      end
+    if @current_player == @player1
+      @current_player = @player2
+    else
+      @current_player = @player1
+    end
   end
 end

@@ -8,6 +8,7 @@
 /tmp/
 /lib/play.rb
 spec/bob_spec.rb
+.vscode/
 
 # rspec failure tracking
 .rspec_status
