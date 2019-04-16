@@ -1,10 +1,12 @@
 require 'game'
 require 'board'
 require 'display'
+require 'display_colour'
 require 'human_player'
 
 def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
-  display = Display.new
+  display_colour = DisplayColour.new
+  display = Display.new(display_colour)
   board = Board.new(squares)
   player1 = HumanPlayer.new('x', 'Human', display)
   player2 = HumanPlayer.new('o', 'Human', display)

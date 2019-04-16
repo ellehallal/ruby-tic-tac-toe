@@ -1,13 +1,15 @@
 require 'controller'
 require 'player_factory'
 require 'display'
+require 'display_colour'
 require 'player_validator'
 require 'game_factory'
 require 'controller'
 
 def controller_setup
   player_factory = PlayerFactory
-  display = Display.new
+  display_colour = DisplayColour.new
+  display = Display.new(display_colour)
   player_validator = PlayerValidator.new(display, player_factory)
   game_factory = GameFactory.new(player_validator)
   Controller.new(display, game_factory)
@@ -22,9 +24,9 @@ RSpec.describe Controller do
       controller = controller_setup
 
       controller.main_game
-      output = $stdout.string.split("\n")
+      output = $stdout.string
 
-      expect(output.last).to eq('The game is a tie!')
+      expect(output).to include('The game is a tie!')
     end
 
     it 'plays a game that ends with a winning player' do
@@ -34,9 +36,9 @@ RSpec.describe Controller do
       controller = controller_setup
 
       controller.main_game
-      output = $stdout.string.split("\n")
+      output = $stdout.string
 
-      expect(output.last).to eq('x is the winner!')
+      expect(output).to include('x is the winner!')
     end
   end
 end
