@@ -17,12 +17,20 @@ class Minimax
     end
   end
 
-  def best_move(scores)
+  def max_best_move(scores)
     scores.max_by { |_key, value| value }[0]
   end
 
-  def highest_score(scores)
+  def max_best_score(scores)
     scores.max_by { |_key, value| value }[1]
+  end
+
+  def min_best_move(scores)
+    scores.min_by { |_key, value| value }[0]
+  end
+
+  def min_best_score(scores)
+    scores.min_by { |_key, value| value }[1]
   end
 
   def move_or_score(depth, best_move, best_score)

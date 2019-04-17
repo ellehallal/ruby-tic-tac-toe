@@ -81,10 +81,16 @@ RSpec.describe Minimax do
     minimax = minimax_setup
     scores = { 7 => 0, 8 => 4, 9 => -3 }
 
-    it 'Returns the move with the highest score ' do
-      move = minimax.best_move(scores)
+    it 'Returns the move for the highest score (max)' do
+      move = minimax.max_best_move(scores)
 
       expect(move).to eq(8)
+    end
+
+    it 'Returns the move for the lowest score (min)' do
+      move = minimax.min_best_move(scores)
+
+      expect(move).to eq(9)
     end
   end
 
@@ -92,10 +98,16 @@ RSpec.describe Minimax do
     minimax = minimax_setup
     scores = { 7 => 0, 8 => 4, 9 => -3 }
 
-    it 'Returns the highest score ' do
-      move = minimax.highest_score(scores)
+    it 'Returns the highest score (max)' do
+      move = minimax.max_best_score(scores)
 
       expect(move).to eq(4)
+    end
+
+    it 'Returns the lowest score (min)' do
+      move = minimax.min_best_score(scores)
+
+      expect(move).to eq(-3)
     end
   end
 
