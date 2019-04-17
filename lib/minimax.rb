@@ -16,4 +16,12 @@ class Minimax
       { score: 0 }
     end
   end
+
+  def best_move(results)
+    results.max_by { |result| result[:score] }[:move]
+  end
+
+  def highest_score(results)
+    results.max_by { |result| result[:score] }[:score]
+  end
 end
