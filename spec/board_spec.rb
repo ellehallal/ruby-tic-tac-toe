@@ -86,4 +86,15 @@ RSpec.describe Board do
       expect(board.available_squares).to eq([2, 4, 5, 6, 7, 8, 9])
     end
   end
+
+  describe 'Copy board: ' do
+    it 'creates a new instance of Board with the current squares' do
+      board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+
+      new_board = board.copy_board(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+
+      expect(new_board).to be_an_instance_of(Board)
+      expect(new_board.squares).to eq(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+    end
+  end
 end
