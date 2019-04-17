@@ -10,44 +10,44 @@ def board_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
 end
 
 RSpec.describe Minimax do
-  describe 'Opponent mark:' do
-    it "returns the opponent's mark as x" do
+  describe 'Toggle player:' do
+    it "returns the current player's mark as x" do
       minimax = minimax_setup
-      computer_mark = 'o'
+      current_mark = 'o'
       player1_mark = 'x'
       player2_mark = 'o'
 
-      opponent_mark =
-        minimax.opponent_mark(computer_mark, player1_mark, player2_mark)
+      current_player =
+        minimax.toggle_current_player(current_mark, player1_mark, player2_mark)
 
-      expect(opponent_mark).to eq('x')
+      expect(current_player).to eq('x')
     end
 
-    it "returns the opponent's mark as o" do
+    it "returns the current player's mark as o" do
       minimax = minimax_setup
-      computer_mark = 'x'
+      current_mark = 'x'
       player1_mark = 'x'
       player2_mark = 'o'
 
-      opponent_mark =
-        minimax.opponent_mark(computer_mark, player1_mark, player2_mark)
+      current_player =
+        minimax.toggle_current_player(current_mark, player1_mark, player2_mark)
 
-      expect(opponent_mark).to eq('o')
+      expect(current_player).to eq('o')
     end
   end
 
   describe 'Returns score:' do
     it 'returns {score: 0} if neither player has a winning line' do
       minimax = minimax_setup
-      board = board_setup(%w[x x o x x o o o x])
-      depth = 10
+      board = board_setup(%w[o x o x x o x o x])
+      depth = 9
       computer_mark = 'x'
       opponent_mark = 'o'
 
       score =
-        minimax.terminal_score(board, depth, computer_mark, opponent_mark)
+        minimax.score(board, depth, computer_mark, opponent_mark)
 
-      expect(score).to eq(score: 0)
+      expect(score).to eq(0)
     end
 
     it 'returns {score: 5} when computer player has a winning line at depth 5' do
@@ -58,9 +58,9 @@ RSpec.describe Minimax do
       opponent_mark = 'o'
 
       score =
-        minimax.terminal_score(board, depth, computer_mark, opponent_mark)
+        minimax.score(board, depth, computer_mark, opponent_mark)
 
-      expect(score).to eq(score: 5)
+      expect(score).to eq(5)
     end
 
     it 'returns {score: -4} when opponent has a winning line at depth 6' do
@@ -71,18 +71,18 @@ RSpec.describe Minimax do
       opponent_mark = 'o'
 
       score =
-        minimax.terminal_score(board, depth, computer_mark, opponent_mark)
+        minimax.score(board, depth, computer_mark, opponent_mark)
 
-      expect(score).to eq(score: -4)
+      expect(score).to eq(-4)
     end
   end
 
   describe 'Best move: ' do
     minimax = minimax_setup
-    results = [{ move: 9, score: 0 }, { move: 7, score: -5 }, { move: 8, score: 4 }]
+    scores = { 7 => 0, 8 => 4, 9 => -3 }
 
     it 'Returns the move with the highest score ' do
-      move = minimax.best_move(results)
+      move = minimax.best_move(scores)
 
       expect(move).to eq(8)
     end
@@ -90,12 +90,32 @@ RSpec.describe Minimax do
 
   describe 'Best score: ' do
     minimax = minimax_setup
-    results = [{ move: 9, score: 0 }, { move: 7, score: -5 }, { move: 8, score: 4 }]
+    scores = { 7 => 0, 8 => 4, 9 => -3 }
 
     it 'Returns the highest score ' do
-      move = minimax.highest_score(results)
+      move = minimax.highest_score(scores)
 
       expect(move).to eq(4)
+    end
+  end
+
+  describe 'Best move or highest score: ' do
+    minimax = minimax_setup
+    best_move = 7
+    best_score = 3
+
+    it 'Returns the best move when depth = 0 ' do
+      depth = 0
+      move_or_score = minimax.move_or_score(depth, best_move, best_score)
+
+      expect(move_or_score).to eq(7)
+    end
+
+    it 'Returns the best score when depth is more than 0 ' do
+      depth = 2
+      move_or_score = minimax.move_or_score(depth, best_move, best_score)
+
+      expect(move_or_score).to eq(3)
     end
   end
 end
