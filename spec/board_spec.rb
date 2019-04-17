@@ -1,5 +1,9 @@
 require 'board'
 
+def board_two_moves
+  Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+end
+
 RSpec.describe Board do
   describe 'Making a move: ' do
     it 'can accept a position and change the value to the specified mark' do
@@ -81,20 +85,33 @@ RSpec.describe Board do
 
   describe 'Available squares: ' do
     it 'returns the available squares as an array' do
-      board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+      board = board_two_moves
 
-      expect(board.available_squares).to eq([2, 4, 5, 6, 7, 8, 9])
+      available_squares = board.available_squares
+
+      expect(available_squares).to eq([2, 4, 5, 6, 7, 8, 9])
     end
   end
 
   describe 'Copy board: ' do
     it 'creates a new instance of Board with the current squares' do
-      board = Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+      board = board_two_moves
 
-      new_board = board.copy_board(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+      new_board = board.copy_board
 
       expect(new_board).to be_an_instance_of(Board)
+      expect(board).not_to eq(new_board)
       expect(new_board.squares).to eq(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
+    end
+  end
+
+  describe 'Reset a square: ' do
+    it 'makes the selected square empty' do
+      board = board_two_moves
+      expect(board.squares[0]).to eq('x')
+
+      board.reset_square(1)
+      expect(board.squares[0]).to eq(1)
     end
   end
 end

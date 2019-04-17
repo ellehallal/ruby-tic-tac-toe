@@ -43,8 +43,12 @@ class Board
     squares.select { |square| square.is_a? Integer }
   end
 
-  def copy_board(squares)
+  def copy_board
     Board.new(squares)
+  end
+
+  def reset_square(square)
+    squares[square - 1] = square
   end
 
   private
