@@ -98,4 +98,24 @@ RSpec.describe Minimax do
       expect(move).to eq(4)
     end
   end
+
+  describe 'Best move or highest score: ' do
+    minimax = minimax_setup
+    best_move = 7
+    best_score = 3
+
+    it 'Returns the best move when depth = 0 ' do
+      depth = 0
+      move_or_score = minimax.move_or_score(depth, best_move, best_score)
+
+      expect(move_or_score).to eq(7)
+    end
+
+    it 'Returns the best score when depth is more than 0 ' do
+      depth = 2
+      move_or_score = minimax.move_or_score(depth, best_move, best_score)
+
+      expect(move_or_score).to eq(3)
+    end
+  end
 end

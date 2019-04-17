@@ -24,4 +24,12 @@ class Minimax
   def highest_score(results)
     results.max_by { |result| result[:score] }[:score]
   end
+
+  def move_or_score(depth, best_move, best_score)
+    if depth.zero?
+      best_move
+    elsif depth > 0
+      best_score
+    end
+  end
 end
