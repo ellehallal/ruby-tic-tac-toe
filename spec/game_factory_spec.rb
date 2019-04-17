@@ -7,8 +7,9 @@ require 'display_colour'
 def game_factory_setup
   display_colour = DisplayColour.new
   display = Display.new(display_colour)
-  player_validator = PlayerValidator.new(display, PlayerFactory)
-  GameFactory.new(player_validator)
+  player_validator = PlayerValidator.new(display)
+  player_factory = PlayerFactory.new(player_validator, display)
+  GameFactory.new(player_factory)
 end
 
 RSpec.describe GameFactory do

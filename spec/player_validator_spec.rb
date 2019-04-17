@@ -2,12 +2,13 @@ require 'player_validator'
 require 'player_factory'
 require 'display'
 require 'display_colour'
+require 'human_player'
+require 'computer_player'
 
 def player_selector_setup
   display_colour = DisplayColour.new
   display = Display.new(display_colour)
-  player_factory = PlayerFactory
-  PlayerValidator.new(display, player_factory)
+  PlayerValidator.new(display)
 end
 
 RSpec.describe PlayerValidator do
@@ -16,20 +17,18 @@ RSpec.describe PlayerValidator do
       allow($stdin).to receive(:gets).and_return('H')
       player_validator = player_selector_setup
 
-      player = player_validator.create_player(1, 'x')
+      player_selection = player_validator.validate_player(1)
 
-      expect(player).to be_an_instance_of(HumanPlayer)
-      expect(player.mark).to eq('x')
+      expect(player_selection).to eq('h')
     end
 
     it 'returns a computer player with mark o' do
       allow($stdin).to receive(:gets).and_return('C')
       player_validator = player_selector_setup
 
-      player = player_validator.create_player(2, 'o')
+      player_selection = player_validator.validate_player(2)
 
-      expect(player).to be_an_instance_of(ComputerPlayer)
-      expect(player.mark).to eq('o')
+      expect(player_selection).to eq('c')
     end
 
     it 'prompts user for input again if input is not h or c' do
@@ -37,10 +36,10 @@ RSpec.describe PlayerValidator do
       $stdout = StringIO.new
       player_validator = player_selector_setup
 
-      player_validator.create_player(2, 'o')
-      output = $stdout.string.split("\n")
+      player_validator.validate_player(2)
+      output = $stdout.string
 
-      expect(output[1])
+      expect(output)
         .to include('Invalid option selected. Please try again:')
     end
   end

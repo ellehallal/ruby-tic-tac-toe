@@ -7,11 +7,11 @@ require 'game_factory'
 require 'controller'
 
 def controller_setup
-  player_factory = PlayerFactory
   display_colour = DisplayColour.new
   display = Display.new(display_colour)
-  player_validator = PlayerValidator.new(display, player_factory)
-  game_factory = GameFactory.new(player_validator)
+  player_validator = PlayerValidator.new(display)
+  player_factory = PlayerFactory.new(player_validator, display)
+  game_factory = GameFactory.new(player_factory)
   Controller.new(display, game_factory)
 end
 
