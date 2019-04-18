@@ -1,28 +1,44 @@
 class Minimax
-  def opponent_mark(computer_mark, player1_mark, player2_mark)
-    if computer_mark == player1_mark
+  def toggle_current_player(current_mark, player1_mark, player2_mark)
+    if current_mark == player1_mark
       player2_mark
     else
       player1_mark
     end
   end
 
-  def terminal_score(board, depth, computer_mark, opponent_mark)
+  def score(board, depth, computer_mark, opponent_mark)
     if board.winning_line?(computer_mark)
-      { score: 10 - depth }
+      10 - depth
     elsif board.winning_line?(opponent_mark)
-      { score: -(10 - depth) }
+      depth - 10
     elsif board.available_squares.empty?
-      { score: 0 }
+      0
     end
   end
 
-  def best_move(results)
-    results.max_by { |result| result[:score] }[:move]
+  def max_best_move(scores)
+    scores.max_by { |_key, value| value }[0]
   end
 
-  def highest_score(results)
-    results.max_by { |result| result[:score] }[:score]
+  def max_best_score(scores)
+    scores.max_by { |_key, value| value }[1]
+  end
+
+  def min_best_move(scores)
+    scores.min_by { |_key, value| value }[0]
+  end
+
+  def min_best_score(scores)
+    scores.min_by { |_key, value| value }[1]
+  end
+
+  def move_or_score(depth, best_move, best_score)
+    if depth.zero?
+      best_move
+    elsif depth > 0
+      best_score
+    end
   end
 
   def move_or_score(depth, best_move, best_score)
