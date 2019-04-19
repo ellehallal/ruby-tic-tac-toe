@@ -55,6 +55,14 @@ class Board
     complete? || winning_player_exists?(player1_mark, player2_mark)
   end
 
+  def empty?
+    squares.size == total_available_squares
+  end
+
+  def corners
+    [1, 3, 7, 9]
+  end
+
   private
 
   def total_available_squares

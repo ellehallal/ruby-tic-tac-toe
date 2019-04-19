@@ -1,7 +1,7 @@
 class Minimax
 
   def find_best_move(board, depth=0, best_score={}, current_player, player1, player2)
-    opponent = toggle_player(current_player, player1, player2)
+    opponent = set_opponent(current_player, player1, player2)
     available_squares = board.available_squares
 
     return score_move(board, depth, current_player, opponent) if 
@@ -43,7 +43,7 @@ class Minimax
     end
   end
 
-  def toggle_player(current_player, player1, player2)
+  def set_opponent(current_player, player1, player2)
     current_player == player1 ? player2 : player1
   end
 end

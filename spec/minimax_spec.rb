@@ -55,7 +55,7 @@ RSpec.describe Minimax do
 
       move = minimax.find_best_move(board, 'o', 'x', 'o')
 
-      expect(move).to eq(3).or(eq(9))
+      expect(move).to eq(9)
     end
   end
 end

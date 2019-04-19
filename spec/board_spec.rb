@@ -134,5 +134,19 @@ RSpec.describe Board do
     end
   end
 
+  describe 'Empty board: ' do
+    it 'returns true when zero squares have been taken' do
+      board = Board.new
+
+      expect(board.empty?).to eq(true)
+    end
+
+    it 'returns false when squares have been taken' do
+      board = Board.new(['x', 'x', 3, 4])
+
+      expect(board.empty?).to eq(false)
+    end
+  end
+
   
 end
