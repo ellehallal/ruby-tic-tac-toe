@@ -49,9 +49,9 @@ RSpec.describe Minimax do
       expect(move).to be_between(4, 5)
     end
 
-    it 'Plays a blocking move (3 or 9) where any move results in opponent win' do
+    it 'Plays a blocking move (9) to prevent opponent from winning' do
       minimax = Minimax.new
-      board = board_setup(['x', 'o', 3, 4, 'x', 'o', 'x', 'o', 9])
+      board = board_setup(['x', 'o', 3, 'o', 'o', 'x', 'x', 'x', 9])
 
       move = minimax.find_best_move(board, 'o', 'x', 'o')
 
