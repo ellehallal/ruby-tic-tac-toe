@@ -1,9 +1,9 @@
 require_relative 'player.rb'
 
 class HumanPlayer < Player
-  def choose_move(board)
+  def choose_move(board, *args)
     @display.display_board(board.squares)
-    @display.show_current_player(@mark, @name)
+    @display.show_current_player(mark, name)
     @display.ask_for_move
 
     move = $stdin.gets.chomp.to_i

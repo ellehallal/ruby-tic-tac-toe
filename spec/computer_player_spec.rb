@@ -18,7 +18,7 @@ RSpec.describe ComputerPlayer do
 
       board = Board.new([1, 2, 3])
 
-      choose_move = computer_player.choose_move(board)
+      choose_move = computer_player.choose_move(board, 'x', 'o')
 
       expect(choose_move).to be_between(1, 3)
     end

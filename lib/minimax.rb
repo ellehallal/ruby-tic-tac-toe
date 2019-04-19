@@ -11,7 +11,7 @@ class Minimax
       opponent = toggle_player(current_player, player1, player2)
 
       best_score[square] =
-         -1 * find_best_move(copy_of_board, depth + 1, {}, opponent, player1, player2)
+         -1 * find_best_move(copy_of_board, depth + 1, opponent, player1, player2)
       board.reset_square(square)
     end
 
