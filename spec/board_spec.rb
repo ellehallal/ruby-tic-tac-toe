@@ -114,4 +114,25 @@ RSpec.describe Board do
       expect(board.squares[0]).to eq(1)
     end
   end
+  describe 'Stop playing: ' do
+    it 'returns true when a winning line is present' do
+      board = Board.new(['x', 'x', 'x', 4, 5, 6, 7, 8, 9])
+
+      expect(board.stop_playing?('x', 'o')).to eq(true)
+    end
+
+    it 'returns true when all spaces have been played' do
+      board = Board.new(['x', 'o', 'o', 'o', 'x', 'x', 'x', 'x', 'o'])
+
+      expect(board.stop_playing?('x', 'o')).to eq(true)
+    end
+
+    it 'returns false when a winning line is not present, and there are empty spaces' do
+      board = Board.new(['x', 'o', 'o', 'o', 'x', 'x', 'x', 'x', 9])
+
+      expect(board.stop_playing?('x', 'o')).to eq(false)
+    end
+  end
+
+  
 end

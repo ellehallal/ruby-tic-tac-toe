@@ -51,6 +51,10 @@ class Board
     squares[square - 1] = square
   end
 
+  def stop_playing?(player1_mark, player2_mark)
+    complete? || winning_player_exists?(player1_mark, player2_mark)
+  end
+
   private
 
   def total_available_squares
