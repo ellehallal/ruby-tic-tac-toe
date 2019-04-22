@@ -1,11 +1,11 @@
+require_relative './test_doubles/display_colour_double'
 require 'game_factory'
 require 'player_factory'
 require 'player_validator'
 require 'display'
-require 'display_colour'
 
 def game_factory_setup
-  display_colour = DisplayColour.new
+  display_colour = DisplayColourDouble.new
   display = Display.new(display_colour)
   player_validator = PlayerValidator.new(display)
   player_factory = PlayerFactory.new(player_validator, display)

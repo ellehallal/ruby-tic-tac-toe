@@ -1,12 +1,12 @@
+require_relative './test_doubles/display_colour_double'
 require 'player_validator'
 require 'player_factory'
 require 'display'
-require 'display_colour'
 require 'human_player'
 require 'computer_player'
 
 def player_selector_setup
-  display_colour = DisplayColour.new
+  display_colour = DisplayColourDouble.new
   display = Display.new(display_colour)
   PlayerValidator.new(display)
 end

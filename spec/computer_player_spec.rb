@@ -1,10 +1,10 @@
+require_relative './test_doubles/display_colour_double'
 require 'computer_player'
 require 'display'
-require 'display_colour'
 require 'board'
 
 def computer_player_setup
-  display_colour = DisplayColour.new
+  display_colour = DisplayColourDouble.new
   display = Display.new(display_colour)
   computer_player = ComputerPlayer.new('x', 'Computer', display)
   computer_player
@@ -22,7 +22,7 @@ RSpec.describe ComputerPlayer do
 
       expect(choose_move).to be_between(3, 9)
     end
-    
+
     it 'returns either 1, 3, 7, 9 when the board is empty' do
       computer_player = computer_player_setup
       allow(computer_player).to receive(:sleep)

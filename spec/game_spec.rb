@@ -1,11 +1,11 @@
+require_relative './test_doubles/display_colour_double'
 require 'game'
 require 'board'
 require 'display'
-require 'display_colour'
 require 'human_player'
 
 def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
-  display_colour = DisplayColour.new
+  display_colour = DisplayColourDouble.new
   display = Display.new(display_colour)
   board = Board.new(squares)
   player1 = HumanPlayer.new('x', 'Human', display)
