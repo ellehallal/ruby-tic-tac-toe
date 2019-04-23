@@ -11,7 +11,7 @@ RSpec.describe Minimax do
       minimax = Minimax.new
       board = board_setup(['x', 'o', 3, 4, 'x', 'o', 'x', 8, 'o'])
 
-      move = minimax.find_best_move(board, 'o', 'x', 'o')
+      move = minimax.choose_move(board, 'o', 'x', 'o')
       expect(move).to eq(3)
     end
 
@@ -19,7 +19,7 @@ RSpec.describe Minimax do
       minimax = Minimax.new
       board = board_setup([1, 'x', 3, 4, 5, 'x', 'o', 'o', 'x'])
 
-      move = minimax.find_best_move(board, 'o', 'x', 'o')
+      move = minimax.choose_move(board, 'o', 'x', 'o')
       expect(move).to eq(3)
     end
 
@@ -27,24 +27,24 @@ RSpec.describe Minimax do
       minimax = Minimax.new
       board = board_setup([1, 2, 3, 'o', 'o', 6, 'x', 'x', 9])
 
-      move = minimax.find_best_move(board, 'x', 'x', 'o')
+      move = minimax.choose_move(board, 'x', 'x', 'o')
       expect(move).to eq(9)
     end
 
-    it 'Returns 3 or 7 as the best move to start creating a winning line' do
+    it 'Returns 7 as the best move to start creating a winning line and block opponent' do
       minimax = Minimax.new
       board = board_setup(['o', 2, 3, 4, 'x', 'o', 7, 8, 'x'])
 
-      move = minimax.find_best_move(board, 'x', 'x', 'o')
+      move = minimax.choose_move(board, 'x', 'x', 'o')
 
-      expect(move).to eq(3).or(eq(7))
+      expect(move).to eq(7)
     end
 
     it 'Returns 4 or 5 as the best move to start creating a winning line' do
       minimax = Minimax.new
       board = board_setup(['x', 'o', 3, 4, 5, 6, 7, 8, 9])
 
-      move = minimax.find_best_move(board, 'x', 'x', 'o')
+      move = minimax.choose_move(board, 'x', 'x', 'o')
 
       expect(move).to be_between(4, 5)
     end
@@ -53,7 +53,7 @@ RSpec.describe Minimax do
       minimax = Minimax.new
       board = board_setup(['x', 'o', 3, 'o', 'o', 'x', 'x', 'x', 9])
 
-      move = minimax.find_best_move(board, 'o', 'x', 'o')
+      move = minimax.choose_move(board, 'o', 'x', 'o')
 
       expect(move).to eq(9)
     end

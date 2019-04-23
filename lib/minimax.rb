@@ -1,6 +1,12 @@
 class Minimax
 
-  def find_best_move(board, depth=0, best_score={}, current_player, player1, player2)
+  def choose_move(board, current_player, player1, player2)
+    copy_board = board.copy_board
+    find_best_move(copy_board, current_player, player1, player2)
+  end
+
+  def find_best_move(board, depth=0, current_player, player1, player2)
+    best_score = {}
     opponent = set_opponent(current_player, player1, player2)
     available_squares = board.available_squares
 
@@ -8,11 +14,10 @@ class Minimax
       board.stop_playing?(player1, player2)
 
     available_squares.each do |square|
-      copy_of_board = board.copy_board
       board.player_make_move(current_player, square)
 
       best_score[square] =
-         -1 * find_best_move(copy_of_board, depth + 1, opponent, player1, player2)
+        -1 * find_best_move(board, depth + 1, opponent, player1, player2)
       board.reset_square(square)
     end
 
