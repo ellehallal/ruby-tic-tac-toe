@@ -17,17 +17,17 @@ class Board
   end
 
   def player_make_move(player_mark, position)
-    @squares[position - 1] = player_mark
+    squares[position - 1] = player_mark
   end
 
   def move_valid?(move)
     move = move.to_i
-    move.between?(1, 9) && (@squares[move - 1].is_a? Integer)
+    move.between?(1, 9) && (squares[move - 1].is_a? Integer)
   end
 
   def winning_line?(player_mark)
     WINNING_LINES.any? do |combination|
-      combination.all? { |position| @squares[position] == player_mark }
+      combination.all? { |position| squares[position] == player_mark }
     end
   end
 
@@ -41,6 +41,26 @@ class Board
 
   def available_squares
     squares.select { |square| square.is_a? Integer }
+  end
+
+  def copy_board
+    Board.new(squares)
+  end
+
+  def reset_square(square)
+    squares[square - 1] = square
+  end
+
+  def stop_playing?(player1_mark, player2_mark)
+    complete? || winning_player_exists?(player1_mark, player2_mark)
+  end
+
+  def empty?
+    squares.size == total_available_squares
+  end
+
+  def corners
+    [1, 3, 7, 9]
   end
 
   private

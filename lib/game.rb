@@ -9,17 +9,17 @@ class Game
   end
 
   def play_move
-    player_move = @current_player.choose_move(@board)
-    @board.player_make_move(@current_player.mark, player_move)
+    player_move = @current_player.choose_move(board, @player1.mark, @player2.mark)
+    board.player_make_move(@current_player.mark, player_move)
     toggle_current_player
   end
 
   def over?
-    @board.complete? || @board.winning_player_exists?(@player1.mark, @player2.mark)
+    board.complete? || board.winning_player_exists?(@player1.mark, @player2.mark)
   end
 
   def tie_or_won
-    if @board.winning_player_exists?(@player1.mark, @player2.mark)
+    if board.winning_player_exists?(@player1.mark, @player2.mark)
       winning_player
     else
       'tie'
@@ -29,7 +29,7 @@ class Game
   private
 
   def winning_player
-    if @board.winning_line?(@player1.mark)
+    if board.winning_line?(@player1.mark)
       @player1.mark
     else
       @player2.mark
