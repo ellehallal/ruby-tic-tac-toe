@@ -1,5 +1,3 @@
-require_relative 'display_colour'
-
 class Display
   def initialize(display_colour)
     @display_colour = display_colour

@@ -1,9 +1,9 @@
+require_relative './test_doubles/display_colour_double'
 require 'display'
-require 'display_colour'
 require 'board'
 
 def display_setup
-  display_colour = DisplayColour.new
+  display_colour = DisplayColourDouble.new
   Display.new(display_colour)
 end
 
