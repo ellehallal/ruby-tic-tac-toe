@@ -12,7 +12,7 @@ class Minimax
     available_squares = board.available_squares
 
     return score_move(board, depth, current_player, opponent) if 
-      board.stop_playing?(current_player, opponent)
+      board.finished?(current_player, opponent)
 
     available_squares.each do |square|
       board.player_make_move(current_player, square)

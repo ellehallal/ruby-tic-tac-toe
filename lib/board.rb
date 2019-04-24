@@ -35,7 +35,7 @@ class Board
     winning_line?(player1_mark) || winning_line?(player2_mark)
   end
 
-  def complete?
+  def full?
     total_available_squares.zero?
   end
 
@@ -44,15 +44,15 @@ class Board
   end
 
   def copy_board
-    Board.new(squares)
+    Board.new(squares.clone)
   end
 
   def reset_square(square)
     squares[square - 1] = square
   end
 
-  def stop_playing?(player1_mark, player2_mark)
-    complete? || winning_player_exists?(player1_mark, player2_mark)
+  def finished?(player1_mark, player2_mark)
+    full? || winning_player_exists?(player1_mark, player2_mark)
   end
 
   def empty?

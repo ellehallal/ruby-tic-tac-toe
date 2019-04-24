@@ -73,13 +73,13 @@ RSpec.describe Board do
     it 'returns false if there are available squares on the board' do
       board = Board.new([1, 2, 3, 'x', 5, 6, 7, 8, 9])
 
-      expect(board.complete?).to be false
+      expect(board.full?).to be false
     end
 
     it 'returns true if there are no available squares on the board' do
       board = Board.new(%w[x x o x o o o x x])
 
-      expect(board.complete?).to be true
+      expect(board.full?).to be true
     end
   end
 
@@ -118,19 +118,19 @@ RSpec.describe Board do
     it 'returns true when a winning line is present' do
       board = Board.new(['x', 'x', 'x', 4, 5, 6, 7, 8, 9])
 
-      expect(board.stop_playing?('x', 'o')).to eq(true)
+      expect(board.finished?('x', 'o')).to eq(true)
     end
 
     it 'returns true when all squares have a mark' do
       board = Board.new(['x', 'o', 'o', 'o', 'x', 'x', 'x', 'x', 'o'])
 
-      expect(board.stop_playing?('x', 'o')).to eq(true)
+      expect(board.finished?('x', 'o')).to eq(true)
     end
 
     it 'returns false when a winning line is not present, and there are empty squares' do
       board = Board.new(['x', 'o', 'o', 'o', 'x', 'x', 'x', 'x', 9])
 
-      expect(board.stop_playing?('x', 'o')).to eq(false)
+      expect(board.finished?('x', 'o')).to eq(false)
     end
   end
 

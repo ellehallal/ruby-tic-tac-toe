@@ -16,7 +16,7 @@ class Game
   end
 
   def over?
-    board.complete? || board.winning_player_exists?(@current_player.mark, @opponent.mark)
+    board.full? || board.winning_player_exists?(@current_player.mark, @opponent.mark)
   end
 
   def tie_or_won
