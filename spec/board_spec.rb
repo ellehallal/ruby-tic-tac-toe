@@ -9,7 +9,7 @@ RSpec.describe Board do
     it 'can accept a position and change the value to the specified mark' do
       board = Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
-      board.player_make_move('x', 4)
+      board.mark_square('x', 4)
 
       expect(board.squares).to eq([1, 2, 3, 'x', 5, 6, 7, 8, 9])
     end
@@ -59,13 +59,13 @@ RSpec.describe Board do
     it "returns true when either player's mark is in a winning line position" do
       board = Board.new(['x', 'x', 'x', 4, 5, 6, 'o', 8, 'o'])
 
-      expect(board.winning_player_exists?('x', 'o')).to be true
+      expect(board.winning_line_exists?('x', 'o')).to be true
     end
 
     it 'returns false when a mark is not in a winning line position' do
       board = Board.new(['x', 'o', 'x', 4, 5, 6, 'o', 'x', 'o'])
 
-      expect(board.winning_player_exists?('x', 'o')).to be false
+      expect(board.winning_line_exists?('x', 'o')).to be false
     end
   end
 
