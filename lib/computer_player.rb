@@ -20,7 +20,7 @@ class ComputerPlayer < Player
   def select_optimum_move(board, computer_mark, opponent)
     return select_corner_move(board) if board.empty?
 
-    Minimax.new.find_best_move(board, computer_mark, opponent)
+    Minimax.new.choose_move(board, computer_mark, opponent)
   end
 
   def select_corner_move(board)

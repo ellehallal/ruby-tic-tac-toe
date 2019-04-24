@@ -5,6 +5,8 @@ class Minimax
     find_best_move(copy_board, current_player, opponent)
   end
 
+  private
+
   def find_best_move(board, depth=0, current_player, opponent)
     best_score = {}
     available_squares = board.available_squares
@@ -23,14 +25,12 @@ class Minimax
     evaluate_move(depth, best_score)
   end
 
-  private
-
   def max_best_move(scores)
-    scores.max_by { |_key, value| value }[0]
+    scores.max_by { |key, value| value }[0]
   end
 
   def max_best_score(scores)
-    scores.max_by { |_key, value| value }[1]
+    scores.max_by { |key, value| value }[1]
   end
 
   def evaluate_move(depth, scores)
