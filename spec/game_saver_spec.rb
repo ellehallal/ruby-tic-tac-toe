@@ -2,7 +2,7 @@ require 'game_saver'
 require_relative './test_doubles/fake_class_double'
 
 
-def clear_file_contents(filename)
+def clear_file(filename)
   File.open(filename, 'w') { |file| file.truncate(0) }
 end
 
@@ -18,8 +18,8 @@ RSpec.describe GameSaver do
       open_file = YAML.load_file(filename)
 
       expect(open_file['TicTacToe']).to eq('text')
-      
-      clear_file_contents(filename)
+
+      clear_file(filename)
     end
 
     it 'saves a class instance to file' do
@@ -33,11 +33,8 @@ RSpec.describe GameSaver do
       fake_class = file['Fake Class']
 
       expect(fake_class).to be_an_instance_of(FakeClassDouble)
-      expect(fake_class.var1).to eq(1)
-      expect(fake_class.var2).to eq(2)
-      expect(fake_class.var3).to eq(3)
 
-      clear_file_contents(filename)
+      clear_file(filename)
     end
   end
 end
