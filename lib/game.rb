@@ -11,16 +11,16 @@ class Game
 
   def play_move
     player_move = @current_player.choose_move(board, @opponent.mark)
-    board.player_make_move(@current_player.mark, player_move)
+    board.mark_square(@current_player.mark, player_move)
     toggle_current_player
   end
 
   def over?
-    board.complete? || board.winning_player_exists?(@current_player.mark, @opponent.mark)
+    board.full? || board.winning_line_exists?(@current_player.mark, @opponent.mark)
   end
 
   def tie_or_won
-    if board.winning_player_exists?(@current_player.mark, @opponent.mark)
+    if board.winning_line_exists?(@current_player.mark, @opponent.mark)
       winning_player
     else
       'tie'

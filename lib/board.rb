@@ -16,8 +16,8 @@ class Board
     @squares = squares
   end
 
-  def player_make_move(player_mark, position)
-    squares[position - 1] = player_mark
+  def mark_square(mark, position)
+    squares[position - 1] = mark
   end
 
   def move_valid?(move)
@@ -25,17 +25,17 @@ class Board
     move.between?(1, 9) && (squares[move - 1].is_a? Integer)
   end
 
-  def winning_line?(player_mark)
+  def winning_line?(mark)
     WINNING_LINES.any? do |combination|
-      combination.all? { |position| squares[position] == player_mark }
+      combination.all? { |position| squares[position] == mark }
     end
   end
 
-  def winning_player_exists?(player1_mark, player2_mark)
-    winning_line?(player1_mark) || winning_line?(player2_mark)
+  def winning_line_exists?(mark1, mark2)
+    winning_line?(mark1) || winning_line?(mark2)
   end
 
-  def complete?
+  def full?
     total_available_squares.zero?
   end
 
@@ -44,15 +44,15 @@ class Board
   end
 
   def copy_board
-    Board.new(squares)
+    Board.new(squares.clone)
   end
 
   def reset_square(square)
     squares[square - 1] = square
   end
 
-  def stop_playing?(player1_mark, player2_mark)
-    complete? || winning_player_exists?(player1_mark, player2_mark)
+  def finished?(mark1, mark2)
+    full? || winning_line_exists?(mark1, mark2)
   end
 
   def empty?
