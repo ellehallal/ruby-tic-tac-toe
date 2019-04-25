@@ -24,5 +24,17 @@ RSpec.describe GameValidator do
 
       expect(game_name).to eq('Best game')
     end
+
+    it "prompts user for input if key does not exist in specified file" do
+      allow($stdin).to receive(:gets).and_return('Worst game', 'Best game')
+      $stdout = StringIO.new
+      game_validator = GameValidator.new
+      filename = file_setup
+
+      game_name = game_validator.validate_selection(filename)
+      output = $stdout.string
+
+      expect(output).to include('Invalid game name entered. Please try again:')
+    end
   end
 end
