@@ -8,10 +8,15 @@ class GameSaver
     File.open(filename, "w") { |file| file.write game_storage.to_yaml }
   end
 
+  def exists?(filename, name)
+    file = retrieve_file_contents(filename)
+    file.key?(name)
+  end
+
   private
 
   def retrieve_file_contents(filename)
-    file_content = YAML.load_file(filename)
-    file_content == false ? {} : file_content
+    file = YAML.load_file(filename)
+    file == false ? {} : file
   end
 end

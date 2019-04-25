@@ -1,18 +1,18 @@
 class GameLoader
 
   def load(filename, name)
-    file = load_file(filename)
+    file = retrieve_file_contents(filename)
     file[name]
   end
 
   def exists?(filename, name)
-    file = load_file(filename)
+    file = retrieve_file_contents(filename)
     file.key?(name)
   end
 
   private
 
-  def load_file(filename)
+  def retrieve_file_contents(filename)
     file = YAML.load_file(filename)
     file == false ? {} : file
   end
