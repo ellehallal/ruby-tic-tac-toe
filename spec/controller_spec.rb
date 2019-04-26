@@ -4,6 +4,8 @@ require 'player_factory'
 require 'display'
 require 'player_validator'
 require 'game_factory'
+require 'game_validator'
+require 'game_loader'
 require 'controller'
 
 def controller_setup
@@ -11,15 +13,18 @@ def controller_setup
   display = Display.new(display_colour)
   player_validator = PlayerValidator.new(display)
   player_factory = PlayerFactory.new(player_validator, display)
-  game_factory = GameFactory.new(player_factory)
+  game_validator = GameValidator.new(display)
+  game_loader = GameLoader.new
+  filename = './spec/test_data/game_factory_test.yml'
+  game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename)
   Controller.new(display, game_factory)
 end
 
 RSpec.describe Controller do
-  describe 'Playing the game: ' do
+  describe 'Playing a game: ' do
     it 'plays a game that ends with a tie' do
       allow($stdin).to receive(:gets)
-        .and_return('h', 'h', '1', '2', '3', '4', '6', '5', '7', '9', '8')
+        .and_return('new', 'h', 'h', '1', '2', '3', '4', '6', '5', '7', '9', '8')
       $stdout = StringIO.new
       controller = controller_setup
 
@@ -31,7 +36,7 @@ RSpec.describe Controller do
 
     it 'plays a game that ends with a winning player' do
       allow($stdin).to receive(:gets)
-        .and_return('h', 'h', '1', '6', '2', '9', '3')
+        .and_return('new', 'h', 'h', '1', '6', '2', '9', '3')
       $stdout = StringIO.new
       controller = controller_setup
 

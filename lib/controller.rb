@@ -14,8 +14,8 @@ class Controller
 
   private
 
-  def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
-    @game = @game_factory.create_game(squares)
+  def game_setup
+    @game = @game_factory.create_game
   end
 
   def play_move
