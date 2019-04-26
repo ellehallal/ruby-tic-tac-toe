@@ -22,8 +22,12 @@ end
 def existing_game_setup
   filename = './spec/test_data/game_factory_test.yml'
   game_obj = FakeClassDouble.new(1, 2, 3)
-  game_details = { 'Great game' => game_obj }
+  game_details = { 'great game' => game_obj }
   File.open(filename, 'w') { |file| file.write game_details.to_yaml }
+end
+
+def clear_file(filename)
+  File.open(filename, 'w') { |file| file.truncate(0) }
 end
 
 RSpec.describe GameFactory do
@@ -33,7 +37,7 @@ RSpec.describe GameFactory do
     $stdout = StringIO.new
 
     it 'creates a human vs human game' do
-      allow($stdin).to receive(:gets).and_return('new','H', 'H', '1')
+      allow($stdin).to receive(:gets).and_return('new', 'H', 'H', '1')
 
       game = game_factory.create_game
       allow(game.current_player).to receive(:sleep)
@@ -44,7 +48,7 @@ RSpec.describe GameFactory do
     end
 
     it 'creates a computer vs computer game' do
-      allow($stdin).to receive(:gets).and_return('new','C', 'C')
+      allow($stdin).to receive(:gets).and_return('new', 'C', 'C')
 
       game = game_factory.create_game
       allow(game.current_player).to receive(:sleep)
@@ -55,7 +59,7 @@ RSpec.describe GameFactory do
     end
 
     it 'creates a computer vs human game' do
-      allow($stdin).to receive(:gets).and_return('new','C', 'H')
+      allow($stdin).to receive(:gets).and_return('new', 'C', 'H')
 
       game = game_factory.create_game
       allow(game.current_player).to receive(:sleep)
@@ -68,13 +72,15 @@ RSpec.describe GameFactory do
 
   describe 'Retrieving an existing game from a file:' do
     it 'returns an existing instance of a class from the specified file' do
+      filename = './spec/test_data/game_factory_test.yml'
       game_factory = game_factory_setup
       existing_game_setup
-      allow($stdin).to receive(:gets).and_return('existing', 'Great game')
+      allow($stdin).to receive(:gets).and_return('existing', 'great game')
 
       game = game_factory.create_game
 
       expect(game).to be_an_instance_of(FakeClassDouble)
+      clear_file(filename)
     end
   end
 end
