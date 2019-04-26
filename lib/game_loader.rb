@@ -5,11 +5,6 @@ class GameLoader
     file[name]
   end
 
-  def exists?(filename, name)
-    file = retrieve_file_contents(filename)
-    file.key?(name)
-  end
-
   private
 
   def retrieve_file_contents(filename)

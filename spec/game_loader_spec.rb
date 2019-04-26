@@ -31,30 +31,4 @@ RSpec.describe GameLoader do
       clear_file(filename)
     end
   end
-
-  describe 'Already exists' do
-    game_loader = GameLoader.new
-    filename = './spec/test_data/test.yml'
-
-    it 'returns true if key exists in file' do
-      file_setup
-      game_name = 'Great game'
-
-      saved_game = game_loader.exists?(filename, game_name)
-
-      expect(saved_game).to eq(true)
-
-      clear_file(filename)
-    end
-
-    it 'returns false if key does not exist in file' do
-      game_name = 'Bad game'
-
-      saved_game = game_loader.exists?(filename, game_name)
-
-      expect(saved_game).to eq(false)
-
-      clear_file(filename)
-    end
-  end
 end
