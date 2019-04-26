@@ -1,8 +1,11 @@
 require 'yaml'
 
 class GameValidator
+  def initialize(display)
+    @display = display
+  end
 
-  def validate_selection(filename)
+  def existing_game_selection(filename)
     game_name = prompt_for_name
     until game_name_exists?(filename, game_name)
       game_name = prompt_for_correct_name
@@ -23,13 +26,12 @@ class GameValidator
   end
 
   def prompt_for_name
-    print "Please enter the game name to load: "
+    @display.game_name_prompt
     $stdin.gets.chomp
   end
 
   def prompt_for_correct_name
-    print "Invalid game name entered. Please try again:"
-    print "Please enter the game name to load: "
+    @display.invalid_game_message
     $stdin.gets.chomp
   end
 end

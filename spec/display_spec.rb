@@ -8,6 +8,39 @@ def display_setup
 end
 
 RSpec.describe Display do
+  context 'Displaying game options:' do
+    display = display_setup
+    $stdout = StringIO.new
+
+    it "displays 'Please enter the game name to load:" do
+      display.game_name_prompt
+      output = $stdout.string
+
+      expect(output).to include('Please enter the game name to load:')
+    end
+
+    it "displays 'You have entered an invalid game name. Please try again:" do
+      display.invalid_game_message
+      output = $stdout.string
+
+      expect(output).to include('You have entered an invalid game name. Please try again:')
+    end
+  end
+
+  context 'Asking the user for a move:' do
+    display = display_setup
+    $stdout = StringIO.new
+
+    it 'displays "Choose a position from 1-9"' do
+      allow($stdin).to receive(:gets).and_return('1')
+
+      display.ask_for_move
+      output = $stdout.string
+
+      expect(output).to include('Choose a position from 1-9:')
+    end
+  end
+
   context 'Displaying a grid:' do
     display = display_setup
     $stdout = StringIO.new

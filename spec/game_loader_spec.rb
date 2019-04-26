@@ -4,8 +4,8 @@ require_relative './test_doubles/fake_class_double'
 
 def file_setup
   filename = './spec/test_data/test.yml'
-  game_obj = FakeClassDouble.new('one', 'two', 'three')
-  game_details = {'Great game' => game_obj}
+  game_obj = FakeClassDouble.new(1, 2, 3)
+  game_details = {'Great game' => game_obj }
   File.open(filename, 'w') { |file| file.write game_details.to_yaml }
 end
 
@@ -24,9 +24,9 @@ RSpec.describe GameLoader do
       saved_game = game_loader.load(filename, game_name)
 
       expect(saved_game).to be_an_instance_of(FakeClassDouble)
-      expect(saved_game.var1).to eq('one')
-      expect(saved_game.var2).to eq('two')
-      expect(saved_game.var3).to eq('three')
+      expect(saved_game.var1).to eq(1)
+      expect(saved_game.var2).to eq(2)
+      expect(saved_game.var3).to eq(3)
 
       clear_file(filename)
     end

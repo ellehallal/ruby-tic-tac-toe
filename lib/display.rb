@@ -9,6 +9,17 @@ class Display
     print @display_colour.greet_colour(output)
   end
 
+  def game_name_prompt
+    output = "Please enter the game name to load:\n"
+    print @display_colour.input_prompt_colour(output)
+  end
+
+  def invalid_game_message
+    output = "You have entered an invalid game name. Please try again:\n"
+
+    print @display_colour.warning_colour(output)
+  end
+
   def display_board(board)
     clear_screen
 
