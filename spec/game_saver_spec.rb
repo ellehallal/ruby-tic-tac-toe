@@ -1,5 +1,11 @@
 require 'game_saver'
 require_relative './test_doubles/fake_class_double'
+require 'game'
+require 'human_player'
+require 'computer_player'
+require 'board'
+require 'display'
+require 'display_colour'
 
 
 def clear_file(filename)
