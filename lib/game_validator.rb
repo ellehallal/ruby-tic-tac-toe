@@ -38,13 +38,11 @@ class GameValidator
 
   def prompt_for_name
     @display.game_name_prompt
-    $stdin.gets.chomp
+    $stdin.gets.chomp.downcase
   end
 
   def prompt_for_correct_name
     @display.invalid_game_message
-    $stdin.gets.chomp
+    $stdin.gets.chomp.downcase
   end
-
-  
 end
