@@ -22,6 +22,8 @@ human v human: !ruby/object:Game
     name: Human
   current_player: *2
   opponent: *3
+  save_game: false
+  exit_game: false
 human v computer: !ruby/object:Game
   board: !ruby/object:Board
     squares:
@@ -45,6 +47,8 @@ human v computer: !ruby/object:Game
     name: Computer
   current_player: *5
   opponent: *6
+  save_game: false
+  exit_game: false
 computer v computer: !ruby/object:Game
   board: !ruby/object:Board
     squares:
@@ -68,3 +72,5 @@ computer v computer: !ruby/object:Game
     name: Computer
   current_player: *8
   opponent: *9
+  save_game: false
+  exit_game: false

@@ -23,18 +23,20 @@ class Controller
 
   def save_game?
     if @game.save_game
+      @game.reset_save_game
       game_name = @game_validator.new_game_name(@filename)
       @game_saver.save(@filename, game_name, @game)
-      @display.show_exit_message
-      exit(0)
+      goodbye
     end
   end
 
   def exit_game?
-    if @game.exit_game
-      @display.show_exit_message
-      exit(0)
-    end
+    goodbye if @game.exit_game
+  end
+
+  def goodbye
+    @display.show_exit_message
+    exit(0)
   end
 
   def game_setup

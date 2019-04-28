@@ -40,10 +40,6 @@ class Game
     @save_game = false
   end
 
-  def reset_exit_game
-    @exit_game = false
-  end
-
   private
 
   def exit?(move)

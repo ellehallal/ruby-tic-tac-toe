@@ -131,15 +131,5 @@ RSpec.describe Game do
 
       expect(game.exit_game).to eq(false)
     end
-
-    it 'changes value of @exit_game to false' do
-      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
-      allow($stdin).to receive(:gets).and_return('exit')
-
-      game.play_move
-      game.reset_exit_game
-
-      expect(game.exit_game).to eq(false)
-    end
   end
 end
