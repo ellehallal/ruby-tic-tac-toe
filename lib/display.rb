@@ -10,7 +10,7 @@ class Display
   end
 
   def game_name_prompt
-    output = "Please enter the game name to load:\n"
+    output = "Please enter the game name:\n"
     print @display_colour.input_prompt_colour(output)
   end
 
@@ -94,6 +94,11 @@ class Display
 
   def invalid_game_type_message
     output = "Invalid game type. Please enter 'new' or 'existing':\n"
+    print @display_colour.warning_colour(output)
+  end
+
+  def game_name_exists_message
+    output = "A saved game with this name already exists. Please enter another name:\n"
     print @display_colour.warning_colour(output)
   end
 

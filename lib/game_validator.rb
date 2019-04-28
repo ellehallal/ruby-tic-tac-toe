@@ -16,6 +16,14 @@ class GameValidator
     selection
   end
 
+  def new_game_name(filename)
+    game_name = prompt_for_name
+    until game_name_not_exists?(filename, game_name)
+      game_name = prompt_for_new_name
+    end
+    game_name
+  end
+
   def existing_game_selection(filename)
     game_name = prompt_for_name
     until game_name_exists?(filename, game_name)
@@ -31,6 +39,11 @@ class GameValidator
     file.key?(name)
   end
 
+  def game_name_not_exists?(filename, name)
+    file = retrieve_file_contents(filename)
+    file.key?(name) == false
+  end
+
   def retrieve_file_contents(filename)
     file = YAML.load_file(filename)
     file == false ? {} : file
@@ -43,6 +56,11 @@ class GameValidator
 
   def prompt_for_correct_name
     @display.invalid_game_message
+    $stdin.gets.chomp.downcase
+  end
+
+  def prompt_for_new_name
+    @display.game_name_exists_message
     $stdin.gets.chomp.downcase
   end
 end

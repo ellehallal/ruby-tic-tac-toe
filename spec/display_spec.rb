@@ -16,7 +16,7 @@ RSpec.describe Display do
       display.game_name_prompt
       output = $stdout.string
 
-      expect(output).to include('Please enter the game name to load:')
+      expect(output).to include('Please enter the game name')
     end
 
     it "displays 'You have entered an invalid game name. Please try again:" do
@@ -219,6 +219,14 @@ RSpec.describe Display do
 
       expect(output)
         .to include("Invalid game type. Please enter 'new' or 'existing':")
+    end
+
+    it "displays 'A saved game with this name already exists. Please enter another name:" do
+      display.game_name_exists_message
+      output = $stdout.string
+
+      expect(output)
+        .to include('A saved game with this name already exists. Please enter another name:')
     end
   end
 end
