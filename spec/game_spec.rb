@@ -82,4 +82,44 @@ RSpec.describe Game do
       expect(game.current_player.name).to eq('Human')
     end
   end
+
+  context 'Updates value of @save_game' do
+    it 'changes value of @save_game to true if input is "save"' do
+      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      allow($stdin).to receive(:gets).and_return('save')
+
+      game.play_move
+
+      expect(game.save_game).to eq(true)
+    end
+
+    it 'value of @save_game is false if input is not "save"' do
+      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      allow($stdin).to receive(:gets).and_return('1')
+
+      game.play_move
+
+      expect(game.save_game).to eq(false)
+    end
+  end
+
+  context 'Updates value of @exit_game' do
+    it 'changes value of @exit_game to true if input is "exit"' do
+      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      allow($stdin).to receive(:gets).and_return('exit')
+
+      game.play_move
+
+      expect(game.exit_game).to eq(true)
+    end
+
+    it 'value of @exit_game is false if input is not "save"' do
+      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      allow($stdin).to receive(:gets).and_return('1')
+
+      game.play_move
+
+      expect(game.exit_game).to eq(false)
+    end
+  end
 end

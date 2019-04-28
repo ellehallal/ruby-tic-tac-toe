@@ -1,5 +1,5 @@
 class Game
-  attr_reader :board, :current_player, :opponent
+  attr_reader :board, :current_player, :opponent, :save_game, :exit_game
 
   def initialize(board, player1, player2)
     @board = board
@@ -7,12 +7,21 @@ class Game
     @player2 = player2
     @current_player = @player1
     @opponent = @player2
+    @save_game = false
+    @exit_game = false
   end
 
   def play_move
-    player_move = @current_player.choose_move(board, @opponent.mark)
-    board.mark_square(@current_player.mark, player_move)
-    toggle_current_player
+    move = @current_player.choose_move(board, @opponent.mark)
+
+    if save?(move)
+      @save_game = true
+    elsif exit?(move)
+      @exit_game = true
+    else
+      board.mark_square(@current_player.mark, move)
+      toggle_current_player
+    end
   end
 
   def over?
@@ -28,6 +37,14 @@ class Game
   end
 
   private
+
+  def exit?(move)
+    move == 'exit'
+  end
+
+  def save?(move)
+    move == 'save'
+  end
 
   def winning_player
     if board.winning_line?(@current_player.mark)
