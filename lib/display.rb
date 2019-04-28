@@ -102,6 +102,21 @@ class Display
     print @display_colour.warning_colour(output)
   end
 
+  def save_exit_message
+    clear_screen
+    output1 = "Type 'save' during your turn to save the current game.\n"
+    output2 = "Type 'exit' during your turn to exit the game without saving.\n"
+    print @display_colour.greet_colour(output1)
+    print @display_colour.greet_colour(output2)
+    sleep(4)
+  end
+
+  def save_game_confirmation
+    output = "Current game saved!\n"
+    print @display_colour.greet_colour(output)
+    sleep(1.5)
+  end
+
   private
 
   def show_winner_message(mark)

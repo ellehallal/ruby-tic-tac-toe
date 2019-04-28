@@ -157,6 +157,17 @@ RSpec.describe Display do
       expect(output)
         .to include('Invalid option selected. Please try again:')
     end
+
+    it 'displays reminder about saving and exiting a game' do
+      allow(display).to receive(:sleep)
+      display.save_exit_message
+      output = $stdout.string
+
+      expect(output)
+        .to include("Type 'save' during your turn to save the current game")
+      expect(output)
+        .to include("Type 'exit' during your turn to exit the game without saving")
+    end
   end
 
   context 'Player types ' do
@@ -220,6 +231,11 @@ RSpec.describe Display do
       expect(output)
         .to include("Invalid game type. Please enter 'new' or 'existing':")
     end
+  end
+
+  context 'Game saving messages ' do
+    display = display_setup
+    $stdout = StringIO.new
 
     it "displays 'A saved game with this name already exists. Please enter another name:" do
       display.game_name_exists_message
@@ -227,6 +243,15 @@ RSpec.describe Display do
 
       expect(output)
         .to include('A saved game with this name already exists. Please enter another name:')
+    end
+
+    it "displays 'Current game saved!'" do
+      allow(display).to receive(:sleep)
+      display.save_game_confirmation
+      output = $stdout.string
+
+      expect(output)
+        .to include('Current game saved!')
     end
   end
 end

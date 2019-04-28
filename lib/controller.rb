@@ -26,7 +26,7 @@ class Controller
       @game.reset_save_game
       game_name = @game_validator.new_game_name(@filename)
       @game_saver.save(@filename, game_name, @game)
-      goodbye
+      @display.save_game_confirmation
     end
   end
 
@@ -41,6 +41,7 @@ class Controller
 
   def game_setup
     @game = @game_factory.create_game
+    @display.save_exit_message
   end
 
   def play_move
