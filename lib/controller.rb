@@ -8,11 +8,21 @@ class Controller
 
   def main_game
     game_setup
-    play_move until @game.over?
+    until @game.over?
+      play_move
+      exit_game?
+    end
     end_of_game
   end
 
   private
+
+  def exit_game?
+    if @game.exit_game
+      @display.show_exit_message
+      exit(0)
+    end
+  end
 
   def game_setup
     @game = @game_factory.create_game

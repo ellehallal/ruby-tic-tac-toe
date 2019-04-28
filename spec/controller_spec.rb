@@ -46,4 +46,18 @@ RSpec.describe Controller do
       expect(output).to include('x is the winner!')
     end
   end
+
+  context 'Exiting a game' do
+    it "displays the exit message, when user input is 'exit'" do
+      allow($stdin).to receive(:gets)
+        .and_return('new', 'h', 'h', 'exit')
+      $stdout = StringIO.new
+      controller = controller_setup
+
+      controller.main_game
+      output = $stdout.string
+
+      expect(output).to include('Thanks for playing Tic Tac Toe!')
+    end
+  end
 end
