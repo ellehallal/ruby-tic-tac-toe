@@ -41,7 +41,7 @@ class GameValidator
 
   def game_name_not_exists?(filename, name)
     file = retrieve_file_contents(filename)
-    file.key?(name) == false
+    file[name].nil?
   end
 
   def retrieve_file_contents(filename)
