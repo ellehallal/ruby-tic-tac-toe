@@ -16,7 +16,6 @@ class Display
 
   def invalid_game_message
     output = "You have entered an invalid game name. Please try again:\n"
-
     print @display_colour.warning_colour(output)
   end
 
@@ -88,6 +87,16 @@ class Display
     print @display_colour.greet_colour(output)
   end
 
+  def game_type_prompt
+    output = "Please enter 'new' to start a new game, or 'existing' to load an existing game:\n"
+    print @display_colour.input_prompt_colour(output)
+  end
+
+  def invalid_game_type_message
+    output = "Invalid game type. Please enter 'new' or 'existing':\n"
+    print @display_colour.warning_colour(output)
+  end
+
   private
 
   def show_winner_message(mark)
@@ -99,8 +108,6 @@ class Display
     output = "The game is a tie!\n"
     print @display_colour.tie_outcome_colour(output)
   end
-
-  private
 
   def clear_screen
     system('clear')

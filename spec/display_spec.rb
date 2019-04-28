@@ -200,4 +200,25 @@ RSpec.describe Display do
         .to include('Computer (o) has selected position 3')
     end
   end
+
+  context 'Game type display ' do
+    display = display_setup
+    $stdout = StringIO.new
+
+    it "displays 'Please enter 'new' to start a new game, or 'existing' to load an existing game:'" do
+      display.game_type_prompt
+      output = $stdout.string
+
+      expect(output)
+        .to include("Please enter 'new' to start a new game, or 'existing' to load an existing game:")
+    end
+
+    it "displays 'Invalid game type. Please enter 'new' or 'existing'':" do
+      display.invalid_game_type_message
+      output = $stdout.string
+
+      expect(output)
+        .to include("Invalid game type. Please enter 'new' or 'existing':")
+    end
+  end
 end

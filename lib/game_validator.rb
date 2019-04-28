@@ -6,11 +6,11 @@ class GameValidator
   end
 
   def validate_game_type_input
-    print "Please enter 'new' to start a new game, or 'existing' to load an existing game:\n"
+    @display.game_type_prompt
     selection = $stdin.gets.chomp.downcase
 
     until %w[new existing].include?(selection)
-      print "Invalid game type. Please enter 'new' or 'existing': "
+      @display.invalid_game_type_message
       selection = $stdin.gets.chomp.downcase
     end
     selection
