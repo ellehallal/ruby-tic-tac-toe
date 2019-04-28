@@ -101,6 +101,16 @@ RSpec.describe Game do
 
       expect(game.save_game).to eq(false)
     end
+
+    it 'changes value of @save_game to false' do
+      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      allow($stdin).to receive(:gets).and_return('save')
+
+      game.play_move
+      game.reset_save_game
+
+      expect(game.save_game).to eq(false)
+    end
   end
 
   context 'Updates value of @exit_game' do
@@ -118,6 +128,16 @@ RSpec.describe Game do
       allow($stdin).to receive(:gets).and_return('1')
 
       game.play_move
+
+      expect(game.exit_game).to eq(false)
+    end
+
+    it 'changes value of @exit_game to false' do
+      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      allow($stdin).to receive(:gets).and_return('exit')
+
+      game.play_move
+      game.reset_exit_game
 
       expect(game.exit_game).to eq(false)
     end
