@@ -14,9 +14,9 @@ require_relative './game_manager.rb'
 display = Display.new(DisplayColour.new)
 player_validator = PlayerValidator.new(display)
 player_factory = PlayerFactory.new(player_validator, display)
-game_validator = GameValidator.new(display)
 game_loader = GameLoader.new
 game_saver = GameSaver.new
+game_validator = GameValidator.new(display, game_loader)
 filename = './data/demo_game_storage.yml'
 game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename)
 controller = Controller.new(display, game_factory, game_saver, game_validator, filename)

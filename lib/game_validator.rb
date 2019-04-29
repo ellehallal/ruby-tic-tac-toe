@@ -27,7 +27,7 @@ class GameValidator
 
   def existing_game_selection(filename)
     existing_games = @game_loader.existing_game_names(filename)
-    print existing_games.join(', ')
+    @display.existing_game_names(existing_games)
 
     game_name = prompt_for_name
     until game_name_exists?(filename, game_name)

@@ -231,6 +231,14 @@ RSpec.describe Display do
       expect(output)
         .to include("Invalid game type. Please enter 'new' or 'existing':")
     end
+
+    it "displays 'Existing games: game1, game2':" do
+      display.existing_game_names(['game1', 'game2'])
+      output = $stdout.string
+
+      expect(output)
+        .to include('Existing games: game1, game2')
+    end
   end
 
   context 'Game saving messages ' do

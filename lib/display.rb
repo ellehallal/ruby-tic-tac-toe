@@ -117,6 +117,10 @@ class Display
     sleep(1.5)
   end
 
+  def existing_game_names(existing_games)
+    print "Existing games: #{existing_games.join(', ')}\n"
+  end
+
   private
 
   def show_winner_message(mark)
