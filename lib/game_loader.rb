@@ -4,6 +4,11 @@ class GameLoader
     file[name]
   end
 
+  def existing_game_names(filename)
+    file = retrieve_file_contents(filename)
+    file.keys
+  end
+
   private
 
   def retrieve_file_contents(filename)
