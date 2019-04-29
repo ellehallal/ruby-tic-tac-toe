@@ -233,7 +233,7 @@ RSpec.describe Display do
     end
 
     it "displays 'Existing games: game1, game2':" do
-      display.existing_game_names(['game1', 'game2'])
+      display.existing_game_names(%w[game1 game2])
       output = $stdout.string
 
       expect(output)

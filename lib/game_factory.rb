@@ -11,7 +11,7 @@ class GameFactory
   end
 
   def create_game
-    selection = @game_validator.validate_game_type_input
+    selection = @game_validator.validate_game_type_input(@filename)
 
     if selection == 'new'
       new_game(@squares)

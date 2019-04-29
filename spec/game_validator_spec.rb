@@ -1,4 +1,5 @@
 require_relative './test_doubles/display_colour_double'
+require_relative './test_doubles/fake_class_double'
 require 'game_validator'
 require 'game_loader'
 require 'display'
@@ -73,6 +74,49 @@ RSpec.describe GameValidator do
 
       expect(output).to include('Please enter another name')
       clear_file(filename)
+    end
+  end
+
+  describe 'New or existing game' do
+    it "returns 'existing' when the specified file is not empty" do
+      allow($stdin).to receive(:gets).and_return('existing')
+      game_validator = game_validator_setup
+      filename = './spec/test_data/game_loader_test.yml'
+
+      game_type = game_validator.validate_game_type_input(filename)
+
+      expect(game_type).to eq('existing')
+    end
+
+    it "prompts user to enter choice again, when input is not 'new' or 'existing" do
+      allow($stdin).to receive(:gets).and_return('old', 'new')
+      $stdout = StringIO.new
+      game_validator = game_validator_setup
+      filename = './spec/test_data/game_loader_test.yml'
+
+      game_type = game_validator.validate_game_type_input(filename)
+      output = $stdout.string
+
+      expect(output).to include("Invalid game type. Please enter 'new' or 'existing':")
+    end
+
+    it "returns 'new' when inputted by user" do
+      allow($stdin).to receive(:gets).and_return('new')
+      game_validator = game_validator_setup
+      filename = './spec/test_data/game_loader_test.yml'
+
+      game_type = game_validator.validate_game_type_input(filename)
+
+      expect(game_type).to eq('new')
+    end
+
+    it "returns 'new' automatically when the specified file is empty" do
+      game_validator = game_validator_setup
+      filename = './spec/test_data/empty_storage_test.yml'
+
+      game_type = game_validator.validate_game_type_input(filename)
+
+      expect(game_type).to eq('new')
     end
   end
 end

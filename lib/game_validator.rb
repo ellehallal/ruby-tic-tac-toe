@@ -6,15 +6,12 @@ class GameValidator
     @game_loader = game_loader
   end
 
-  def validate_game_type_input
-    @display.game_type_prompt
-    selection = $stdin.gets.chomp.downcase
-
-    until %w[new existing].include?(selection)
-      @display.invalid_game_type_message
-      selection = $stdin.gets.chomp.downcase
+  def validate_game_type_input(filename)
+    if existing_games_empty?(filename)
+      'new'
+    else
+      retrieve_game_type
     end
-    selection
   end
 
   def new_game_name(filename)
@@ -37,6 +34,22 @@ class GameValidator
   end
 
   private
+
+  def retrieve_game_type
+    @display.game_type_prompt
+    selection = $stdin.gets.chomp.downcase
+
+    until %w[new existing].include?(selection)
+      @display.invalid_game_type_message
+      selection = $stdin.gets.chomp.downcase
+    end
+    selection
+  end
+
+  def existing_games_empty?(filename)
+    file = @game_loader.retrieve_file_contents(filename)
+    file == {}
+  end
 
   def game_name_exists?(filename, name)
     file = @game_loader.retrieve_file_contents(filename)
