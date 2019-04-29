@@ -9,8 +9,6 @@ class GameLoader
     file.keys
   end
 
-  private
-
   def retrieve_file_contents(filename)
     file = YAML.load_file(filename)
     file == false || file.nil? ? {} : file

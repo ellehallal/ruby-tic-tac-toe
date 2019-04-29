@@ -28,4 +28,16 @@ RSpec.describe GameLoader do
       expect(saved_games).to eq(['great game', 'bad game'])
     end
   end
+
+  describe 'Retrieving file contents' do
+    it 'returns file contents as a hash' do
+      game_loader = GameLoader.new
+      filename = './spec/test_data/game_loader_test.yml'
+
+      file = game_loader.retrieve_file_contents(filename)
+      p file
+
+      expect(file).to be_a_kind_of(Hash)
+    end
+  end
 end

@@ -1,8 +1,9 @@
 require 'yaml'
 
 class GameValidator
-  def initialize(display)
+  def initialize(display, game_loader)
     @display = display
+    @game_loader = game_loader
   end
 
   def validate_game_type_input
@@ -25,6 +26,9 @@ class GameValidator
   end
 
   def existing_game_selection(filename)
+    existing_games = @game_loader.existing_game_names(filename)
+    print existing_games.join(', ')
+
     game_name = prompt_for_name
     until game_name_exists?(filename, game_name)
       game_name = prompt_for_correct_name
@@ -35,18 +39,13 @@ class GameValidator
   private
 
   def game_name_exists?(filename, name)
-    file = retrieve_file_contents(filename)
+    file = @game_loader.retrieve_file_contents(filename)
     file.key?(name)
   end
 
   def game_name_not_exists?(filename, name)
-    file = retrieve_file_contents(filename)
+    file = @game_loader.retrieve_file_contents(filename)
     file[name].nil?
-  end
-
-  def retrieve_file_contents(filename)
-    file = YAML.load_file(filename)
-    file == false ? {} : file
   end
 
   def prompt_for_name

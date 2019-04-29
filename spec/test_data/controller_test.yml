@@ -22,5 +22,5 @@ favourite game: !ruby/object:Game
     name: Human
   current_player: *2
   opponent: *3
-  save_game: true
+  save_game: false
   exit_game: false
