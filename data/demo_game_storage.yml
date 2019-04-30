@@ -2,21 +2,21 @@
 human v human: !ruby/object:Game
   board: !ruby/object:Board
     squares:
-      - 1
-      - 2
-      - 3
-      - x
-      - o
-      - 6
-      - 7
-      - 8
-      - 9
-  player1: !ruby/object:HumanPlayer &2
+    - 1
+    - 2
+    - 3
+    - x
+    - o
+    - 6
+    - 7
+    - 8
+    - 9
+  player1: &2 !ruby/object:HumanPlayer
     mark: x
-    display: !ruby/object:Display &1
+    display: &1 !ruby/object:Display
       display_colour: !ruby/object:DisplayColour {}
     name: Human
-  player2: !ruby/object:HumanPlayer &3
+  player2: &3 !ruby/object:HumanPlayer
     mark: o
     display: *1
     name: Human
@@ -27,21 +27,21 @@ human v human: !ruby/object:Game
 human v computer: !ruby/object:Game
   board: !ruby/object:Board
     squares:
-      - 1
-      - 2
-      - x
-      - 4
-      - o
-      - 6
-      - 7
-      - 8
-      - 9
-  player1: !ruby/object:HumanPlayer &5
+    - 1
+    - 2
+    - x
+    - 4
+    - o
+    - 6
+    - 7
+    - 8
+    - 9
+  player1: &5 !ruby/object:HumanPlayer
     mark: x
-    display: !ruby/object:Display &4
+    display: &4 !ruby/object:Display
       display_colour: !ruby/object:DisplayColour {}
     name: Human
-  player2: !ruby/object:ComputerPlayer &6
+  player2: &6 !ruby/object:ComputerPlayer
     mark: o
     display: *4
     name: Computer
@@ -52,21 +52,21 @@ human v computer: !ruby/object:Game
 computer v computer: !ruby/object:Game
   board: !ruby/object:Board
     squares:
-      - x
-      - o
-      - 3
-      - 4
-      - o
-      - 6
-      - 7
-      - 8
-      - x
-  player1: !ruby/object:ComputerPlayer &8
+    - x
+    - o
+    - 3
+    - 4
+    - o
+    - 6
+    - 7
+    - 8
+    - x
+  player1: &8 !ruby/object:ComputerPlayer
     mark: x
-    display: !ruby/object:Display &7
+    display: &7 !ruby/object:Display
       display_colour: !ruby/object:DisplayColour {}
     name: Computer
-  player2: !ruby/object:ComputerPlayer &9
+  player2: &9 !ruby/object:ComputerPlayer
     mark: o
     display: *7
     name: Computer
