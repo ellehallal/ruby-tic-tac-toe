@@ -1,19 +1,9 @@
-require_relative './test_doubles/display_colour_double'
 require 'computer_player'
-require 'display'
-require 'board'
-
-def computer_player_setup
-  display_colour = DisplayColourDouble.new
-  display = Display.new(display_colour)
-  computer_player = ComputerPlayer.new('x', 'Computer', display)
-  computer_player
-end
 
 RSpec.describe ComputerPlayer do
   describe 'Selecting a move' do
     $stdout = StringIO.new
-    
+
     it 'returns an available move' do
       computer_player = computer_player_setup
       allow(computer_player).to receive(:sleep)

@@ -1,9 +1,5 @@
 require 'board'
 
-def board_two_moves
-  Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
-end
-
 RSpec.describe Board do
   describe 'Making a move: ' do
     it 'can accept a position and change the value to the specified mark' do

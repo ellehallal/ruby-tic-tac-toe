@@ -13,6 +13,7 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'test_setup/helpers.rb'
 require 'simplecov'
 SimpleCov.start do
   add_filter %r{^/spec/}
@@ -100,4 +101,5 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+  config.include Helpers
 end
