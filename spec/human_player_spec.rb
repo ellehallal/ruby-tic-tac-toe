@@ -1,14 +1,3 @@
-require_relative './test_doubles/display_colour_double'
-require 'human_player'
-require 'display'
-require 'board'
-
-def human_player_setup
-  display_colour = DisplayColourDouble.new
-  display = Display.new(display_colour)
-  HumanPlayer.new('x', 'Human', display)
-end
-
 RSpec.describe HumanPlayer do
   describe 'Selecting a move' do
     it 'prompts the player for a move and returns it' do

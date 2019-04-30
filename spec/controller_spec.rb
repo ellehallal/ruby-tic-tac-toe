@@ -1,5 +1,3 @@
-require 'controller'
-
 RSpec.describe Controller do
   describe 'Playing a game: ' do
     it 'plays a game that ends with a tie' do

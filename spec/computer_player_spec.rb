@@ -1,5 +1,3 @@
-require 'computer_player'
-
 RSpec.describe ComputerPlayer do
   describe 'Selecting a move' do
     $stdout = StringIO.new

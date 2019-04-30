@@ -1,5 +1,3 @@
-require 'board'
-
 RSpec.describe Board do
   describe 'Making a move: ' do
     it 'can accept a position and change the value to the specified mark' do

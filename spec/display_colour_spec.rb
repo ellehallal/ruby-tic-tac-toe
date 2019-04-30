@@ -1,5 +1,3 @@
-require 'display_colour'
-
 RSpec.describe DisplayColour do
   display_colour = DisplayColour.new
 

@@ -1,21 +1,10 @@
-require_relative './test_doubles/display_colour_double'
-require 'player_validator'
-require 'player_factory'
-require 'display'
-require 'human_player'
-require 'computer_player'
-
-def player_selector_setup
-  display_colour = DisplayColourDouble.new
-  display = Display.new(display_colour)
-  PlayerValidator.new(display)
-end
-
 RSpec.describe PlayerValidator do
   describe 'Player validation: ' do
+    $stdout = StringIO.new
+    
     it 'returns a human player with mark x' do
       allow($stdin).to receive(:gets).and_return('H')
-      player_validator = player_selector_setup
+      player_validator = player_validator_setup
 
       player_selection = player_validator.validate_player(1)
 
@@ -24,7 +13,7 @@ RSpec.describe PlayerValidator do
 
     it 'returns a computer player with mark o' do
       allow($stdin).to receive(:gets).and_return('C')
-      player_validator = player_selector_setup
+      player_validator = player_validator_setup
 
       player_selection = player_validator.validate_player(2)
 
@@ -34,7 +23,7 @@ RSpec.describe PlayerValidator do
     it 'prompts user for input again if input is not h or c' do
       allow($stdin).to receive(:gets).and_return('X', 'H')
       $stdout = StringIO.new
-      player_validator = player_selector_setup
+      player_validator = player_validator_setup
 
       player_validator.validate_player(2)
       output = $stdout.string

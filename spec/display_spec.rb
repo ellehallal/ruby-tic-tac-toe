@@ -1,5 +1,3 @@
-require 'display'
-
 RSpec.describe Display do
   context 'Displaying game options:' do
     $stdout = StringIO.new

@@ -35,7 +35,6 @@ RSpec.describe GameLoader do
       filename = './spec/test_data/game_loader_test.yml'
 
       file = game_loader.retrieve_file_contents(filename)
-      p file
 
       expect(file).to be_a_kind_of(Hash)
     end

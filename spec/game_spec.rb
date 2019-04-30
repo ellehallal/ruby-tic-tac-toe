@@ -1,19 +1,3 @@
-require_relative './test_doubles/display_colour_double'
-require 'game'
-require 'board'
-require 'display'
-require 'human_player'
-
-def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
-  display_colour = DisplayColourDouble.new
-  display = Display.new(display_colour)
-  board = Board.new(squares)
-  player1 = HumanPlayer.new('x', 'Human', display)
-  player2 = HumanPlayer.new('o', 'Human', display)
-  game = Game.new(board, player1, player2)
-  game
-end
-
 RSpec.describe Game do
   context 'Checks if a user can continue playing:' do
     it 'returns false when less than 9 moves have been played' do
@@ -62,9 +46,8 @@ RSpec.describe Game do
   end
 
   context 'Toggles the current player' do
-    game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
-
     it 'updates current player from x to o' do
+      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
       allow($stdin).to receive(:gets).and_return('1')
 
       game.play_move
@@ -74,8 +57,10 @@ RSpec.describe Game do
     end
 
     it 'updates current player from o to x' do
-      allow($stdin).to receive(:gets).and_return('3')
+      game = game_setup([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      allow($stdin).to receive(:gets).and_return('1','3')
 
+      game.play_move
       game.play_move
 
       expect(game.current_player.mark).to eq('x')
