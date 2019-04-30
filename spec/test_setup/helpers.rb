@@ -39,7 +39,7 @@ module Helpers
     game_saver = GameSaver.new
     game_validator = GameValidator.new(display, game_loader)
     filename = './spec/test_data/controller_test.yml'
-    game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename)
+    game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename, Board, Game)
     Controller.new(display, game_factory, game_saver, game_validator, filename)
   end
   
@@ -60,7 +60,7 @@ module Helpers
     game_loader = GameLoader.new
     game_validator = GameValidator.new(display, game_loader)
     filename = './spec/test_data/game_factory_test.yml'
-    GameFactory.new(player_factory, game_validator, game_loader, filename)
+    GameFactory.new(player_factory, game_validator, game_loader, filename, Board, Game)
   end
   
   def existing_game_setup
@@ -79,7 +79,7 @@ module Helpers
     game_saver = GameSaver.new
     game_validator = GameValidator.new(display, game_loader)
     filename = './spec/test_data/game_factory_test.yml'
-    game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename)
+    game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename, Board, Game)
     controller = Controller.new(display, game_factory, game_saver, game_validator, filename)
     GameManager.new(controller, display)
   end

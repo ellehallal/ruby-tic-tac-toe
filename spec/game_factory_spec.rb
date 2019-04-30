@@ -1,13 +1,3 @@
-require_relative './test_doubles/display_colour_double'
-require_relative './test_doubles/fake_class_double'
-require 'game_factory'
-require 'game_validator'
-require 'game_loader'
-require 'player_factory'
-require 'player_validator'
-require 'display'
-require 'yaml'
-
 RSpec.describe GameFactory do
   describe 'Creating a new game:' do
     $stdout = StringIO.new

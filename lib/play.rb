@@ -18,7 +18,7 @@ game_loader = GameLoader.new
 game_saver = GameSaver.new
 game_validator = GameValidator.new(display, game_loader)
 filename = './data/demo_game_storage.yml'
-game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename)
+game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename, Board, Game)
 controller = Controller.new(display, game_factory, game_saver, game_validator, filename)
 game_manager = GameManager.new(controller, display)
 
