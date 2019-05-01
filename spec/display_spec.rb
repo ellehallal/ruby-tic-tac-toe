@@ -8,6 +8,39 @@ def display_setup
 end
 
 RSpec.describe Display do
+  context 'Displaying game options:' do
+    display = display_setup
+    $stdout = StringIO.new
+
+    it "displays 'Please enter the game name to load:" do
+      display.game_name_prompt
+      output = $stdout.string
+
+      expect(output).to include('Please enter the game name')
+    end
+
+    it "displays 'You have entered an invalid game name. Please try again:" do
+      display.invalid_game_message
+      output = $stdout.string
+
+      expect(output).to include('You have entered an invalid game name. Please try again:')
+    end
+  end
+
+  context 'Asking the user for a move:' do
+    display = display_setup
+    $stdout = StringIO.new
+
+    it 'displays "Choose a position from 1-9"' do
+      allow($stdin).to receive(:gets).and_return('1')
+
+      display.ask_for_move
+      output = $stdout.string
+
+      expect(output).to include('Choose a position from 1-9:')
+    end
+  end
+
   context 'Displaying a grid:' do
     display = display_setup
     $stdout = StringIO.new
@@ -124,6 +157,17 @@ RSpec.describe Display do
       expect(output)
         .to include('Invalid option selected. Please try again:')
     end
+
+    it 'displays reminder about saving and exiting a game' do
+      allow(display).to receive(:sleep)
+      display.save_exit_message
+      output = $stdout.string
+
+      expect(output)
+        .to include("Type 'save' during your turn to save the current game")
+      expect(output)
+        .to include("Type 'exit' during your turn to exit the game without saving")
+    end
   end
 
   context 'Player types ' do
@@ -165,6 +209,57 @@ RSpec.describe Display do
 
       expect(output)
         .to include('Computer (o) has selected position 3')
+    end
+  end
+
+  context 'Game type display ' do
+    display = display_setup
+    $stdout = StringIO.new
+
+    it "displays 'Please enter 'new' to start a new game, or 'existing' to load an existing game:'" do
+      display.game_type_prompt
+      output = $stdout.string
+
+      expect(output)
+        .to include("Please enter 'new' to start a new game, or 'existing' to load an existing game:")
+    end
+
+    it "displays 'Invalid game type. Please enter 'new' or 'existing'':" do
+      display.invalid_game_type_message
+      output = $stdout.string
+
+      expect(output)
+        .to include("Invalid game type. Please enter 'new' or 'existing':")
+    end
+
+    it "displays 'Existing games: game1, game2':" do
+      display.existing_game_names(%w[game1 game2])
+      output = $stdout.string
+
+      expect(output)
+        .to include('Existing games: game1, game2')
+    end
+  end
+
+  context 'Game saving messages ' do
+    display = display_setup
+    $stdout = StringIO.new
+
+    it "displays 'A saved game with this name already exists. Please enter another name:" do
+      display.game_name_exists_message
+      output = $stdout.string
+
+      expect(output)
+        .to include('A saved game with this name already exists. Please enter another name:')
+    end
+
+    it "displays 'Current game saved!'" do
+      allow(display).to receive(:sleep)
+      display.save_game_confirmation
+      output = $stdout.string
+
+      expect(output)
+        .to include('Current game saved!')
     end
   end
 end

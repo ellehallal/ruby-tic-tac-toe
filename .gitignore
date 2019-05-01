@@ -6,7 +6,6 @@
 /pkg/
 /spec/reports/
 /tmp/
-/lib/play.rb
 spec/bob_spec.rb
 .vscode/
 

@@ -1,21 +1,47 @@
 require_relative 'game_factory.rb'
 
 class Controller
-  def initialize(display, game_factory)
+  def initialize(display, game_factory, game_saver, game_validator, filename)
     @display = display
     @game_factory = game_factory
+    @game_saver = game_saver
+    @game_validator = game_validator
+    @filename = filename
   end
 
   def main_game
     game_setup
-    play_move until @game.over?
+    until @game.over?
+      play_move
+      save_game?
+      exit_game?
+    end
     end_of_game
   end
 
   private
 
-  def game_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
-    @game = @game_factory.create_game(squares)
+  def save_game?
+    if @game.save_game
+      @game.reset_save_game
+      game_name = @game_validator.new_game_name(@filename)
+      @game_saver.save(@filename, game_name, @game)
+      @display.save_game_confirmation
+    end
+  end
+
+  def exit_game?
+    goodbye if @game.exit_game
+  end
+
+  def goodbye
+    @display.show_exit_message
+    exit(0)
+  end
+
+  def game_setup
+    @game = @game_factory.create_game
+    @display.save_exit_message
   end
 
   def play_move

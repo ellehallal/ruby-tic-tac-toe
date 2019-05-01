@@ -1,0 +1,76 @@
+---
+human v human: !ruby/object:Game
+  board: !ruby/object:Board
+    squares:
+      - 1
+      - 2
+      - 3
+      - x
+      - o
+      - 6
+      - 7
+      - 8
+      - 9
+  player1: !ruby/object:HumanPlayer &2
+    mark: x
+    display: !ruby/object:Display &1
+      display_colour: !ruby/object:DisplayColour {}
+    name: Human
+  player2: !ruby/object:HumanPlayer &3
+    mark: o
+    display: *1
+    name: Human
+  current_player: *2
+  opponent: *3
+  save_game: false
+  exit_game: false
+human v computer: !ruby/object:Game
+  board: !ruby/object:Board
+    squares:
+      - 1
+      - 2
+      - x
+      - 4
+      - o
+      - 6
+      - 7
+      - 8
+      - 9
+  player1: !ruby/object:HumanPlayer &5
+    mark: x
+    display: !ruby/object:Display &4
+      display_colour: !ruby/object:DisplayColour {}
+    name: Human
+  player2: !ruby/object:ComputerPlayer &6
+    mark: o
+    display: *4
+    name: Computer
+  current_player: *5
+  opponent: *6
+  save_game: false
+  exit_game: false
+computer v computer: !ruby/object:Game
+  board: !ruby/object:Board
+    squares:
+      - x
+      - o
+      - 3
+      - 4
+      - o
+      - 6
+      - 7
+      - 8
+      - x
+  player1: !ruby/object:ComputerPlayer &8
+    mark: x
+    display: !ruby/object:Display &7
+      display_colour: !ruby/object:DisplayColour {}
+    name: Computer
+  player2: !ruby/object:ComputerPlayer &9
+    mark: o
+    display: *7
+    name: Computer
+  current_player: *8
+  opponent: *9
+  save_game: false
+  exit_game: false

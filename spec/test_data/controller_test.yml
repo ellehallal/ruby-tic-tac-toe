@@ -1,0 +1,26 @@
+---
+favourite game: !ruby/object:Game
+  board: !ruby/object:Board
+    squares:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+  player1: &2 !ruby/object:HumanPlayer
+    mark: x
+    display: &1 !ruby/object:Display
+      display_colour: !ruby/object:DisplayColourDouble {}
+    name: Human
+  player2: &3 !ruby/object:HumanPlayer
+    mark: o
+    display: *1
+    name: Human
+  current_player: *2
+  opponent: *3
+  save_game: false
+  exit_game: false

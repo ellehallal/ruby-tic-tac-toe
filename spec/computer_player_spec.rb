@@ -12,6 +12,8 @@ end
 
 RSpec.describe ComputerPlayer do
   describe 'Selecting a move' do
+    $stdout = StringIO.new
+    
     it 'returns an available move' do
       computer_player = computer_player_setup
       allow(computer_player).to receive(:sleep)

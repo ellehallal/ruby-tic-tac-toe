@@ -9,6 +9,16 @@ class Display
     print @display_colour.greet_colour(output)
   end
 
+  def game_name_prompt
+    output = "Please enter the game name:\n"
+    print @display_colour.input_prompt_colour(output)
+  end
+
+  def invalid_game_message
+    output = "You have entered an invalid game name. Please try again:\n"
+    print @display_colour.warning_colour(output)
+  end
+
   def display_board(board)
     clear_screen
 
@@ -77,6 +87,40 @@ class Display
     print @display_colour.greet_colour(output)
   end
 
+  def game_type_prompt
+    output = "Please enter 'new' to start a new game, or 'existing' to load an existing game:\n"
+    print @display_colour.input_prompt_colour(output)
+  end
+
+  def invalid_game_type_message
+    output = "Invalid game type. Please enter 'new' or 'existing':\n"
+    print @display_colour.warning_colour(output)
+  end
+
+  def game_name_exists_message
+    output = "A saved game with this name already exists. Please enter another name:\n"
+    print @display_colour.warning_colour(output)
+  end
+
+  def save_exit_message
+    clear_screen
+    output1 = "Type 'save' during your turn to save the current game.\n"
+    output2 = "Type 'exit' during your turn to exit the game without saving.\n"
+    print @display_colour.greet_colour(output1)
+    print @display_colour.greet_colour(output2)
+    sleep(4)
+  end
+
+  def save_game_confirmation
+    output = "Current game saved!\n"
+    print @display_colour.greet_colour(output)
+    sleep(1.5)
+  end
+
+  def existing_game_names(existing_games)
+    print "Existing games: #{existing_games.join(', ')}\n"
+  end
+
   private
 
   def show_winner_message(mark)
@@ -88,8 +132,6 @@ class Display
     output = "The game is a tie!\n"
     print @display_colour.tie_outcome_colour(output)
   end
-
-  private
 
   def clear_screen
     system('clear')
