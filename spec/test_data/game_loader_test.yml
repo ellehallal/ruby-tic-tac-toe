@@ -1,9 +1,9 @@
 ---
-great game: !ruby/object:FakeClassDouble
+great game: !ruby/object:FakeGame
   var1: 1
   var2: 2
   var3: 3
-bad game: !ruby/object:FakeClassDouble
+bad game: !ruby/object:FakeGame
   var1: 4
   var2: 5
   var3: 6

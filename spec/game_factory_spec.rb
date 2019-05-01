@@ -48,7 +48,7 @@ RSpec.describe GameFactory do
 
       game = game_factory.create_game
 
-      expect(game).to be_an_instance_of(FakeClassDouble)
+      expect(game).to be_an_instance_of(FakeGame)
       clear_file(filename)
     end
   end

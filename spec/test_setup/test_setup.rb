@@ -1,5 +1,5 @@
 require_relative '../test_doubles/display_colour_double'
-require_relative '../test_doubles/fake_class_double'
+require_relative '../test_doubles/fake_game'
 require 'yaml'
 require 'display'
 require 'board'
@@ -14,7 +14,7 @@ require 'game_loader'
 require 'game_saver'
 require 'minimax'
 
-module Helpers
+module TestSetup
   def board_two_moves
     Board.new(['x', 2, 'o', 4, 5, 6, 7, 8, 9])
   end
@@ -65,9 +65,17 @@ module Helpers
   
   def existing_game_setup
     filename = './spec/test_data/game_factory_test.yml'
-    game_obj = FakeClassDouble.new(1, 2, 3)
-    game_details = { 'great game' => game_obj }
+    game = FakeGame.new(1, 2, 3)
+    game_details = { 'great game' => game }
     File.open(filename, 'w') { |file| file.write game_details.to_yaml }
+  end
+
+  def file_setup
+    filename = './spec/test_data/test.yml'
+    game = 'game_object'
+    game_details = { 'best game' => game }
+    File.open(filename, 'w') { |file| file.write game_details.to_yaml }
+    filename
   end
 
   def manager_setup
@@ -92,14 +100,6 @@ module Helpers
     player2 = HumanPlayer.new('o', 'Human', display)
     game = Game.new(board, player1, player2)
     game
-  end
-
-  def file_setup
-    filename = './spec/test_data/test.yml'
-    game_obj = 'game_object'
-    game_details = { 'best game' => game_obj }
-    File.open(filename, 'w') { |file| file.write game_details.to_yaml }
-    filename
   end
   
   def game_validator_setup
