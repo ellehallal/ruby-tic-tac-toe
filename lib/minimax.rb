@@ -15,11 +15,11 @@ class Minimax
       board.finished?(current_player, opponent)
 
     available_squares.each do |square|
-      board.mark_square(current_player, square)
+      copy_board = board.copy_board
+      copy_board.mark_square(current_player, square)
 
       best_score[square] =
-        -1 * find_best_move(board, depth + 1, opponent, current_player)
-      board.reset_square(square)
+        -1 * find_best_move(copy_board, depth + 1, opponent, current_player)
     end
 
     evaluate_move(depth, best_score)

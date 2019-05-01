@@ -47,10 +47,6 @@ class Board
     Board.new(squares.clone)
   end
 
-  def reset_square(square)
-    squares[square - 1] = square
-  end
-
   def finished?(mark1, mark2)
     full? || winning_line_exists?(mark1, mark2)
   end

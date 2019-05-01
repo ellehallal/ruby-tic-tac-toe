@@ -99,15 +99,6 @@ RSpec.describe Board do
     end
   end
 
-  describe 'Reset a square: ' do
-    it 'makes the selected square empty' do
-      board = board_two_moves
-      expect(board.squares[0]).to eq('x')
-
-      board.reset_square(1)
-      expect(board.squares[0]).to eq(1)
-    end
-  end
   describe 'Winning line present, or empty squares: ' do
     it 'returns true when a winning line is present' do
       board = Board.new(['x', 'x', 'x', 4, 5, 6, 7, 8, 9])
