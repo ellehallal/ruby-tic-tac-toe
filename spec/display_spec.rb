@@ -1,18 +1,9 @@
-require_relative './test_doubles/display_colour_double'
-require 'display'
-require 'board'
-
-def display_setup
-  display_colour = DisplayColourDouble.new
-  Display.new(display_colour)
-end
-
 RSpec.describe Display do
   context 'Displaying game options:' do
-    display = display_setup
     $stdout = StringIO.new
 
     it "displays 'Please enter the game name to load:" do
+      display = display_setup
       display.game_name_prompt
       output = $stdout.string
 
@@ -20,6 +11,7 @@ RSpec.describe Display do
     end
 
     it "displays 'You have entered an invalid game name. Please try again:" do
+      display = display_setup
       display.invalid_game_message
       output = $stdout.string
 
@@ -28,10 +20,10 @@ RSpec.describe Display do
   end
 
   context 'Asking the user for a move:' do
-    display = display_setup
     $stdout = StringIO.new
 
     it 'displays "Choose a position from 1-9"' do
+      display = display_setup
       allow($stdin).to receive(:gets).and_return('1')
 
       display.ask_for_move
@@ -42,10 +34,10 @@ RSpec.describe Display do
   end
 
   context 'Displaying a grid:' do
-    display = display_setup
     $stdout = StringIO.new
 
     it 'accepts a grid as an argument and displays it' do
+      display = display_setup
       display.display_board([1, 2, 3, 4, 5, 6, 7, 8, 9])
       output = $stdout.string
 
@@ -56,10 +48,10 @@ RSpec.describe Display do
   end
 
   context 'Asking the user for a move:' do
-    display = display_setup
     $stdout = StringIO.new
 
     it 'displays "Choose a position from 1-9"' do
+      display = display_setup
       allow($stdin).to receive(:gets).and_return('1')
 
       display.ask_for_move
@@ -70,10 +62,10 @@ RSpec.describe Display do
   end
 
   context 'Displaying the current player:' do
-    display = display_setup
     $stdout = StringIO.new
 
     it 'displays "The current player is x"' do
+      display = display_setup
       display.show_current_player('x', 'Computer')
       output = $stdout.string
 
@@ -82,10 +74,10 @@ RSpec.describe Display do
   end
 
   context 'Displays a message when a user enters an incorrect move:' do
-    display = display_setup
     $stdout = StringIO.new
 
     it 'Displays "You have entered an invalid move. Please try again:"' do
+      display = display_setup
       display.invalid_move_message
       output = $stdout.string
 
@@ -95,10 +87,10 @@ RSpec.describe Display do
   end
 
   context 'Displays message, depending on game outcome' do
-    display = display_setup
     $stdout = StringIO.new
 
     it "displays 'x is the winner!' when the outcome is x" do
+      display = display_setup
       outcome = 'x'
 
       display.show_game_outcome(outcome)
@@ -108,6 +100,7 @@ RSpec.describe Display do
     end
 
     it "displays 'The game is a tie!\n' when the outcome is a tie" do
+      display = display_setup
       outcome = 'tie'
 
       display.show_game_outcome(outcome)
@@ -118,10 +111,10 @@ RSpec.describe Display do
   end
 
   context 'Displays messages after game has ended ' do
-    display = display_setup
     $stdout = StringIO.new
 
     it 'displays "Play again? (Y/N):"' do
+      display = display_setup
       allow($stdin).to receive(:gets).and_return('Y')
 
       display.ask_play_again
@@ -131,6 +124,7 @@ RSpec.describe Display do
     end
 
     it 'displays "Thanks for playing Tic Tac Toe!"' do
+      display = display_setup
       display.show_exit_message
       output = $stdout.string
 
@@ -139,10 +133,10 @@ RSpec.describe Display do
   end
 
   context 'Game options ' do
-    display = display_setup
     $stdout = StringIO.new
 
     it 'displays the available game options a user can select' do
+      display = display_setup
       display.show_welcome_message
       output = $stdout.string
 
@@ -151,6 +145,7 @@ RSpec.describe Display do
     end
 
     it 'displays "Invalid game option selected. Please try again:"' do
+      display = display_setup
       display.show_invalid_option_message
       output = $stdout.string
 
@@ -159,6 +154,7 @@ RSpec.describe Display do
     end
 
     it 'displays reminder about saving and exiting a game' do
+      display = display_setup
       allow(display).to receive(:sleep)
       display.save_exit_message
       output = $stdout.string
@@ -171,10 +167,10 @@ RSpec.describe Display do
   end
 
   context 'Player types ' do
-    display = display_setup
     $stdout = StringIO.new
 
     it "displays 'Please select player 1 (h = human, c = computer):'" do
+      display = display_setup
       display.ask_for_player_selection(1)
       output = $stdout.string
 
@@ -183,6 +179,7 @@ RSpec.describe Display do
     end
 
     it "displays 'Please select player 2 (h = human, c = computer):'" do
+      display = display_setup
       display.ask_for_player_selection(2)
       output = $stdout.string
 
@@ -192,10 +189,10 @@ RSpec.describe Display do
   end
 
   context 'Computer move ' do
-    display = display_setup
     $stdout = StringIO.new
 
     it "displays 'Computer (x) is thinking. Please wait...'" do
+      display = display_setup
       display.show_computer_thinking('x')
       output = $stdout.string
 
@@ -204,6 +201,7 @@ RSpec.describe Display do
     end
 
     it 'displays "Computer (o) has selected position 3"' do
+      display = display_setup
       display.show_computer_move(3, 'o')
       output = $stdout.string
 
@@ -213,10 +211,10 @@ RSpec.describe Display do
   end
 
   context 'Game type display ' do
-    display = display_setup
     $stdout = StringIO.new
 
     it "displays 'Please enter 'new' to start a new game, or 'existing' to load an existing game:'" do
+      display = display_setup
       display.game_type_prompt
       output = $stdout.string
 
@@ -225,6 +223,7 @@ RSpec.describe Display do
     end
 
     it "displays 'Invalid game type. Please enter 'new' or 'existing'':" do
+      display = display_setup
       display.invalid_game_type_message
       output = $stdout.string
 
@@ -233,6 +232,7 @@ RSpec.describe Display do
     end
 
     it "displays 'Existing games: game1, game2':" do
+      display = display_setup
       display.existing_game_names(%w[game1 game2])
       output = $stdout.string
 
@@ -242,10 +242,10 @@ RSpec.describe Display do
   end
 
   context 'Game saving messages ' do
-    display = display_setup
     $stdout = StringIO.new
 
     it "displays 'A saved game with this name already exists. Please enter another name:" do
+      display = display_setup
       display.game_name_exists_message
       output = $stdout.string
 
@@ -254,6 +254,7 @@ RSpec.describe Display do
     end
 
     it "displays 'Current game saved!'" do
+      display = display_setup
       allow(display).to receive(:sleep)
       display.save_game_confirmation
       output = $stdout.string

@@ -3,10 +3,8 @@ class Game
 
   def initialize(board, player1, player2)
     @board = board
-    @player1 = player1
-    @player2 = player2
-    @current_player = @player1
-    @opponent = @player2
+    @current_player = player1
+    @opponent = player2
     @save_game = false
     @exit_game = false
   end
@@ -60,11 +58,9 @@ class Game
 
   def toggle_current_player
     if @current_player == @player1
-      @current_player = @player2
-      @opponent = @player1
+      @current_player, @opponent = @opponent, @current_player
     else
-      @current_player = @player1
-      @opponent = @player2
+      @opponent, @current_player = @current_player, @opponent
     end
   end
 end

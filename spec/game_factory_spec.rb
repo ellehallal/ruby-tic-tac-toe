@@ -1,42 +1,9 @@
-require_relative './test_doubles/display_colour_double'
-require_relative './test_doubles/fake_class_double'
-require 'game_factory'
-require 'game_validator'
-require 'game_loader'
-require 'player_factory'
-require 'player_validator'
-require 'display'
-require 'yaml'
-
-def game_factory_setup
-  display_colour = DisplayColourDouble.new
-  display = Display.new(display_colour)
-  player_validator = PlayerValidator.new(display)
-  player_factory = PlayerFactory.new(player_validator, display)
-  game_validator = GameValidator.new(display)
-  game_loader = GameLoader.new
-  filename = './spec/test_data/game_factory_test.yml'
-  GameFactory.new(player_factory, game_validator, game_loader, filename)
-end
-
-def existing_game_setup
-  filename = './spec/test_data/game_factory_test.yml'
-  game_obj = FakeClassDouble.new(1, 2, 3)
-  game_details = { 'great game' => game_obj }
-  File.open(filename, 'w') { |file| file.write game_details.to_yaml }
-end
-
-def clear_file(filename)
-  File.open(filename, 'w') { |file| file.truncate(0) }
-end
-
 RSpec.describe GameFactory do
   describe 'Creating a new game:' do
-
-    game_factory = game_factory_setup
     $stdout = StringIO.new
 
     it 'creates a human vs human game' do
+      game_factory = game_factory_setup
       allow($stdin).to receive(:gets).and_return('new', 'H', 'H', '1')
 
       game = game_factory.create_game
@@ -48,6 +15,7 @@ RSpec.describe GameFactory do
     end
 
     it 'creates a computer vs computer game' do
+      game_factory = game_factory_setup
       allow($stdin).to receive(:gets).and_return('new', 'C', 'C')
 
       game = game_factory.create_game
@@ -59,6 +27,7 @@ RSpec.describe GameFactory do
     end
 
     it 'creates a computer vs human game' do
+      game_factory = game_factory_setup
       allow($stdin).to receive(:gets).and_return('new', 'C', 'H')
 
       game = game_factory.create_game
@@ -79,7 +48,7 @@ RSpec.describe GameFactory do
 
       game = game_factory.create_game
 
-      expect(game).to be_an_instance_of(FakeClassDouble)
+      expect(game).to be_an_instance_of(FakeGame)
       clear_file(filename)
     end
   end

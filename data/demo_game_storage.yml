@@ -11,17 +11,15 @@ human v human: !ruby/object:Game
     - 7
     - 8
     - 9
-  player1: &2 !ruby/object:HumanPlayer
+  current_player: &2 !ruby/object:HumanPlayer
     mark: x
     display: &1 !ruby/object:Display
       display_colour: !ruby/object:DisplayColour {}
     name: Human
-  player2: &3 !ruby/object:HumanPlayer
+  opponent: &3 !ruby/object:HumanPlayer
     mark: o
     display: *1
     name: Human
-  current_player: *2
-  opponent: *3
   save_game: false
   exit_game: false
 human v computer: !ruby/object:Game
@@ -36,17 +34,15 @@ human v computer: !ruby/object:Game
     - 7
     - 8
     - 9
-  player1: &5 !ruby/object:HumanPlayer
+  current_player: &5 !ruby/object:HumanPlayer
     mark: x
     display: &4 !ruby/object:Display
       display_colour: !ruby/object:DisplayColour {}
     name: Human
-  player2: &6 !ruby/object:ComputerPlayer
+  opponent: &6 !ruby/object:ComputerPlayer
     mark: o
     display: *4
     name: Computer
-  current_player: *5
-  opponent: *6
   save_game: false
   exit_game: false
 computer v computer: !ruby/object:Game
@@ -61,16 +57,14 @@ computer v computer: !ruby/object:Game
     - 7
     - 8
     - x
-  player1: &8 !ruby/object:ComputerPlayer
+  current_player: &8 !ruby/object:ComputerPlayer
     mark: x
     display: &7 !ruby/object:Display
       display_colour: !ruby/object:DisplayColour {}
     name: Computer
-  player2: &9 !ruby/object:ComputerPlayer
+  opponent: &9 !ruby/object:ComputerPlayer
     mark: o
     display: *7
     name: Computer
-  current_player: *8
-  opponent: *9
   save_game: false
   exit_game: false

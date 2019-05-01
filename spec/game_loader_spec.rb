@@ -1,17 +1,15 @@
-require 'yaml'
-require 'game_loader'
-require_relative './test_doubles/fake_class_double'
+require_relative './test_doubles/fake_game'
 
 RSpec.describe GameLoader do
-  describe 'Loading an object' do
-    it 'returns an object from the specified file' do
+  describe 'Loading an instance of a class' do
+    it 'returns an instance of the class from the specified file' do
       game_loader = GameLoader.new
       filename = './spec/test_data/game_loader_test.yml'
       game_name = 'great game'
 
       saved_game = game_loader.load(filename, game_name)
 
-      expect(saved_game).to be_an_instance_of(FakeClassDouble)
+      expect(saved_game).to be_an_instance_of(FakeGame)
       expect(saved_game.var1).to eq(1)
       expect(saved_game.var2).to eq(2)
       expect(saved_game.var3).to eq(3)
@@ -34,8 +32,7 @@ RSpec.describe GameLoader do
       game_loader = GameLoader.new
       filename = './spec/test_data/game_loader_test.yml'
 
-      file = game_loader.retrieve_file_contents(filename)
-      p file
+      file = game_loader.get_file_contents(filename)
 
       expect(file).to be_a_kind_of(Hash)
     end

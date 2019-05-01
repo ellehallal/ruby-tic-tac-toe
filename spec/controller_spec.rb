@@ -1,31 +1,3 @@
-require_relative './test_doubles/display_colour_double'
-require 'controller'
-require 'player_factory'
-require 'display'
-require 'player_validator'
-require 'game_factory'
-require 'game_validator'
-require 'game_loader'
-require 'game_saver'
-require 'controller'
-
-def controller_setup
-  display_colour = DisplayColourDouble.new
-  display = Display.new(display_colour)
-  player_validator = PlayerValidator.new(display)
-  player_factory = PlayerFactory.new(player_validator, display)
-  game_validator = GameValidator.new(display)
-  game_loader = GameLoader.new
-  game_saver = GameSaver.new
-  filename = './spec/test_data/controller_test.yml'
-  game_factory = GameFactory.new(player_factory, game_validator, game_loader, filename)
-  Controller.new(display, game_factory, game_saver, game_validator, filename)
-end
-
-def clear_file(filename)
-  File.open(filename, 'w') { |file| file.truncate(0) }
-end
-
 RSpec.describe Controller do
   describe 'Playing a game: ' do
     it 'plays a game that ends with a tie' do
@@ -57,9 +29,9 @@ RSpec.describe Controller do
 
   describe 'Saving and exiting a game' do
     filename = './spec/test_data/controller_test.yml'
-    clear_file(filename)
 
     it "displays the exit message, when user input is 'save'" do
+      clear_file(filename)
       controller = controller_setup
       allow(controller).to receive(:sleep)
       allow($stdin).to receive(:gets)
@@ -73,6 +45,7 @@ RSpec.describe Controller do
     end
 
     it "displays the exit message, when user input is 'exit'" do
+      clear_file(filename)
       controller = controller_setup
       allow(controller).to receive(:sleep)
       allow($stdin).to receive(:gets)

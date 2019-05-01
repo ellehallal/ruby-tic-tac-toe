@@ -1,21 +1,3 @@
-require_relative './test_doubles/display_colour_double'
-require 'human_player'
-require 'computer_player'
-require 'player_factory'
-require 'player_validator'
-require 'display'
-
-def display_setup
-  display_colour = DisplayColourDouble.new
-  Display.new(display_colour)
-end
-
-def player_factory_setup
-  display = display_setup
-  player_validator = PlayerValidator.new(display)
-  PlayerFactory.new(player_validator, display)
-end
-
 RSpec.describe PlayerFactory do
   describe 'Create players:' do
     it "creates a human player with a mark 'x' and the name 'human'" do

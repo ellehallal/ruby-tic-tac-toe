@@ -8,11 +8,7 @@ class HumanPlayer < Player
 
     move = $stdin.gets.chomp
 
-    if save_or_exit?(move)
-      move
-    else
-      handle_move(board, move)
-    end
+    save_or_exit?(move) ? move : handle_move(board, move)
   end
 
   private

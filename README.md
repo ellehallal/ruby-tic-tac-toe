@@ -52,9 +52,9 @@ ruby lib/play.rb
 
 ## Edge Cases Considered
 - Cases where the user is prompted to enter input again:
-  - Game type selection: if `new` or `existing` is not entered
+  - Game type selection: if `'new'` or `'existing'` is not entered
   - Loading a saved game: if the game name entered does not exist
-  - Player type selection: if `h` or `c` is not entered
+  - Player type selection: if `'h'` or `'c'` is not entered
   - Move selection: if 1-9, `'save'` or `'exit'` is not entered during game play
 - If the file containing the saved games is empty, a new game is automatically selected 
 
@@ -64,3 +64,4 @@ ruby lib/play.rb
 - [Understanding the Red, Green, Refactor Cycle](https://medium.com/@ellehallal/understanding-the-red-green-refactor-cycle-6495f995874d?source=---------4------------------)
 - [Testing Output in RSpec using StringIO](https://medium.com/@ellehallal/testing-output-in-rspec-using-stringio-c784c08acb77?source=---------3------------------)
 - [Creating An Unbeatable Computer Player, Using Minimax](https://medium.com/@ellehallal/tic-tac-toe-creating-an-unbeatable-computer-player-using-minimax-f1f1e2f875a2?source=---------2------------------)
+- [The Dependency Inversion Principle](https://medium.com/@ellehallal/the-dependency-inversion-principle-f2a5679a013b)

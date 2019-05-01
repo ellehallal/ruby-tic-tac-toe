@@ -1,10 +1,3 @@
-require 'minimax'
-require 'board'
-
-def board_setup(squares = [1, 2, 3, 4, 5, 6, 7, 8, 9])
-  Board.new(squares)
-end
-
 RSpec.describe Minimax do
   describe 'Finding the best score ' do
     it 'Returns 3 as the best score for o to win and block x from winning' do

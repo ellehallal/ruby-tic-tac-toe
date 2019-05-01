@@ -7,11 +7,7 @@ class GameValidator
   end
 
   def validate_game_type_input(filename)
-    if existing_games_empty?(filename)
-      'new'
-    else
-      retrieve_game_type
-    end
+    existing_games_empty?(filename) ? 'new' : get_game_type
   end
 
   def new_game_name(filename)
@@ -35,7 +31,7 @@ class GameValidator
 
   private
 
-  def retrieve_game_type
+  def get_game_type
     @display.game_type_prompt
     selection = $stdin.gets.chomp.downcase
 
@@ -47,17 +43,17 @@ class GameValidator
   end
 
   def existing_games_empty?(filename)
-    file = @game_loader.retrieve_file_contents(filename)
+    file = @game_loader.get_file_contents(filename)
     file == {}
   end
 
   def game_name_exists?(filename, name)
-    file = @game_loader.retrieve_file_contents(filename)
+    file = @game_loader.get_file_contents(filename)
     file.key?(name)
   end
 
   def game_name_not_exists?(filename, name)
-    file = @game_loader.retrieve_file_contents(filename)
+    file = @game_loader.get_file_contents(filename)
     file[name].nil?
   end
 
